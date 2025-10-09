@@ -24,3 +24,31 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(255,255,255,0.7); /* 흐린배경 */
+  padding: 8px 16px;
+}
+
+.left {
+  font-weight: bold;
+}
+
+.right {
+  display: flex;
+  gap: 16px;
+}
+
+.link {
+  color: #444;
+  text-decoration: none;
+  font-size: 0.95rem;
+}
+
+.link:hover {
+  color: #0099cc;
+  text-decoration: underline;
+}
