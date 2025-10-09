@@ -7,9 +7,10 @@ interface FadeInSectionProps {
   children: React.ReactNode;
   minHeight?: string; // 기본 높이를 설정할 수 있는 props
   delay?: number; // 각 섹션의 애니메이션 지연 시간 (ms)
+  id?: string; // 각 섹션의 고유 ID
 }
 
-const FadeInSection: React.FC<FadeInSectionProps> = ({ children, minHeight = '100vh', delay = 0 }) => {
+const FadeInSection: React.FC<FadeInSectionProps> = ({ children, minHeight = '100vh', delay = 0, id }) => {
   const [isVisible, setIsVisible] = useState(false);
   const domRef = useRef<HTMLDivElement>(null);
 
@@ -40,6 +41,7 @@ const FadeInSection: React.FC<FadeInSectionProps> = ({ children, minHeight = '10
 
   return (
     <div
+      id={id} // id를 DOM 요소에 전달
       className={`fade-in-section ${isVisible ? 'is-visible' : ''}`}
       ref={domRef}
       style={{
