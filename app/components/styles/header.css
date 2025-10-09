@@ -1,0 +1,27 @@
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(255,255,255,0.7); /* 흐린배경 */
+  padding: 8px 16px;
+}
+
+.nav-left {
+  font-weight: bold;
+}
+
+.nav-right {
+  display: flex;
+  gap: 16px;
+}
+
+.nav-link {
+  color: #444;
+  text-decoration: none;
+  font-size: 0.95rem;
+}
+
+.nav-link:hover {
+  color: #0099cc;
+}

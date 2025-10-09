@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+// Used in FadeInSection
 import "./globals.css";
-import Link from "next/link";
+import Navigator from "./components/header";
+import Footer from "./components/footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -33,20 +35,8 @@ export default function DashboardLayout({
             <Navigator />
         </header>
         <main>{children}</main>
+        <Footer />
       </body>
     </html>
   )
-}
-
-function Navigator() {
-    return (
-        <nav className="nav">
-            <div className="left">page:Factory</div>
-            <div className="right">
-                <Link href="/" className="link">Home</Link>
-                <Link href="/profile" className="link">Profile</Link>
-                <Link href="/portfolio" className="link">Portfolio</Link>
-            </div>
-        </nav>
-    )
 }
