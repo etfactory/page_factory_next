@@ -3,13 +3,13 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px 32px;
+  padding: 120px;
   background: rgb(15, 15, 15); /* 흐린배경 */
   font-size: 0.85rem;
-  color: #aaaaaa;
+  color: #4a4a4a;
 }
 
 .footer img {
-  opacity: 0.7;
+  opacity: 0.2;
   height: 60px;
 }
