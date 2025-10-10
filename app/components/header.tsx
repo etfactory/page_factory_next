@@ -28,6 +28,7 @@ export default function Navigator() {
         <a href="#main_section" className="nav-link" onClick={(e) => handleScroll(e, "main_section")}>Home</a>
         <a href="#profile_section" className="nav-link" onClick={(e) => handleScroll(e, "profile_section")}>Profile</a>
         <a href="#portfolio_section" className="nav-link" onClick={(e) => handleScroll(e, "portfolio_section")}>Portfolio</a>
+        <a href="#contact_section" className="nav-link" onClick={(e) => handleScroll(e, "contact_section")}>Contact</a>
       </div>
     </nav>
   );
