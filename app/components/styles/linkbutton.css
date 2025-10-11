@@ -1,0 +1,14 @@
+
+/* Button */
+.link-button {
+    font-family: paperozi;
+    width: 150px;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-bottom: 20px;
+    margin-right: 10px;
+}

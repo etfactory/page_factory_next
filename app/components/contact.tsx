@@ -8,6 +8,7 @@ import { GetServiceIdEmailJs, GetTemplateIdEmailJs, GetPublicKeyEmailJs } from "
 // FadeInSection 컴포넌트를 가져옵니다.
 import FadeInSection from "./scrollfadein";
 import "./styles/contact.css";
+import "./styles/main_style.css";
 
 export const ContactSection = () => {
     const form = useRef<HTMLFormElement>(null);
@@ -39,14 +40,14 @@ export const ContactSection = () => {
 
     return (
         <FadeInSection id="contact_section" delay={200}>
-            <div className="main-content" style={{ width: "90vw" }}>
+            <div className="main-content width-setting">
                 <h1 className="section-title">Contact Me</h1>
                 <form ref={form} onSubmit={sendEmail}>
-                    <label>Name</label>
-                    <input type="text" name="name" required />
-                    <label>Email</label>
-                    <input type="email" name="email" required />
-                    <label>Message</label>
+                    <label className="colored-text" >Name</label>
+                    <input type="text" placeholder="Robert Oh" name="name" required />
+                    <label className="colored-text" >Email</label>
+                    <input type="email" placeholder="factory@etfactory.dev" name="email" required />
+                    <label className="colored-text" >Message</label>
                     <textarea name="message" required />
                     <input type="submit" value="Send" />
                 </form>

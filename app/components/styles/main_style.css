@@ -12,18 +12,55 @@
 }
 
 .first-section-title {
+    font-family: Paperozi;
     font-size: 3rem;
-    font-weight: bold;
+    font-weight: 800;
     margin-bottom: 20px;
 }
 
 .section-title {
+    font-family: Paperozi;
     font-size: 2rem;
-    font-weight: bold;
+    font-weight: 800;
     margin-bottom: 20px;
+}
+
+.section-subtitle {
+    font-family: Paperozi;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.colored-text {
+    color: #0099cc;
+}
+
+
+/* Skills Section */
+.skills-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2vw;
+    margin-bottom: 10px;
+}
+
+.skill-item {
+    width: 25vw;
+}
+.language-title {
+    font-family: Paperozi;
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+.language-context {
+    font-size: 1.2rem;
 }
 
 .section-text {
     font-size: 1.2rem;
-    margin-bottom: 20px;
+}
+
+.width-setting {
+    min-width: 80vw;
 }
