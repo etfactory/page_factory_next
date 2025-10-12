@@ -31,7 +31,7 @@ const ProjectPanel:React.FC<ProjectPanelProps> = ({ title, description, projectU
             </div>
             <p className="project-description">{description}</p>
             {projectUrl && (
-                <LinkButton text={linkname ? linkname : "View Project"} href={projectUrl} style={{ backgroundColor: "#000000", marginTop: "10px" }} />
+                <LinkButton text={linkname ? linkname : "Github Link"} href={projectUrl} style={{ backgroundColor: "#000000", marginTop: "10px" }} />
             )}
         </div>
     )
