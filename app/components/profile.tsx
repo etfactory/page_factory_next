@@ -29,8 +29,8 @@ export default function ProfileSection() {
         </ul>
         <br />
         <h1 className="section-title">Links</h1>
-        <LinkButton text="GitHub" href="https://github.com/etfactory" style={{ backgroundColor: "#000000" }} />
-        <LinkButton text="Blog" href="https://blog.etfactory.dev" style={{ backgroundColor: "#000000" }} />
+        <LinkButton text="GitHub" href="https://github.com/etfactory" style={{ backgroundColor: "#000000", marginBottom: "20px" }} />
+        <LinkButton text="Blog" href="https://blog.etfactory.dev" style={{ backgroundColor: "#000000", marginBottom: "20px" }} />
         <Skills />
       </div>
     </FadeInSection>

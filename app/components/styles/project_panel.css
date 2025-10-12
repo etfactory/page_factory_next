@@ -1,0 +1,37 @@
+.project-box {
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 16px;
+    margin: 10px;
+    width: 75vw;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+
+.project-box:hover {
+    transform: translateY(-5px);
+}
+
+.project-title {
+    font-family: paperozi;
+    font-size: 1.5rem;
+    font-weight: 800;
+    margin-bottom: 8px;
+}
+
+.public-badge,
+.private-badge {
+  border: 2px solid;
+  border-color: #4caf50; /* Public 뱃지 색상 */
+  color: #4caf50;
+  padding: 5px 10px;
+  border-radius: 50px;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+.private-badge {
+  border-color: #f44336; /* Private 뱃지 색상 */
+  color: #f44336;
+}
