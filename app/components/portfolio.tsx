@@ -10,7 +10,6 @@ export default function PortfolioSection() {
         <h1 className="section-title">Projects</h1>
         <ProjectPanel
           title="Public Test"
-          public={true}
           description="Public Test Project Description"
           projectUrl="https://youtube.etfactory.dev"
           techStack={["React Native", "TypeScript", "Firebase"]}
@@ -18,7 +17,6 @@ export default function PortfolioSection() {
 
         <ProjectPanel
           title="Private Test"
-          public={false}
           description="Private Test Project Description"
           techStack={["Flutter", "Dart", "AWS"]}
         />

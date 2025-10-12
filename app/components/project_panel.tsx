@@ -4,10 +4,11 @@ import './styles/project_panel.css';
 import './styles/linkbutton.css';
 import './styles/main_style.css';
 import LinkButton from './linkbutton';
+import ProjectModal from './project_modal';
+import Link from 'next/link';
 
 interface ProjectPanelProps {
     title: string;
-    public: boolean;
     description: string;
     projectUrl?: string;
     linkname?: string;
@@ -30,9 +31,12 @@ const ProjectPanel:React.FC<ProjectPanelProps> = ({ title, description, projectU
                 </div>
             </div>
             <p className="project-description">{description}</p>
-            {projectUrl && (
-                <LinkButton text={linkname ? linkname : "Github Link"} href={projectUrl} style={{ backgroundColor: "#000000", marginTop: "10px" }} />
-            )}
+            <div style={{ display: 'flex', gap: '2px', alignItems: 'center', marginTop: '10px' }}>
+                <ProjectModal title={title} description={description} projectUrl={projectUrl} techStack={techStack} linkname={linkname} />
+                {projectUrl && (
+                    <LinkButton text={linkname ? linkname : "Github Link"} href={projectUrl} style={{ backgroundColor: "#000000" }} />
+                )}
+            </div>
         </div>
     )
 }

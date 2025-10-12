@@ -62,5 +62,6 @@
 }
 
 .width-setting {
+    margin-top: 80px;
     min-width: 80vw;
 }

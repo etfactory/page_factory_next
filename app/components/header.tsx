@@ -12,7 +12,7 @@ export default function Navigator() {
         setTimeout(() => {
             const targetElement = document.getElementById(targetId);
             if (targetElement) {
-            targetElement.scrollIntoView({ behavior: "smooth" }); // 부드러운 스크롤
+            targetElement.scrollIntoView({ behavior: "smooth", block: "start" }); // 부드러운 스크롤
             } else {
             console.error(`Element with ID "${targetId}" not found.`);
             }
