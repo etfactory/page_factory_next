@@ -50,7 +50,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ title, description, project
                 </div>
                 <p className="modal-description">{description}</p>
                 {projectUrl && (
-                    <LinkButton text={linkname ? linkname : "Github Link"} href={projectUrl} style={{ backgroundColor: "#000000" }} />
+                    <LinkButton text={linkname ? linkname : "Github Link"} href={projectUrl} style={{ backgroundColor: "#000000", marginTop: "12px" }} />
                 )}
                 <button onClick={closeModal} className="close-button">X</button>
             </Modal>

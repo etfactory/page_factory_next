@@ -3,7 +3,7 @@
     margin-bottom: 60px;
     text-align: left;
     padding: 0 20px;
-    min-width: 80vw;
+    width: 80vw;
 }
 
 .start-section-title {
@@ -63,5 +63,5 @@
 
 .width-setting {
     margin-top: 80px;
-    min-width: 80vw;
+    width: 80vw;
 }
