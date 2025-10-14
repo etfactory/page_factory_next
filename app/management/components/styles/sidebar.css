@@ -1,0 +1,14 @@
+.sidebar {
+    margin-top: 60px; /* Adjust based on header height */
+    width: 250px;
+    background-color: #f8f9fa;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+li {
+    font-family: paperozi;
+    font-weight: 600;
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+}
