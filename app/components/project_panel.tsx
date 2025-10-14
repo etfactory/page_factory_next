@@ -5,7 +5,10 @@ import './styles/linkbutton.css';
 import './styles/main_style.css';
 import LinkButton from './linkbutton';
 import ProjectModal from './project_modal';
-import Link from 'next/link';
+
+import mobileModalData from './json/modals/mobile_modals.json';
+import webModalData from './json/modals/web_modals.json';
+import otherModalData from './json/modals/others_modals.json';
 
 interface ProjectPanelProps {
     title: string;
@@ -13,9 +16,10 @@ interface ProjectPanelProps {
     projectUrl?: string;
     linkname?: string;
     techStack: string[];
+    modalDescription: string;
 }
 
-const ProjectPanel:React.FC<ProjectPanelProps> = ({ title, description, projectUrl, techStack, linkname }) => {
+const ProjectPanel:React.FC<ProjectPanelProps> = ({ title, description, projectUrl, techStack, linkname, modalDescription }) => {
     return (
         <div className="project-box">
             <div>
@@ -32,7 +36,7 @@ const ProjectPanel:React.FC<ProjectPanelProps> = ({ title, description, projectU
             </div>
             <p className="project-description">{description}</p>
             <div style={{ display: 'flex', gap: '2px', alignItems: 'center', marginTop: '10px' }}>
-                <ProjectModal title={title} description={description} projectUrl={projectUrl} techStack={techStack} linkname={linkname} />
+                <ProjectModal title={title} description={modalDescription} projectUrl={projectUrl} techStack={techStack} linkname={linkname} />
                 {projectUrl && (
                     <LinkButton text={linkname ? linkname : "Github Link"} href={projectUrl} style={{ backgroundColor: "#000000" }} />
                 )}

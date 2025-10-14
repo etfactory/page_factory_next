@@ -1,0 +1,12 @@
+{
+    "gamePort" : {
+        "report" : "https://drive.google.com/file/d/1WwxwKVT0MX5Y8_bHltUQUmo4K61xZho-/view?usp=sharing",
+        "notion" : "https://etfactory.notion.site/db-null"
+    },
+    "KNUCalendar" : {
+        "url" : "https://github.com/etfactory/ProjKNUCalendar"
+    },
+    "CStudy" : {
+        "url" : "https://github.com/etfactory/KNU-24Fall-C"
+    }
+}

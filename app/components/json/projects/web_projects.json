@@ -1,0 +1,21 @@
+{
+    "pageFactory_bootstrap": {
+        "title": "pageFactory (Bootstrap)",
+        "description": "A personal portfolio website template built with Bootstrap, HTML, CSS, and JavaScript. It features a responsive design, smooth scrolling, and interactive elements to showcase your projects and skills effectively.",
+        "projectUrl": "webProjectLinks.pageFactory_bootstrap.url",
+        "techStack": ["Bootstrap", "HTML", "CSS", "JavaScript"]
+    },
+    "pageFactory_next": {
+        "title": "pageFactory (Next.js)",
+        "description": "A personal portfolio website template built with Next.js, React, Tailwind CSS, and TypeScript. It features a responsive design, smooth scrolling, and interactive elements to showcase your projects and skills effectively.",
+        "projectUrl": "webProjectLinks.pageFactory_next.url",
+        "techStack": ["Next.js", "React", "Tailwind CSS", "TypeScript"]
+    },
+    "objectViewer": {
+        "title": "3D Object Viewer",
+        "description": "A web application that allows users to view and interact with 3D models directly in their web browsers. Built using Three.js, this project demonstrates the capabilities of WebGL for rendering complex 3D graphics.",
+        "techStack": ["Three.js", "JavaScript", "HTML", "CSS", "JavaScript"],
+        "linkname": "Report Link",
+        "projectUrl": "webProjectLinks.objectViewer.report"
+    }
+}

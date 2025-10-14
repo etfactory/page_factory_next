@@ -1,0 +1,19 @@
+{
+    "gamePort": {
+        "title": "Game Port",
+        "description": "",
+        "techStack": ["SQL"]
+    },
+    "KNUCalendar": {
+        "title": "KNU Calendar",
+        "description": "",
+        "techStack": ["Java", "SQLite"],
+        "projectUrl": "otherProjectLinks.KNUCalendar.url"
+    },
+    "CStudy" : {
+        "title": "C Study",
+        "description": "A collection of C programming exercises and projects designed to help beginners learn the fundamentals of the C programming language. This repository includes various examples, practice problems, and solutions to enhance coding skills.",
+        "techStack": ["C"],
+        "projectUrl": "otherProjectLinks.CStudy.url"
+    }
+}

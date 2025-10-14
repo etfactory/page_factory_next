@@ -1,13 +1,16 @@
 import FadeInSection from "./scrollfadein";
 import "./styles/main_style.css";
 
+// Importing project data from JSON files
 import mobileProjects from "./json/projects/mobile_projects.json"
 import webProjects from "./json/projects/web_projects.json"
 import otherProjects from "./json/projects/other_projects.json"
-
 import mobileProjectLinks from "./json/project_links/mobile_links.json";
 import webProjectLinks from "./json/project_links/web_links.json";
 import otherProjectLinks from "./json/project_links/other_links.json";
+import mobileProjectModals from "./json/modals/mobile_modals.json";
+import webProjectModals from "./json/modals/web_modals.json";
+import otherProjectModals from "./json/modals/others_modals.json";
 
 import ProjectPanel from "./project_panel";
 
@@ -17,11 +20,11 @@ export default function PortfolioSection() {
       <div className="main-content width-setting">
         <h1 className="section-title">Projects</h1>
         <h2 className="section-subtitle">Mobile Project</h2>
-        {createProjectPanels(mobileProjects, mobileProjectLinks)}
+        {createProjectPanels(mobileProjects, mobileProjectLinks, mobileProjectModals)}
         <h2 className="section-subtitle">Web Projects</h2>
-        {createProjectPanels(webProjects, webProjectLinks)}
+        {createProjectPanels(webProjects, webProjectLinks, webProjectModals)}
         <h2 className="section-subtitle">Other Projects</h2>
-        {createProjectPanels(otherProjects, otherProjectLinks)}
+        {createProjectPanels(otherProjects, otherProjectLinks, otherProjectModals)}
       </div>
     </FadeInSection>
   );
@@ -43,9 +46,16 @@ type ProjectLinks = {
   };
 };
 
+type ProjectModals = {
+  [key: string]: {
+    description: string;
+  };
+};
+
 function createProjectPanels(
   projectType: { [key: string]: Project },
-  projectLink: ProjectLinks
+  projectLink: ProjectLinks,
+  projectModal: ProjectModals
 ) {
   return Object.entries(projectType).map(
     (
@@ -74,6 +84,12 @@ function createProjectPanels(
           ]?.report
             ? "Report Link"
             : "Github Link"
+        }
+        // ./json/modals/*.json에 내용 없으면 project.description 사용
+        modalDescription={
+          projectModal[
+            (project.linkKey ?? key) as keyof typeof projectModal
+          ]?.description || project.description
         }
       />
     )

@@ -1,0 +1,11 @@
+{
+    "pageFactory_bootstrap": {
+        "description": "pageFactory (Bootstrap) is a web application that utilizes the Page Factory design pattern in Selenium WebDriver to enhance the maintainability and readability of test scripts. It leverages Bootstrap for responsive and modern UI design, making it easier to create and manage web elements in automated tests."
+    },
+    "pageFactory_next": {
+        "description": ""
+    },
+    "objectViewer": {
+        "description": ""
+    }
+}
