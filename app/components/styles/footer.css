@@ -1,7 +1,4 @@
-
-.footer {
-  display: flex;
-  justify-content: space-between;
+footer {
   align-items: center;
   padding: 120px;
   background: rgb(15, 15, 15); /* 흐린배경 */
@@ -13,14 +10,12 @@
   opacity: 0.2;
   height: 60px;
 }
-/*
-.footer-links {
-  margin-top: 10px;
+
+.footer-context {
+  display: flex;
+  justify-content: space-between;
 }
 
-.footer-links a {
-  margin-right: 15px;
-  color: #4a4a4a;
-  text-decoration: none;
+.footer-links {
+  margin-top: 20px;
 }
-  */

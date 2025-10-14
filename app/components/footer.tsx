@@ -6,16 +6,16 @@ import Link from "next/link";
 export default function Footer() {
     return (
         <footer className="footer">
-            <div>
+            <div className="footer-context">
                 © Euntaek 'Robert' Oh. All rights reserved.
                 <br />
                 This Page is powered by Next.js.
                 <br />
-                <div className="footer-links">
-                    <Link href="/setting">Settings</Link>
-                </div>
+                <img src="/logo/etfactory.dev.svg" alt="etfactory.dev Logo" />
             </div>
-            <img src="/logo/etfactory.dev.svg" alt="etfactory.dev Logo" />
+            <div className="footer-links">
+                <Link href="/setting">Settings</Link>
+            </div>
         </footer>
     )
 }
