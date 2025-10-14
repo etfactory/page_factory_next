@@ -45,6 +45,3 @@ next-env.d.ts
 /app/api/**/*.tsx
 /app/api/**/*.js
 /app/api/**/*.jsx
-
-# links
-/app/components/json/**/*.json
