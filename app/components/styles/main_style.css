@@ -75,25 +75,48 @@ body {
 }
 
 /* Skills Section */
+/* --- Skills Section (PC) --- */
 .skills-container {
     display: flex;
-    flex-wrap: wrap; /* 줄바꿈 허용 */
-    gap: 2vw; /* 사이 간격 */
+    flex-wrap: wrap;
+    gap: 20px; /* 아이템 사이의 간격 (고정값 사용 권장) */
     margin-bottom: 40px;
 }
 
 .skill-item {
-    width: 25vw; /* PC: 한 줄에 약 3개 배치 */
+    /* 계산식 설명: (전체 100% - 간격공간 40px) ÷ 3개 
+       간격공간 40px은 사이사이 틈(gap 20px * 2개)을 의미합니다.
+    */
+    width: calc((100% - 40px) / 3); 
     margin-bottom: 10px;
 }
 
 .language-title {
     font-family: 'Paperozi', sans-serif;
-    font-size: 1.2rem;
+    font-size: 1.3rem; /* PC 폰트 크기 살짝 키움 */
     font-weight: 700;
     margin-bottom: 5px;
-    display: block;
 }
+
+/* --- 모바일 반응형 (768px 이하) --- */
+@media (max-width: 768px) {
+    .skills-container {
+        gap: 15px;
+    }
+
+    .skill-item {
+        /* 모바일에서는 1줄에 1개씩 꽉 차게 */
+        width: 100%; 
+    }
+    
+    /* 만약 모바일에서 2개씩 보여주고 싶다면 아래 주석을 해제하세요 */
+    /*
+    .skill-item {
+        width: calc((100% - 15px) / 2);
+    }
+    */
+}
+
 
 .language-context {
     font-size: 1.1rem; /* PC 본문 크기 미세 조정 */

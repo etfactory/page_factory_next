@@ -6,7 +6,7 @@ export default function StartSection() {
     <FadeInSection id="main_section" delay={200} minHeight="100vh">
       <div className="main-content width-setting">
         {/* 인라인 스타일 제거 -> class 추가 */}
-        <img src="/logo/2FD.svg" alt="etfactory logo" className="main-logo" />
+        <img src="/logo/2FD.svg" alt="etfactory logo" className="main-logo h-64" />
         
         <h1 className="first-section-title">안녕하세요!</h1>
         <h1 className="first-section-title">
