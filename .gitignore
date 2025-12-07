@@ -39,9 +39,3 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
-
-# api
-/app/api/**/*.ts
-/app/api/**/*.tsx
-/app/api/**/*.js
-/app/api/**/*.jsx
