@@ -19,10 +19,10 @@ export const ContactSection = () => {
 
         if (form.current) {
             EmailJS.sendForm(
-                GetServiceIdEmailJs(),
-                GetTemplateIdEmailJs(),
+                GetServiceIdEmailJs() || "",
+                GetTemplateIdEmailJs() || "",
                 form.current,
-                GetPublicKeyEmailJs()
+                GetPublicKeyEmailJs() || ""
             )
             .then((result) => {
                 console.log(result.text);
