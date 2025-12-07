@@ -13,9 +13,6 @@ export default function Footer() {
                 <br />
                 <img src="/logo/etfactory.dev.svg" alt="etfactory.dev Logo" />
             </div>
-            <div className="footer-links">
-                <Link href="/management">Management</Link>
-            </div>
         </footer>
     )
 }
