@@ -1,67 +1,200 @@
+/* --- 기본 스타일 (PC 기준) --- */
 .start-section {
     margin-top: 120px;
     margin-bottom: 60px;
     text-align: left;
     padding: 0 20px;
-    width: 80vw;
+    width: 80vw; /* PC: 여백 넉넉하게 */
+    box-sizing: border-box; /* 패딩이 너비에 포함되도록 */
 }
 
 .start-section-title {
     font-size: 1rem;
     font-weight: bold;
+    color: #666; /* 살짝 연하게 처리 (선택사항) */
 }
 
 .first-section-title {
-    font-family: Paperozi;
+    font-family: 'Paperozi', sans-serif; /* 폰트 백업 추가 */
     font-size: 3rem;
     font-weight: 800;
     margin-bottom: 20px;
+    line-height: 1.3;
+    word-break: keep-all; /* 단어 단위 줄바꿈 */
 }
 
 .section-title {
-    font-family: Paperozi;
+    font-family: 'Paperozi', sans-serif;
     font-size: 2rem;
     font-weight: 800;
     margin-bottom: 20px;
+    word-break: keep-all;
 }
 
 .section-subtitle {
-    font-family: Paperozi;
+    font-family: 'Paperozi', sans-serif;
     font-size: 1.5rem;
     font-weight: 700;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
+    line-height: 1.4;
 }
 
 .colored-text {
     color: #0099cc;
 }
 
-
 /* Skills Section */
 .skills-container {
     display: flex;
-    flex-wrap: wrap;
-    gap: 2vw;
-    margin-bottom: 10px;
+    flex-wrap: wrap; /* 줄바꿈 허용 */
+    gap: 2vw; /* 사이 간격 */
+    margin-bottom: 40px;
 }
 
 .skill-item {
-    width: 25vw;
+    width: 25vw; /* PC: 한 줄에 약 3개 배치 */
+    margin-bottom: 10px;
 }
+
 .language-title {
-    font-family: Paperozi;
+    font-family: 'Paperozi', sans-serif;
     font-size: 1.2rem;
     font-weight: 700;
+    margin-bottom: 5px;
+    display: block;
 }
+
 .language-context {
-    font-size: 1.2rem;
+    font-size: 1.1rem; /* PC 본문 크기 미세 조정 */
+    line-height: 1.6;
+    color: #444;
 }
 
 .section-text {
     font-size: 1.2rem;
+    line-height: 1.8; /* 줄간격 확보 */
+    margin-bottom: 20px;
 }
 
 .width-setting {
     margin-top: 80px;
     width: 80vw;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+/* --- 모바일 반응형 (768px 이하) --- */
+@media (max-width: 768px) {
+    
+    /* 1. 레이아웃 및 여백 조정 */
+    .start-section, 
+    .width-setting {
+        width: 92vw; /* 모바일: 좌우 여백 줄이고 컨텐츠 확보 */
+        margin-top: 80px; /* 상단 여백 축소 */
+        padding: 0 10px;
+    }
+
+    /* 2. 폰트 크기 축소 */
+    .first-section-title {
+        font-size: 2rem; /* 3rem -> 2rem */
+    }
+
+    .section-title {
+        font-size: 1.6rem; /* 2rem -> 1.6rem */
+    }
+
+    .section-subtitle {
+        font-size: 1.3rem; /* 1.5rem -> 1.3rem */
+    }
+
+    .language-title,
+    .language-context,
+    .section-text {
+        font-size: 1rem; /* 본문 폰트 1rem(약 16px)으로 통일 */
+    }
+
+    /* 3. 스킬 리스트 정렬 변경 */
+    .skills-container {
+        gap: 20px; /* vw 대신 고정 픽셀 간격 사용 */
+    }
+
+    .skill-item {
+        width: 100%; /* 모바일: 한 줄에 하나씩 꽉 차게 배치 */
+    }
+}
+
+/* --- About Me 텍스트 간격 --- */
+.about-content {
+    margin-bottom: 40px;
+}
+.about-content .section-text {
+    margin-bottom: 10px; /* 문단 사이 간격 */
+}
+
+/* --- Education 리스트 스타일 --- */
+.education-list {
+    list-style-type: disc;
+    padding-left: 20px;
+    margin-bottom: 40px;
+    color: #333; /* var(--foreground) 대신 색상 지정 */
+}
+
+.school-name {
+    display: block;
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.major-name {
+    display: block;
+    font-size: 1.1rem;
+    color: #555;
+    line-height: 1.4;
+}
+
+/* --- Links 버튼 컨테이너 --- */
+.links-container {
+    display: flex;
+    gap: 15px; /* 버튼 사이 간격 */
+    margin-bottom: 40px;
+    flex-wrap: wrap; /* 화면 좁으면 줄바꿈 */
+}
+
+/* PC에서만 줄바꿈 하고 싶을 때 사용하는 유틸리티 클래스 */
+.pc-only {
+    display: block;
+}
+
+/* --- 모바일 반응형 (768px 이하) --- */
+@media (max-width: 768px) {
+    
+    /* 1. Education 폰트 크기 조절 */
+    .school-name {
+        font-size: 1.1rem;
+    }
+    .major-name {
+        font-size: 0.95rem;
+    }
+
+    /* 2. Links 버튼 배치 */
+    .links-container {
+        flex-direction: column; /* 세로로 쌓기 */
+        gap: 10px;
+        width: 100%; /* 버튼이 꽉 차게 보이길 원하면 추가 */
+    }
+
+    /* LinkButton 컴포넌트 내부 스타일이 width 100%가 아니라면, 
+       여기서 강제할 수도 있습니다 (선택사항) */
+    
+    /* 3. 불필요한 줄바꿈 제거 */
+    .pc-only {
+        display: none; /* 모바일에서는 문장이 이어지도록 */
+    }
+    
+    /* 4. 문단 간격 조금 더 확보 */
+    .about-content .section-text {
+        margin-bottom: 15px;
+    }
 }
