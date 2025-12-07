@@ -2,6 +2,6 @@
     "todayWeather" :
         {
             "images" : [],
-            "description" : "만약 내용이 있다면?"
+            "description" : ""
         }
 }
