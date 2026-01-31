@@ -7,5 +7,8 @@
     },
     "objectViewer": {
         "description": ""
+    },
+    "orangeStats": {
+        "description": "A wep homepage that provides statistical data and insigts about the Major League Baseball (MLB), used by MLB API to fetch real-time data and display it in an easy-to-understand format. The application is built with Next.js, React, Tailwind CSS, and TypeScript for the frontend, and MySQL for data storage."
     }
 }
