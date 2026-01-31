@@ -6,10 +6,6 @@ import './styles/main_style.css';
 import LinkButton from './linkbutton';
 import ProjectModal from './project_modal';
 
-import mobileModalData from './json/modals/mobile_modals.json';
-import webModalData from './json/modals/web_modals.json';
-import otherModalData from './json/modals/others_modals.json';
-
 interface ProjectPanelProps {
     title: string;
     description: string;

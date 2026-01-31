@@ -83,7 +83,7 @@ function createProjectPanels(
             (project.linkKey ?? key) as keyof typeof projectLink
           ]?.report
             ? "Report Link"
-            : "Github Link"
+            : "About Link"
         }
         // ./json/modals/*.json에 내용 없으면 project.description 사용
         modalDescription={

@@ -1,25 +1,43 @@
-.modal-content {
-  position: relative;
-  padding: 20px;
-  background: #fff;
-  border-radius: 8px;
-  max-width: 600px;
-  margin: auto;
+/* styles/project_modal.css */
 
-  width: 100%;
-}
-
+/* 배경 (Overlay) */
 .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.75); /* 어두운 배경 */
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: center; /* 수직 중앙 정렬 */
+  justify-content: center; /* 수평 중앙 정렬 */
   z-index: 1000;
+  padding: 20px; /* 모바일에서 꽉 차지 않게 여백 줌 */
+}
+
+/* 모달 내용 박스 (Content) */
+.modal-content {
+  background: white;
+  width: 100%;
+  max-width: 600px; /* 최대 너비 */
+  
+  /* 핵심: 화면 높이의 90%까지만 차지하고 넘치면 스크롤 */
+  max-height: 90vh; 
+  overflow-y: auto; 
+  
+  border-radius: 12px;
+  padding: 12px;
+  outline: none; /* 포커스 테두리 제거 */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  position: relative; /* 닫기 버튼 위치 잡기 위해 */
+}
+
+/* 다크 모드 대응 예시 (필요 시) */
+@media (prefers-color-scheme: dark) {
+  .modal-content {
+    background: #1f2937;
+    color: white;
+  }
 }
 
 .close-button {
@@ -55,4 +73,33 @@
     font-size: 1rem;
     line-height: 1.5;
     color: #555;
+}
+
+h1 {
+    font-family: paperozi;
+    font-size: 2rem;
+    font-weight: 800;
+}
+
+h2 {
+    font-family: paperozi;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+h3 {
+    font-family: paperozi;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+p {
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #555;
+}
+
+li {
+    list-style-type: disc;
+    margin-left: 20px;
+    margin-top: 10px;
 }
