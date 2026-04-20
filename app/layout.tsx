@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Noto_Sans_KR } from "next/font/google";
 // Used in FadeInSection
-// @ts-expect-error - Next.js handles global CSS imports in app/layout.tsx
 import "./globals.css";
 import Navigator from "./components/header";
 import Footer from "./components/footer";
