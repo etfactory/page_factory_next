@@ -1,8 +1,5 @@
 "use client";
 
-import './styles/project_panel.css';
-import './styles/linkbutton.css';
-import './styles/main_style.css';
 import LinkButton from './linkbutton';
 import ProjectModal from './project_modal';
 

@@ -1,6 +1,4 @@
 import React from 'react';
-import '../components/styles/main_style.css';
-import './components/styles/management.css';
 
 import LoginPanel from './components/login';
 

@@ -1,7 +1,6 @@
 import FadeInSection from "./scrollfadein";
 import Skills from "./skills";
 import LinkButton from "./linkbutton";
-import "./styles/main_style.css";
 
 export default function ProfileSection() {
   return (

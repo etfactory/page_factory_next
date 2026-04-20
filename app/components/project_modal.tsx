@@ -2,10 +2,6 @@ import React, { useState, useEffect } from "react";
 import Modal from 'react-modal';
 import LinkButton from './linkbutton';
 
-// CSS 파일 import (위에서 수정한 CSS가 적용됩니다)
-import './styles/project_modal.css';
-import './styles/linkbutton.css';
-import './styles/main_style.css';
 
 interface ProjectModalProps {
     title: string;

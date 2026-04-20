@@ -1,5 +1,4 @@
 import FadeInSection from "./scrollfadein";
-import "./styles/main_style.css";
 
 export default function StartSection() {
   return (

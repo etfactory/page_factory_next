@@ -1,5 +1,4 @@
 import FadeInSection from "./scrollfadein";
-import "./styles/main_style.css";
 
 // Importing project data from JSON files
 import mobileProjects from "./json/projects/mobile_projects.json"

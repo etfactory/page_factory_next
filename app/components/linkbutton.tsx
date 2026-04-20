@@ -1,5 +1,4 @@
 "use client";
-import "./styles/linkbutton.css";
 
 interface LinkButtonProps {
     href: string;

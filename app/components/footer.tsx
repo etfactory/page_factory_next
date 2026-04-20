@@ -1,6 +1,4 @@
 /* Footer component is now integrated into layout.tsx as Footer function */
-import "./styles/footer.css";
-
 import Link from "next/link";
 
 export default function Footer() {

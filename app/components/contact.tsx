@@ -7,8 +7,6 @@ import { GetServiceIdEmailJs, GetTemplateIdEmailJs, GetPublicKeyEmailJs } from "
 
 // FadeInSection 컴포넌트를 가져옵니다.
 import FadeInSection from "./scrollfadein";
-import "./styles/contact.css";
-import "./styles/main_style.css";
 
 export const ContactSection = () => {
     const form = useRef<HTMLFormElement>(null);
@@ -31,7 +29,9 @@ export const ContactSection = () => {
                 alert("메일이 성공적으로 전송되었습니다. 빠른 시일 내에 답변드리겠습니다!");
             })
             .catch((error) => {
-                console.log(error.text);
+                // error 객체 전체를 출력하여 HTTP 상태 코드나 정확한 실패 원인 파악
+                console.log("FAILED...", error); 
+                alert("전송에 실패했습니다. 콘솔을 확인해주세요.");
             });
 
             form.current.reset(); // 폼 초기화

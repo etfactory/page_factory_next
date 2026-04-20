@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useRef, useState, useEffect } from 'react';
-import './styles/scrollfadein.css';
 
 interface FadeInSectionProps {
   children: React.ReactNode;
