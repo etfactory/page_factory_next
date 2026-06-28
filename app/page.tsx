@@ -5,15 +5,7 @@ import PortfolioSection from "./components/portfolio";
 
 export default function Home() {
   return (
-    <main
-      style={{
-        minHeight: "100vh",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
+    <main className="min-h-screen flex flex-col justify-center items-center">
       <StartSection />
       <ProfileSection />
       <PortfolioSection />

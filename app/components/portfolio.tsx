@@ -1,96 +1,49 @@
 import FadeInSection from "./scrollfadein";
-
-// Importing project data from JSON files
-import mobileProjects from "./json/projects/mobile_projects.json"
-import webProjects from "./json/projects/web_projects.json"
-import otherProjects from "./json/projects/other_projects.json"
-import mobileProjectLinks from "./json/project_links/mobile_links.json";
-import webProjectLinks from "./json/project_links/web_links.json";
-import otherProjectLinks from "./json/project_links/other_links.json";
-import mobileProjectModals from "./json/modals/mobile_modals.json";
-import webProjectModals from "./json/modals/web_modals.json";
-import otherProjectModals from "./json/modals/others_modals.json";
-
 import ProjectPanel from "./project_panel";
+import db from "@/lib/db";
 
 export default function PortfolioSection() {
+  const stmt = db.prepare('SELECT * FROM projects');
+  const allProjects = stmt.all() as any[];
+
+  const mobileProjects = allProjects.filter((p) => p.project_type === 'mobile');
+  const webProjects = allProjects.filter((p) => p.project_type === 'web');
+  const otherProjects = allProjects.filter((p) => p.project_type === 'other');
+
   return (
     <FadeInSection id="portfolio_section" delay={200}>
-      <div className="main-content width-setting">
-        <h1 className="section-title">Projects</h1>
-        <h2 className="section-subtitle">Mobile Project</h2>
-        {createProjectPanels(mobileProjects, mobileProjectLinks, mobileProjectModals)}
-        <h2 className="section-subtitle">Web Projects</h2>
-        {createProjectPanels(webProjects, webProjectLinks, webProjectModals)}
-        <h2 className="section-subtitle">Other Projects</h2>
-        {createProjectPanels(otherProjects, otherProjectLinks, otherProjectModals)}
+      <div className="w-[92vw] md:w-[80vw] max-w-[1200px] mx-auto px-[10px] md:px-[20px] mt-[80px]">
+        <h1 className="font-[paperozi] text-[2rem] md:text-[2.5rem] font-[800] mb-[20px] break-keep">Projects</h1>
+        <h2 className="font-[paperozi] text-[1.3rem] md:text-[1.5rem] font-[700] mb-[15px] leading-[1.4]">Mobile Project</h2>
+        {createProjectPanels(mobileProjects)}
+        <h2 className="font-[paperozi] text-[1.3rem] md:text-[1.5rem] font-[700] mb-[15px] leading-[1.4]">Web Projects</h2>
+        {createProjectPanels(webProjects)}
+        <h2 className="font-[paperozi] text-[1.3rem] md:text-[1.5rem] font-[700] mb-[15px] leading-[1.4]">Other Projects</h2>
+        {createProjectPanels(otherProjects)}
       </div>
     </FadeInSection>
   );
 }
 
-type Project = {
-  title: string;
-  description: string;
-  techStack: string[];
-  linkname?: string;
-  projectUrl?: string;
-  linkKey?: string;
-};
+function createProjectPanels(projects: any[]) {
+  return projects.map((project, index) => {
+    let techStack = [];
+    try {
+      techStack = JSON.parse(project.tech_stack);
+    } catch (e) {
+      techStack = [];
+    }
 
-type ProjectLinks = {
-  [key: string]: {
-    report?: string;
-    url?: string;
-  };
-};
-
-type ProjectModals = {
-  [key: string]: {
-    description: string;
-  };
-};
-
-function createProjectPanels(
-  projectType: { [key: string]: Project },
-  projectLink: ProjectLinks,
-  projectModal: ProjectModals
-) {
-  return Object.entries(projectType).map(
-    (
-      [key, project]: [
-        string,
-        Project
-      ],
-      index: number
-    ) => (
+    return (
       <ProjectPanel
-        key={index}
+        key={project.id || index}
         title={project.title}
         description={project.description}
-        projectUrl={
-          projectLink[
-            (project.linkKey ?? key) as keyof typeof projectLink
-          ]?.report ||
-          projectLink[
-            (project.linkKey ?? key) as keyof typeof projectLink
-          ]?.url
-        }
-        techStack={project.techStack}
-        linkname={
-          projectLink[
-            (project.linkKey ?? key) as keyof typeof projectLink
-          ]?.report
-            ? "Report Link"
-            : "About Link"
-        }
-        // ./json/modals/*.json에 내용 없으면 project.description 사용
-        modalDescription={
-          projectModal[
-            (project.linkKey ?? key) as keyof typeof projectModal
-          ]?.description || project.description
-        }
+        projectUrl={project.project_url}
+        techStack={techStack}
+        linkname={project.link_name}
+        modalDescription={project.modal_description || project.description}
       />
-    )
-  );
+    );
+  });
 }

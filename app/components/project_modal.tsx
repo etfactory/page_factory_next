@@ -36,8 +36,8 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
     };
 
     return (
-        <div className="project-modal-wrapper">
-            <div onClick={openModal} style={{ display: "inline-block" }}>
+        <div className="inline-block">
+            <div onClick={openModal} className="inline-block">
                 <LinkButton 
                     text="More Info" 
                     href="#" 
@@ -50,44 +50,35 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
                 isOpen={modalIsOpen}
                 onRequestClose={closeModal}
                 contentLabel="Project Details"
-                
-                // CSS 클래스 이름 매핑
-                className="modal-content"
-                overlayClassName="modal-overlay"
-                
-                // 애니메이션 시간 설정 (선택사항)
+                className="bg-white dark:bg-[#1f2937] dark:text-white w-full max-w-[600px] max-h-[90vh] overflow-y-auto rounded-[12px] p-[12px] outline-none shadow-[0_4px_6px_rgba(0,0,0,0.1)] relative"
+                overlayClassName="fixed inset-0 bg-black/75 flex items-center justify-center z-[1000] p-[20px]"
                 closeTimeoutMS={200}
             >
                 {/* 닫기 버튼 (우상단 고정) */}
                 <button 
                     onClick={closeModal} 
-                    className="close-button"
-                    style={{ position: 'absolute', top: '16px', right: '16px', cursor: 'pointer' }}
+                    className="absolute top-[16px] right-[16px] bg-transparent border-none text-[1.5rem] cursor-pointer text-black dark:text-white"
                 >
                     ✕
                 </button>
 
-                <h2 className="modal-title" style={{ marginTop: 0 }}>{title}</h2>
+                <h2 className="font-[paperozi] text-[1.5rem] font-[800] mb-[10px] mt-0">{title}</h2>
                 
-                <div className="modal-tech-stack" style={{ marginBottom: '16px' }}>
+                <div className="font-[paperozi] text-[0.9rem] font-[600] text-[#3c3c3c] dark:text-[#ccc] flex flex-wrap gap-[8px] mb-[16px]">
                     {techStack.map((tech, index) => (
-                        <span key={index} className="tech-item" style={{ marginRight: '8px', padding: '4px 8px', background: '#eee', borderRadius: '4px', fontSize: '0.875rem' }}>
+                        <span key={index} className="px-[8px] py-[4px] bg-[#eee] dark:bg-[#333] rounded-[4px] text-[0.875rem]">
                             {tech}
                         </span>
                     ))}
                 </div>
 
-                {/* DOMParser 로직 대체:
-                    dangerouslySetInnerHTML을 사용하면 훨씬 간단하게 HTML을 렌더링할 수 있습니다.
-                    Next.js 서버 사이드 렌더링 시 DOMParser 에러를 막아줍니다.
-                */}
                 <div 
-                    className="modal-description"
+                    className="mt-[15px] text-[1rem] leading-[1.5] text-[#555] dark:text-[#ddd]"
                     dangerouslySetInnerHTML={{ __html: description }}
                 />
 
                 {projectUrl && (
-                    <div style={{ marginTop: "20px" }}>
+                    <div className="mt-[20px]">
                         <LinkButton 
                             text={linkname ? linkname : "Github Link"} 
                             href={projectUrl} 

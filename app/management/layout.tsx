@@ -7,9 +7,9 @@ export default function ManagementLayout({
     children: React.ReactNode
 }) {
     return (
-        <div style={{ display: 'flex' }}>
+        <div className="flex min-h-screen bg-[#0a0a0a] text-white">
             <Sidebar />
-            <main>{children}</main>
+            <main className="flex-1 w-full overflow-x-hidden py-16">{children}</main>
         </div>
     )
 }

@@ -4,6 +4,8 @@ import { Noto_Sans_KR } from "next/font/google";
 import "./globals.css";
 import Navigator from "./components/header";
 import Footer from "./components/footer";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 // Noto Sans KR 폰트 설정
 const notoSansKR = Noto_Sans_KR({
@@ -37,6 +39,8 @@ export default function DashboardLayout({
         </header>
         <main>{children}</main>
         <Footer />
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   )
