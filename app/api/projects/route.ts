@@ -1,10 +1,11 @@
 import { NextResponse } from 'next/server';
-import db from '@/lib/db';
+import prisma from '@/lib/prisma';
 
 export async function GET() {
   try {
-    const stmt = db.prepare('SELECT * FROM projects');
-    const projects = stmt.all();
+    const projects = await prisma.project.findMany({
+      orderBy: { id: 'desc' }
+    });
     return NextResponse.json({ success: true, data: projects });
   } catch (error: any) {
     return NextResponse.json({ success: false, error: error.message }, { status: 500 });
@@ -25,25 +26,20 @@ export async function POST(request: Request) {
       modal_description,
     } = body;
 
-    const stmt = db.prepare(`
-      INSERT INTO projects (
-        project_type, project_key, title, description, tech_stack,
-        link_name, project_url, modal_description
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-    `);
+    const result = await prisma.project.create({
+      data: {
+        project_type,
+        project_key,
+        title,
+        description,
+        tech_stack: typeof tech_stack === 'string' ? tech_stack : JSON.stringify(tech_stack),
+        link_name,
+        project_url,
+        modal_description
+      }
+    });
 
-    const result = stmt.run(
-      project_type,
-      project_key,
-      title,
-      description,
-      typeof tech_stack === 'string' ? tech_stack : JSON.stringify(tech_stack),
-      link_name,
-      project_url,
-      modal_description
-    );
-
-    return NextResponse.json({ success: true, id: result.lastInsertRowid });
+    return NextResponse.json({ success: true, id: result.id });
   } catch (error: any) {
     return NextResponse.json({ success: false, error: error.message }, { status: 500 });
   }

@@ -1,23 +1,34 @@
 import { NextResponse } from 'next/server';
-import db from '@/lib/db';
+import prisma from '@/lib/prisma';
 
 export async function GET() {
   try {
-    const totalStmt = db.prepare('SELECT COUNT(*) as count FROM projects');
-    const totalProjects = (totalStmt.get() as any).count;
+    const totalProjects = await prisma.project.count();
 
-    const byTypeStmt = db.prepare('SELECT project_type, COUNT(*) as count FROM projects GROUP BY project_type');
-    const byType = byTypeStmt.all() as any[];
+    const byTypeGroups = await prisma.project.groupBy({
+      by: ['project_type'],
+      _count: {
+        project_type: true
+      }
+    });
 
-    const recentStmt = db.prepare('SELECT id, project_type, title, description FROM projects ORDER BY id DESC LIMIT 3');
-    const recentProjects = recentStmt.all() as any[];
+    const recentProjects = await prisma.project.findMany({
+      orderBy: { id: 'desc' },
+      take: 3,
+      select: {
+        id: true,
+        project_type: true,
+        title: true,
+        description: true
+      }
+    });
 
     return NextResponse.json({
       success: true,
       data: {
         total: totalProjects,
-        byType: byType.reduce((acc, curr) => {
-          acc[curr.project_type] = curr.count;
+        byType: byTypeGroups.reduce((acc: any, curr: any) => {
+          acc[curr.project_type] = curr._count.project_type;
           return acc;
         }, {}),
         recent: recentProjects,

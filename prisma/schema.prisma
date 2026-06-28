@@ -1,0 +1,20 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Project {
+  id                Int      @id @default(autoincrement())
+  project_type      String   @db.VarChar(50)
+  project_key       String   @db.VarChar(100)
+  title             String   @db.VarChar(255)
+  description       String?  @db.Text
+  tech_stack        String?  @db.Text
+  link_name         String?  @db.VarChar(100)
+  project_url       String?  @db.Text
+  modal_description String?  @db.Text
+}

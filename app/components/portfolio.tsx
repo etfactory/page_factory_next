@@ -1,10 +1,9 @@
 import FadeInSection from "./scrollfadein";
 import ProjectPanel from "./project_panel";
-import db from "@/lib/db";
+import prisma from "@/lib/prisma";
 
-export default function PortfolioSection() {
-  const stmt = db.prepare('SELECT * FROM projects');
-  const allProjects = stmt.all() as any[];
+export default async function PortfolioSection() {
+  const allProjects = await prisma.project.findMany();
 
   const mobileProjects = allProjects.filter((p) => p.project_type === 'mobile');
   const webProjects = allProjects.filter((p) => p.project_type === 'web');

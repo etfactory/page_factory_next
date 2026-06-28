@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import db from '../lib/db';
+import db from "../lib/prisma";
 
 const baseDir = path.join(process.cwd(), 'app', 'components', 'json');
 
@@ -30,14 +30,7 @@ const mobileModals = loadJson('modals/mobile_modals.json');
 const webModals = loadJson('modals/web_modals.json');
 const otherModals = loadJson('modals/others_modals.json');
 
-const insertStmt = db.prepare(`
-  INSERT INTO projects (
-    project_type, project_key, title, description, tech_stack,
-    link_name, project_url, modal_description
-  ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-`);
-
-function seedType(
+async function seedType(
   type: string,
   projects: any,
   links: any,
@@ -45,32 +38,45 @@ function seedType(
 ) {
   for (const [key, project] of Object.entries(projects) as any) {
     const linkKey = project.linkKey ?? key;
-    
+
     // Determine project_url
     let projectUrl = project.projectUrl;
     let reportUrl = links[linkKey]?.report;
     let normalUrl = links[linkKey]?.url;
-    
+
     const finalUrl = reportUrl || normalUrl || projectUrl || '';
     const linkName = reportUrl ? "Report Link" : (normalUrl ? "About Link" : project.linkname || "");
     const modalDesc = modals[linkKey]?.description || project.description || "";
     const techStack = project.techStack ? JSON.stringify(project.techStack) : '[]';
 
-    insertStmt.run(
-      type,
-      key,
-      project.title || '',
-      project.description || '',
-      techStack,
-      linkName,
-      finalUrl,
-      modalDesc
-    );
+    await db.project.create({
+      data: {
+        project_type: type,
+        project_key: key,
+        title: project.title || '',
+        description: project.description || '',
+        tech_stack: techStack,
+        link_name: linkName,
+        project_url: finalUrl,
+        modal_description: modalDesc
+      }
+    });
   }
 }
 
-console.log("Seeding Database...");
-seedType('mobile', mobileProjects, mobileLinks, mobileModals);
-seedType('web', webProjects, webLinks, webModals);
-seedType('other', otherProjects, otherLinks, otherModals);
-console.log("Database seeded successfully.");
+async function main() {
+  console.log("Seeding Database...");
+  await seedType('mobile', mobileProjects, mobileLinks, mobileModals);
+  await seedType('web', webProjects, webLinks, webModals);
+  await seedType('other', otherProjects, otherLinks, otherModals);
+  console.log("Database seeded successfully.");
+}
+
+main()
+  .catch((e) => {
+    console.error(e);
+    process.exit(1);
+  })
+  .finally(async () => {
+    await db.$disconnect();
+  });

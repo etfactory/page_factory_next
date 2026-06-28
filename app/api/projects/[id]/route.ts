@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import db from '@/lib/db';
+import prisma from '@/lib/prisma';
 
 export async function PUT(request: Request, context: { params: Promise<{ id: string }> }) {
   try {
@@ -16,37 +16,30 @@ export async function PUT(request: Request, context: { params: Promise<{ id: str
       modal_description,
     } = body;
 
-    const stmt = db.prepare(`
-      UPDATE projects SET
-        project_type = ?,
-        project_key = ?,
-        title = ?,
-        description = ?,
-        tech_stack = ?,
-        link_name = ?,
-        project_url = ?,
-        modal_description = ?
-      WHERE id = ?
-    `);
-
-    const result = stmt.run(
-      project_type,
-      project_key,
-      title,
-      description,
-      typeof tech_stack === 'string' ? tech_stack : JSON.stringify(tech_stack),
-      link_name,
-      project_url,
-      modal_description,
-      id
-    );
-
-    if (result.changes === 0) {
-      return NextResponse.json({ success: false, error: 'Project not found' }, { status: 404 });
+    const projectId = parseInt(id, 10);
+    if (isNaN(projectId)) {
+      return NextResponse.json({ success: false, error: 'Invalid ID' }, { status: 400 });
     }
 
-    return NextResponse.json({ success: true });
+    const updatedProject = await prisma.project.update({
+      where: { id: projectId },
+      data: {
+        project_type,
+        project_key,
+        title,
+        description,
+        tech_stack: typeof tech_stack === 'string' ? tech_stack : JSON.stringify(tech_stack),
+        link_name,
+        project_url,
+        modal_description
+      }
+    });
+
+    return NextResponse.json({ success: true, data: updatedProject });
   } catch (error: any) {
+    if (error.code === 'P2025') {
+      return NextResponse.json({ success: false, error: 'Project not found' }, { status: 404 });
+    }
     return NextResponse.json({ success: false, error: error.message }, { status: 500 });
   }
 }
@@ -54,16 +47,21 @@ export async function PUT(request: Request, context: { params: Promise<{ id: str
 export async function DELETE(request: Request, context: { params: Promise<{ id: string }> }) {
   try {
     const { id } = await context.params;
+    const projectId = parseInt(id, 10);
     
-    const stmt = db.prepare('DELETE FROM projects WHERE id = ?');
-    const result = stmt.run(id);
-
-    if (result.changes === 0) {
-      return NextResponse.json({ success: false, error: 'Project not found' }, { status: 404 });
+    if (isNaN(projectId)) {
+      return NextResponse.json({ success: false, error: 'Invalid ID' }, { status: 400 });
     }
+
+    await prisma.project.delete({
+      where: { id: projectId }
+    });
 
     return NextResponse.json({ success: true });
   } catch (error: any) {
+    if (error.code === 'P2025') {
+      return NextResponse.json({ success: false, error: 'Project not found' }, { status: 404 });
+    }
     return NextResponse.json({ success: false, error: error.message }, { status: 500 });
   }
 }
