@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { revalidatePath } from 'next/cache';
 import prisma from '@/lib/prisma';
 
 export const dynamic = 'force-dynamic';
@@ -37,6 +38,8 @@ export async function PUT(request: Request, context: { params: Promise<{ id: str
       }
     });
 
+    revalidatePath('/');
+
     return NextResponse.json({ success: true, data: updatedProject });
   } catch (error: any) {
     if (error.code === 'P2025') {
@@ -58,6 +61,8 @@ export async function DELETE(request: Request, context: { params: Promise<{ id: 
     await prisma.project.delete({
       where: { id: projectId }
     });
+
+    revalidatePath('/');
 
     return NextResponse.json({ success: true });
   } catch (error: any) {
