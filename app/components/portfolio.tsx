@@ -3,11 +3,18 @@ import ProjectPanel from "./project_panel";
 import prisma from "@/lib/prisma";
 
 export default async function PortfolioSection() {
-  const allProjects = await prisma.project.findMany();
+  const allProjects = await prisma.project.findMany({
+    orderBy: {
+      title: 'asc'
+    }
+  });
 
-  const mobileProjects = allProjects.filter((p) => p.project_type === 'mobile');
-  const webProjects = allProjects.filter((p) => p.project_type === 'web');
-  const otherProjects = allProjects.filter((p) => p.project_type === 'other');
+  // public 프로젝트만 필터링 (project_url이 비어있지 않은 경우)
+  const publicProjects = allProjects.filter((p) => p.project_url && p.project_url.trim() !== '');
+
+  const mobileProjects = publicProjects.filter((p) => p.project_type === 'mobile');
+  const webProjects = publicProjects.filter((p) => p.project_type === 'web');
+  const otherProjects = publicProjects.filter((p) => p.project_type === 'other');
 
   return (
     <FadeInSection id="portfolio_section" delay={200}>
