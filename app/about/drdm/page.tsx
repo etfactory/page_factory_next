@@ -408,7 +408,7 @@ function ArchitectureTabs() {
 
   return (
     <div className="bg-[#111]/80 backdrop-blur-sm rounded-2xl border border-white/10 overflow-hidden shadow-2xl">
-      <div className="flex items-center justify-between border-b border-white/10 pr-2 md:pr-4">
+      <div className="flex items-center justify-between border-b border-white/10">
         <div className="flex overflow-x-auto hide-scrollbar w-full">
           {tabs.map(tab => (
             <button
