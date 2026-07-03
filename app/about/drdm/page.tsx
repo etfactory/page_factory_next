@@ -164,6 +164,11 @@ export default function DrDMAboutPage() {
                 </div>
               </div>
             </div>
+
+            {/* Tabbed Details Section */}
+            <div className="mt-16 w-full">
+              <ArchitectureTabs />
+            </div>
           </div>
         </FadeInSection>
       </section>
@@ -259,5 +264,133 @@ export default function DrDMAboutPage() {
         </FadeInSection>
       </section>
     </main>
+  );
+}
+
+function ArchitectureTabs() {
+  const [activeTab, setActiveTab] = React.useState<'frontend' | 'backend' | 'ai'>('frontend');
+
+  const tabs = [
+    { id: 'frontend', label: 'Frontend' },
+    { id: 'backend', label: 'Backend' },
+    { id: 'ai', label: 'AI' },
+  ];
+
+  const content = {
+    frontend: (
+      <div className="animate-in fade-in duration-500">
+        <div className="flex items-center gap-4 mb-6 border-b border-white/10 pb-5">
+          <div className="p-3 bg-[#0099cc]/10 rounded-xl">
+            <svg className="w-6 h-6 text-[#0099cc]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+            </svg>
+          </div>
+          <div>
+            <h4 className="text-2xl font-bold font-[paperozi] text-white tracking-tight">Frontend Architecture</h4>
+            <div className="flex items-center gap-2 mt-1.5">
+              <span className="px-2.5 py-0.5 rounded-md bg-white/5 text-[#0099cc] text-xs font-semibold tracking-wide">TypeScript</span>
+              <span className="px-2.5 py-0.5 rounded-md bg-white/5 text-[#0099cc] text-xs font-semibold tracking-wide">React Native</span>
+            </div>
+          </div>
+        </div>
+        <div className="space-y-4 text-gray-300 leading-relaxed text-sm md:text-base">
+          <p><strong className="text-[#0099cc] font-semibold">선택 이유:</strong></p>
+          <ul className="list-none pl-5 space-y-2 border-l-2 border-[#0099cc]/30 ml-2">
+            <li className="pl-4">크로스 플랫폼(iOS, Android) 모바일 애플리케이션을 하나의 코드베이스로 빠르게 개발하고 유지보수하기 위해 React Native를 채택했습니다. 또한 정적 타입 검사를 통해 런타임 에러를 줄이고 코드 안정성을 높이기 위해 TypeScript를 함께 사용했습니다.</li>
+          </ul>
+          <p className="pt-2"><strong className="text-[#0099cc] font-semibold">구성 방식:</strong></p>
+          <ul className="list-none pl-5 space-y-3 border-l-2 border-[#0099cc]/30 ml-2">
+            <li className="pl-4"><strong className="text-white block mb-1">네이티브 기능 접근</strong> 식단 기록을 위한 스마트폰 카메라 및 갤러리 저장소 접근 기능을 네이티브 모듈과 연동하여 구현했습니다.</li>
+            <li className="pl-4"><strong className="text-white block mb-1">푸시 알림</strong> 사용자의 규칙적인 식사, 운동, 복약 타이밍과 AI의 혈당 스파이크 예측 경고 알림을 네이티브 푸시로 실시간 전송합니다.</li>
+            <li className="pl-4"><strong className="text-white block mb-1">로컬 데이터베이스</strong> 오프라인 상태에서도 빠른 데이터 로드와 임시 저장을 지원하며, 네트워크 통신 비용을 최소화하기 위해 기기 내부의 SQLite를 활용해 백엔드 클라우드 DB와 효율적으로 동기화(Sync)합니다.</li>
+          </ul>
+        </div>
+      </div>
+    ),
+    backend: (
+      <div className="animate-in fade-in duration-500">
+        <div className="flex items-center gap-4 mb-6 border-b border-white/10 pb-5">
+          <div className="p-3 bg-purple-500/10 rounded-xl">
+            <svg className="w-6 h-6 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" />
+            </svg>
+          </div>
+          <div>
+            <h4 className="text-2xl font-bold font-[paperozi] text-white tracking-tight">Backend Architecture</h4>
+            <div className="flex items-center gap-2 mt-1.5 flex-wrap">
+              <span className="px-2.5 py-0.5 rounded-md bg-white/5 text-purple-400 text-xs font-semibold tracking-wide">NestJS</span>
+              <span className="px-2.5 py-0.5 rounded-md bg-white/5 text-purple-400 text-xs font-semibold tracking-wide">FastAPI</span>
+              <span className="px-2.5 py-0.5 rounded-md bg-white/5 text-purple-400 text-xs font-semibold tracking-wide">PostgreSQL</span>
+            </div>
+          </div>
+        </div>
+        <div className="space-y-4 text-gray-300 leading-relaxed text-sm md:text-base">
+          <p><strong className="text-purple-400 font-semibold">선택 이유:</strong></p>
+          <ul className="list-none pl-5 space-y-2 border-l-2 border-purple-400/30 ml-2">
+            <li className="pl-4">Main Server는 견고한 아키텍처와 타입 안정성을 제공하는 NestJS를 사용하여 안정적인 API를 구성하였습니다. 반면 AI Server는 데이터 분석과 기계 학습 모델 연동에 압도적인 장점이 있는 Python 기반의 FastAPI를 선택하여, 두 서버를 목적에 맞게 마이크로서비스 형태로 분리 구성했습니다.</li>
+          </ul>
+          <p className="pt-2"><strong className="text-purple-400 font-semibold">구성 방식:</strong></p>
+          <ul className="list-none pl-5 space-y-3 border-l-2 border-purple-400/30 ml-2">
+            <li className="pl-4"><strong className="text-white block mb-1">Main Server (NestJS)</strong> 사용자 인증, 데이터베이스(PostgreSQL) 접근 및 CRUD 로직, 모바일 앱과의 메인 통신을 담당합니다. AWS Cloud 환경에 배포되어 높은 가용성을 보장합니다.</li>
+            <li className="pl-4"><strong className="text-white block mb-1">AI Server (FastAPI)</strong> Main Server로부터 분석 요청을 받아, LLM(Gemini) 모델로 프롬프트를 전송하고 추론 결과값을 반환합니다. 파이썬의 풍부한 데이터 전처리 라이브러리를 적극 활용하여 입력 데이터를 정제합니다.</li>
+            <li className="pl-4"><strong className="text-white block mb-1">응답 속도 최적화 (Server-sent Events)</strong> AI가 생성하는 의료 가이드라인의 긴 답변을 모바일 앱이 한 번에 기다리지 않도록, Server-sent Events(SSE) 방식을 채택했습니다. 텍스트가 실시간 타이핑 형태로 스트리밍 전송되어 사용자의 체감 응답 대기 시간을 최소화했습니다.</li>
+          </ul>
+        </div>
+      </div>
+    ),
+    ai: (
+      <div className="animate-in fade-in duration-500">
+        <div className="flex items-center gap-4 mb-6 border-b border-white/10 pb-5">
+          <div className="p-3 bg-blue-500/10 rounded-xl">
+            <svg className="w-6 h-6 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+            </svg>
+          </div>
+          <div>
+            <h4 className="text-2xl font-bold font-[paperozi] text-white tracking-tight">Artificial Intelligence</h4>
+            <div className="flex items-center gap-2 mt-1.5 flex-wrap">
+              <span className="px-2.5 py-0.5 rounded-md bg-white/5 text-blue-400 text-xs font-semibold tracking-wide">Gemini 2.5 Flash</span>
+              <span className="px-2.5 py-0.5 rounded-md bg-white/5 text-blue-400 text-xs font-semibold tracking-wide">Gemini 2.5 Flash-Light</span>
+            </div>
+          </div>
+        </div>
+        <div className="space-y-4 text-gray-300 leading-relaxed text-sm md:text-base">
+          <p><strong className="text-blue-400 font-semibold">선택 이유:</strong></p>
+          <ul className="list-none pl-5 space-y-2 border-l-2 border-blue-400/30 ml-2">
+            <li className="pl-4">멀티모달(Multi-modal) 이미지 인식 성능이 뛰어나면서도 응답 속도가 매우 빠른 Gemini 2.5 Flash 모델 라인업을 채택했습니다. 의료 및 헬스케어 데이터를 다룸에 있어 즉각적인 피드백과 높은 추론 능력이 동시에 필요하기 때문입니다.</li>
+          </ul>
+          <p className="pt-2"><strong className="text-blue-400 font-semibold">구성 방식:</strong></p>
+          <ul className="list-none pl-5 space-y-3 border-l-2 border-blue-400/30 ml-2">
+            <li className="pl-4"><strong className="text-white block mb-1">혈당 변화 예측 및 원인 감지</strong> 사용자의 과거 1~2일 혈당 기록, 공복 상태, 이전 혈당 스파이크 내역 등을 종합적인 컨텍스트(Context) 데이터로 제공하여 향후 변화를 정밀하게 예측합니다.</li>
+            <li className="pl-4"><strong className="text-white block mb-1">이미지 기반 식단 피드백</strong> 사용자가 업로드한 식단 사진을 멀티모달 비전(Vision) 기능으로 분석하여 영양소(열량, 탄수화물 등)를 추출하고, 당뇨 환자에게 적합한지 평가 의견을 생성합니다.</li>
+            <li className="pl-4"><strong className="text-white block mb-1">의료 검증 및 맞춤형 가이드라인 매핑</strong> 단순한 범용 LLM의 생성 능력을 넘어, 사전에 정의된 '당뇨 환자 표준 운동/식단 가이드라인' 데이터베이스를 기반으로 환자의 생활 패턴에 맞는 가장 적절한 행동 지도를 안전하고 정확하게 출력하도록 프롬프트 파이프라인을 설계했습니다.</li>
+          </ul>
+        </div>
+      </div>
+    ),
+  };
+
+  return (
+    <div className="bg-[#111]/80 backdrop-blur-sm rounded-2xl border border-white/10 overflow-hidden shadow-2xl">
+      <div className="flex border-b border-white/10 overflow-x-auto hide-scrollbar">
+        {tabs.map(tab => (
+          <button
+            key={tab.id}
+            onClick={() => setActiveTab(tab.id as any)}
+            className={`flex-1 py-4 px-6 text-sm md:text-base font-[paperozi] font-semibold whitespace-nowrap border-b-2 transition-all duration-300 ${activeTab === tab.id
+              ? tab.id === 'frontend' ? 'text-[#0099cc] border-[#0099cc] bg-[#0099cc]/10'
+                : tab.id === 'backend' ? 'text-purple-400 border-purple-400 bg-purple-500/10'
+                  : 'text-blue-400 border-blue-400 bg-blue-500/10'
+              : 'border-transparent text-gray-500 hover:text-gray-300 hover:bg-white/5'
+              }`}
+          >
+            {tab.label}
+          </button>
+        ))}
+      </div>
+      <div className="p-8 md:p-10 min-h-[300px]">
+        {content[activeTab]}
+      </div>
+    </div>
   );
 }
