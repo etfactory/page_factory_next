@@ -248,13 +248,16 @@ export default function DrDMAboutPage() {
                 <h3 className="text-3xl font-bold text-white mb-3" style={{ fontFamily: 'paperozi' }}>Presentation Material</h3>
                 <p className="text-gray-400">Dr.DM 프로젝트 기획 및 설계 발표 자료</p>
               </div>
-              {/* 16:9 Aspect Ratio Container */}
-              <div className="w-full bg-[#111] border border-white/10 rounded-2xl overflow-hidden shadow-2xl relative" style={{ paddingTop: '56.25%' }}>
-                <iframe
-                  src="/pdf/drdm/presentation.pdf#view=FitH"
-                  className="absolute top-0 left-0 w-full h-full border-none"
-                  title="Dr.DM Presentation"
-                />
+              {/* Presentation Viewer Container */}
+              <div className="w-full bg-[#111] border border-white/10 rounded-2xl shadow-2xl overflow-hidden relative h-[50vh] md:h-auto md:aspect-video">
+                <div className="absolute inset-0 overflow-auto overflow-y-scroll" style={{ WebkitOverflowScrolling: 'touch' }}>
+                  <iframe
+                    src="/pdf/drdm/presentation.pdf#view=FitH"
+                    className="w-full h-full border-none"
+                    style={{ minHeight: '100%' }}
+                    title="Dr.DM Presentation"
+                  />
+                </div>
               </div>
               <p className="text-center text-sm text-gray-500 mt-4">
                 만약 뷰어가 정상적으로 로드되지 않는다면 <a href="/pdf/drdm/presentation.pdf" target="_blank" rel="noopener noreferrer" className="text-[#0099cc] hover:underline">여기</a>를 눌러 직접 확인하실 수 있습니다.
