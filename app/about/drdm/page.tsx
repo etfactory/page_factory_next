@@ -6,7 +6,7 @@ import Header from '@/app/components/header';
 
 export default function DrDMAboutPage() {
   return (
-    <main className="bg-[#0a0a0a] min-h-screen text-white font-sans selection:bg-[#0099cc] selection:text-white">
+    <main className="bg-[#0a0a0a] min-h-screen text-white font-sans selection:bg-[#0099cc] selection:text-white overflow-x-hidden">
       <Header />
 
       {/* Hero Section */}
@@ -250,11 +250,11 @@ export default function DrDMAboutPage() {
               </div>
               {/* Presentation Viewer Container */}
               <div className="w-full bg-[#111] border border-white/10 rounded-2xl shadow-2xl overflow-hidden relative h-[50vh] md:h-auto md:aspect-video">
-                <div className="absolute inset-0 overflow-auto overflow-y-scroll" style={{ WebkitOverflowScrolling: 'touch' }}>
+                <div className="absolute inset-0 overflow-auto" style={{ WebkitOverflowScrolling: 'touch' }}>
                   <iframe
                     src="/pdf/drdm/presentation.pdf#view=FitH"
-                    className="w-full h-full border-none"
-                    style={{ minHeight: '100%' }}
+                    className="border-none"
+                    style={{ width: '1px', minWidth: '100%', height: '100%', minHeight: '100%' }}
                     title="Dr.DM Presentation"
                   />
                 </div>
@@ -408,7 +408,7 @@ function ArchitectureTabs() {
 
   return (
     <div className="bg-[#111]/80 backdrop-blur-sm rounded-2xl border border-white/10 overflow-hidden shadow-2xl">
-      <div className="flex items-center justify-between border-b border-white/10">
+      <div className="flex items-center justify-between border-b border-white/10 pr-2 md:pr-4">
         <div className="flex overflow-x-auto hide-scrollbar w-full">
           {tabs.map(tab => (
             <button
