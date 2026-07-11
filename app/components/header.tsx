@@ -36,9 +36,12 @@ export default function Navigator() {
         </a>
       );
     }
-    <Link href={`/#${href}`} className="text-[#444] no-underline text-[1.2rem] font-medium transition-colors duration-200 ease-in hover:text-[#0099cc] md:text-[0.95rem] md:font-normal" onClick={handleClick}>
-      {children}
-    </Link>
+
+    return (
+      <Link href={`/#${href}`} className="text-[#444] no-underline text-[1.2rem] font-medium transition-colors duration-200 ease-in hover:text-[#0099cc] md:text-[0.95rem] md:font-normal" onClick={handleClick}>
+        {children}
+      </Link>
+    );
   }
 
   return (

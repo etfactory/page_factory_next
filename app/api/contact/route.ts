@@ -4,17 +4,24 @@ import { NextResponse } from 'next/server';
 export async function POST(request: Request) {
     const { name, email, message } = await request.json();
 
-    console.log("받은 데이터:", { name, email, message });
-    
-    console.log("Service ID:", process.env.EMAIL_SERVICE);
-    console.log("Template ID:", process.env.EMAIL_TEMPLATE);
-    console.log("Public Key:", process.env.EMAIL_PUBLIC_KEY);
+    if (!name || !email || !message) {
+        return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
+    }
+
+    const serviceId = process.env.EMAIL_SERVICE;
+    const templateId = process.env.EMAIL_TEMPLATE;
+    const publicKey = process.env.EMAIL_PUBLIC_KEY;
+    const privateKey = process.env.EMAIL_PRIVATE_KEY;
+
+    if (!serviceId || !templateId || !publicKey || !privateKey) {
+        return NextResponse.json({ error: 'Email configuration is incomplete' }, { status: 500 });
+    }
 
     const data = {
-        service_id: process.env.EMAIL_SERVICE,
-        template_id: process.env.EMAIL_TEMPLATE,
-        user_id: process.env.EMAIL_PUBLIC_KEY,
-        accessToken: process.env.EMAIL_PRIVATE_KEY, // 보안을 위해 Private Key 사용 권장
+        service_id: serviceId,
+        template_id: templateId,
+        user_id: publicKey,
+        accessToken: privateKey,
         template_params: {
             name,
             email,

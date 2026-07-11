@@ -15,16 +15,22 @@ export function middleware(request: NextRequest) {
 
   if (isManagementRoute || isMutatingApi) {
     const basicAuth = request.headers.get('authorization');
+    const expectedUser = process.env.ADMIN_USERNAME;
+    const expectedPwd = process.env.ADMIN_PASSWORD;
 
-    if (basicAuth) {
-      const authValue = basicAuth.split(' ')[1];
-      const [user, pwd] = atob(authValue).split(':');
+    if (basicAuth && expectedUser && expectedPwd) {
+      try {
+        const [scheme, authValue] = basicAuth.split(' ');
 
-      const expectedUser = process.env.ADMIN_USERNAME || 'admin';
-      const expectedPwd = process.env.ADMIN_PASSWORD || 'password123';
+        if (scheme === 'Basic' && authValue) {
+          const [user, pwd] = atob(authValue).split(':');
 
-      if (user === expectedUser && pwd === expectedPwd) {
-        return NextResponse.next();
+          if (user === expectedUser && pwd === expectedPwd) {
+            return NextResponse.next();
+          }
+        }
+      } catch {
+        // Fall through to the 401 response below.
       }
     }
 

@@ -35,6 +35,8 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
         setModalIsOpen(false);
     };
 
+    const sanitizedDescription = sanitizeHtml(description);
+
     return (
         <div className="inline-block">
             <div onClick={openModal} className="inline-block">
@@ -74,7 +76,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
 
                 <div 
                     className="mt-[15px] text-[1rem] leading-[1.5] text-[#555] dark:text-[#ddd]"
-                    dangerouslySetInnerHTML={{ __html: description }}
+                    dangerouslySetInnerHTML={{ __html: sanitizedDescription }}
                 />
 
                 {projectUrl && (
@@ -89,6 +91,51 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
             </Modal>
         </div>
     );
+}
+
+function sanitizeHtml(input: string) {
+    if (typeof window === 'undefined') {
+        return input
+            .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '')
+            .replace(/on\w+="[^"]*"/gi, '');
+    }
+
+    const parser = new DOMParser();
+    const documentFragment = parser.parseFromString(input, 'text/html');
+    const allowedTags = new Set([
+        'a', 'b', 'blockquote', 'br', 'div', 'em', 'i', 'li', 'ol', 'p', 'span', 'strong', 'u', 'ul'
+    ]);
+    const allowedAttributes = new Set(['href', 'target', 'rel', 'class']);
+
+    const walk = (node: ParentNode) => {
+        Array.from(node.children).forEach((element) => {
+            const tagName = element.tagName.toLowerCase();
+
+            if (!allowedTags.has(tagName)) {
+                element.replaceWith(...Array.from(element.childNodes));
+                return;
+            }
+
+            Array.from(element.attributes).forEach((attribute) => {
+                const name = attribute.name.toLowerCase();
+                const value = attribute.value;
+
+                if (name.startsWith('on') || !allowedAttributes.has(name)) {
+                    element.removeAttribute(attribute.name);
+                    return;
+                }
+
+                if (name === 'href' && !/^https?:\/\//i.test(value) && !value.startsWith('/') && !value.startsWith('#')) {
+                    element.removeAttribute(attribute.name);
+                }
+            });
+
+            walk(element);
+        });
+    };
+
+    walk(documentFragment.body);
+    return documentFragment.body.innerHTML;
 }
 
 export default ProjectModal;
