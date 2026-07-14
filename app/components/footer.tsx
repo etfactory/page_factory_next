@@ -7,7 +7,7 @@ export default function Footer() {
     const pathname = usePathname();
     if (pathname?.startsWith("/about/")) return null;
     return (
-        <footer className="bg-[#0f0f0f] px-6 py-12 text-[0.85rem] text-[#4a4a4a] sm:px-10 sm:py-16 lg:p-[120px]">
+        <footer className="bg-[#0f0f0f] px-6 py-12 text-[0.85rem] text-[#9a9a9a] sm:px-10 sm:py-16 lg:p-[120px]">
             <div className="flex flex-col items-start gap-8 sm:flex-row sm:items-center sm:justify-between sm:gap-12">
                 <div className="leading-relaxed">
                     © Euntaek 'Robert' Oh. All rights reserved.

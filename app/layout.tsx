@@ -30,7 +30,14 @@ export default function DashboardLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={notoSansKR.className}>
+    <html lang="ko" className={notoSansKR.className} suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var saved=localStorage.getItem('theme');var dark=saved?saved==='dark':window.matchMedia('(prefers-color-scheme: dark)').matches;document.documentElement.classList.toggle('dark',dark);document.documentElement.style.colorScheme=dark?'dark':'light'}catch(e){}})()`,
+          }}
+        />
+      </head>
       <body>
         {/* Layout UI */}
         {/* Place children where you want to render a page or nested layout */}

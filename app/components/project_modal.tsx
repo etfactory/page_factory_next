@@ -52,30 +52,30 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
                 isOpen={modalIsOpen}
                 onRequestClose={closeModal}
                 contentLabel="Project Details"
-                className="bg-white dark:bg-[#1f2937] dark:text-white w-full max-w-[600px] max-h-[90vh] overflow-y-auto rounded-[12px] p-[12px] outline-none shadow-[0_4px_6px_rgba(0,0,0,0.1)] relative"
+                className="bg-[var(--surface-elevated)] text-[var(--foreground)] border border-[var(--border)] w-full max-w-[600px] max-h-[90vh] overflow-y-auto rounded-[12px] p-[12px] outline-none shadow-[0_4px_16px_var(--shadow)] relative"
                 overlayClassName="fixed inset-0 bg-black/75 flex items-center justify-center z-[1000] p-[20px]"
                 closeTimeoutMS={200}
             >
                 {/* 닫기 버튼 (우상단 고정) */}
                 <button 
                     onClick={closeModal} 
-                    className="absolute top-[16px] right-[16px] bg-transparent border-none text-[1.5rem] cursor-pointer text-black dark:text-white"
+                    className="absolute top-[16px] right-[16px] bg-transparent border-none text-[1.5rem] cursor-pointer text-[var(--foreground)]"
                 >
                     ✕
                 </button>
 
                 <h2 className="font-[paperozi] text-[1.5rem] font-[800] mb-[10px] mt-0">{title}</h2>
                 
-                <div className="font-[paperozi] text-[0.9rem] font-[600] text-[#3c3c3c] dark:text-[#ccc] flex flex-wrap gap-[8px] mb-[16px]">
+                <div className="font-[paperozi] text-[0.9rem] font-[600] text-[var(--muted-foreground)] flex flex-wrap gap-[8px] mb-[16px]">
                     {techStack.map((tech, index) => (
-                        <span key={index} className="px-[8px] py-[4px] bg-[#eee] dark:bg-[#333] rounded-[4px] text-[0.875rem]">
+                        <span key={index} className="px-[8px] py-[4px] bg-[var(--surface)] rounded-[4px] text-[0.875rem]">
                             {tech}
                         </span>
                     ))}
                 </div>
 
                 <div 
-                    className="mt-[15px] text-[1rem] leading-[1.5] text-[#555] dark:text-[#ddd]"
+                    className="mt-[15px] text-[1rem] leading-[1.5] text-[var(--muted-foreground)]"
                     dangerouslySetInnerHTML={{ __html: sanitizedDescription }}
                 />
 

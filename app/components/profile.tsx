@@ -20,10 +20,10 @@ export default function ProfileSection() {
 
         {/* --- Education --- */}
         <h1 className="font-[paperozi] text-[2rem] md:text-[2.5rem] mb-6 md:mb-8 font-bold">Education</h1>
-        <ul className="list-disc pl-5 mb-10 text-[#333]">
+        <ul className="list-disc pl-5 mb-10 text-[var(--foreground)]">
           <li>
             <span className="block font-bold text-[1.2rem]">Kongju National University</span>
-            <span className="block text-[1rem] text-[#666] mt-1.5">Division of Computer Engineering, Major in Software</span>
+            <span className="block text-[1rem] text-[var(--muted-foreground)] mt-1.5">Division of Computer Engineering, Major in Software</span>
           </li>
         </ul>
 

@@ -6,7 +6,7 @@ export default function StartSection() {
       <div className="w-[92vw] md:w-[80vw] lg:w-[85vw] max-w-[1200px] mx-auto px-[10px] md:px-[20px mt-[20px] flex flex-col md:flex-row items-center justify-center">
         {/* 로고 영역 */}
         <div className="flex flex-col items-center justify-center mb-8 md:mb-0">
-          <img src="/logo/2FD.svg" alt="etfactory logo" className="h-40 md:h-64" />
+          <img src="/logo/2FD.svg" alt="etfactory logo" className="theme-logo h-40 md:h-64" />
         </div>
         {/* 텍스트 영역 */}
         <div className="md:ml-[40px] flex flex-col items-center md:items-start justify-center text-center md:text-left">
