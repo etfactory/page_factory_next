@@ -95,6 +95,10 @@ select {
   outline-offset: 2px;
 }
 
+.action-button {
+  color: #ffffff !important;
+}
+
 .theme-logo {
   transition: filter 180ms ease;
 }

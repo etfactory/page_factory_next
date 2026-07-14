@@ -53,7 +53,7 @@ export const ContactSection = () => {
                     <input type="email" placeholder="factory@etfactory.dev" name="email" required className="w-full p-[8px] pl-[16px] mb-[16px] border border-[var(--border)] bg-[var(--input)] rounded-[50px] text-[1rem] outline-none focus:border-[var(--accent)]" />
                     <label className="font-[paperozi] block ml-[8px] mb-[8px] font-bold text-[var(--accent)]">Message</label>
                     <textarea name="message" required className="w-full p-[8px] pl-[16px] mb-[16px] border border-[var(--border)] bg-[var(--input)] rounded-[20px] text-[1rem] min-h-[100px] outline-none focus:border-[var(--accent)]" />
-                    <input type="submit" value="Send" className="bg-[var(--accent)] text-white py-[10px] px-[20px] border-none rounded-[50px] cursor-pointer text-[1rem]" />
+                    <input type="submit" value="Send" className="action-button bg-[var(--accent)] py-[10px] px-[20px] border-none rounded-[50px] cursor-pointer text-[1rem]" />
                 </form>
             </div>
         </FadeInSection>
