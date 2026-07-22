@@ -1,6 +1,6 @@
-import { FaJava, FaReact, FaGitAlt, FaGithub } from "react-icons/fa";
+import { FaJava, FaReact, FaGitAlt, FaGithub, FaDocker } from "react-icons/fa";
 import { FaSwift } from "react-icons/fa6";
-import { SiKotlin, SiDart, SiJavascript, SiTypescript, SiFlutter, SiNextdotjs, SiSpringboot, SiMysql, SiSqlite, SiNestjs, SiPostgresql } from "react-icons/si";
+import { SiKotlin, SiDart, SiJavascript, SiTypescript, SiFlutter, SiNextdotjs, SiSpringboot, SiMysql, SiSqlite, SiNestjs, SiPostgresql, SiFastapi } from "react-icons/si";
 
 export default function Skills() {
   const cardClass = "flex min-h-36 flex-col items-start justify-between rounded-2xl border border-[var(--pf-border-subtle)] bg-[var(--pf-bg-surface)] p-5 transition-[transform,border-color] duration-150 hover:-translate-y-0.5 hover:border-[var(--pf-border-strong)]";
@@ -65,6 +65,10 @@ export default function Skills() {
           <SiNestjs className={`${iconClass} text-[#ea2845]`} />
           <h4 className={titleClass}>NestJS</h4>
         </div>
+        <div className={cardClass}>
+          <SiFastapi className={`${iconClass} text-[#039384]`} />
+          <h4 className={titleClass}>FastAPI</h4>
+        </div>
       </div>
 
       {/* --- Databases --- */}
@@ -93,6 +97,10 @@ export default function Skills() {
             <FaGithub className="text-[3rem] text-black dark:text-white" />
           </div>
           <h4 className={titleClass}>Git & GitHub</h4>
+        </div>
+        <div className={cardClass}>
+          <FaDocker className={`${iconClass} text-[#2560ff]`} />
+          <h4 className={titleClass}>Docker</h4>
         </div>
       </div>
     </div>
