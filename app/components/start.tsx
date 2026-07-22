@@ -3,20 +3,23 @@ import FadeInSection from "./scrollfadein";
 export default function StartSection() {
   return (
     <FadeInSection id="main_section" delay={200} minHeight="100vh">
-      <div className="w-[92vw] md:w-[80vw] lg:w-[85vw] max-w-[1200px] mx-auto px-[10px] md:px-[20px mt-[20px] flex flex-col md:flex-row items-center justify-center">
-        {/* 로고 영역 */}
-        <div className="flex flex-col items-center justify-center mb-8 md:mb-0">
-          <img src="/logo/2FD.svg" alt="etfactory logo" className="theme-logo h-40 md:h-64" />
+      <div className="pf-container grid min-h-screen items-center gap-12 pb-20 pt-28 md:grid-cols-[minmax(0,1fr)_280px] md:gap-20 md:pb-24 md:pt-32 lg:grid-cols-[minmax(0,1fr)_360px]">
+        <div className="order-2 md:order-1">
+          <p className="pf-eyebrow">Mobile Application Developer · Portfolio</p>
+          <h1 className="m-0 max-w-[850px] text-[clamp(2.5rem,6vw,4rem)] font-bold leading-[1.08] tracking-[-0.035em] break-keep">
+            안녕하세요.<br />
+            모바일 앱의 흐름을 설계하고<br />
+            구현하는 개발자 오은택입니다.
+          </h1>
+          <div className="mt-10 flex items-center gap-4 border-t border-[var(--pf-border-subtle)] pt-5 text-sm font-bold text-[var(--pf-text-secondary)]">
+            <span className="h-2.5 w-2.5 bg-[var(--pf-signal)]" aria-hidden="true" />
+            Android · iOS · Cross-platform
+          </div>
         </div>
-        {/* 텍스트 영역 */}
-        <div className="md:ml-[40px] flex flex-col items-center md:items-start justify-center text-center md:text-left">
-          <h1 className="font-[paperozi] text-[1.5rem] sm:text-[2rem] md:text-[2rem] lg:text-[3rem] font-[800] mb-[15px] md:mb-[20px] leading-[1.3] break-keep">안녕하세요!</h1>
-          <h1 className="font-[paperozi] text-[1.5rem] sm:text-[2rem] md:text-[2rem] lg:text-[2.8rem] font-[800] mb-[15px] md:mb-[20px] leading-[1.3] break-keep">
-            손가락으로 모두 해결할 수 있는 세상을 추구하는
-          </h1>
-          <h1 className="font-[paperozi] text-[1.5rem] sm:text-[2rem] md:text-[2rem] lg:text-[2.8rem] font-[800] mb-[15px] md:mb-[20px] leading-[1.3] break-keep">
-            모바일 어플리케이션 개발자 오은택입니다.
-          </h1>
+        <div className="order-1 flex justify-start md:order-2 md:justify-end">
+          <div className="flex aspect-square w-36 items-center justify-center border border-[var(--pf-border-subtle)] bg-[var(--pf-bg-subtle)] md:w-full">
+            <img src="/logo/2FD.svg" alt="etfactory logo" className="theme-logo h-24 w-24 md:h-44 md:w-44" />
+          </div>
         </div>
       </div>
     </FadeInSection>

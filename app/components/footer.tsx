@@ -7,9 +7,9 @@ export default function Footer() {
     const pathname = usePathname();
     if (pathname?.startsWith("/about/")) return null;
     return (
-        <footer className="bg-[#0f0f0f] px-6 py-12 text-[0.85rem] text-[#9a9a9a] sm:px-10 sm:py-16 lg:p-[120px]">
-            <div className="flex flex-col items-start gap-8 sm:flex-row sm:items-center sm:justify-between sm:gap-12">
-                <div className="leading-relaxed">
+        <footer className="bg-[var(--pf-bg-canvas)] px-5 py-20 text-sm text-[var(--pf-text-primary)] md:px-12 md:py-24 lg:py-[120px]">
+            <div className="mx-auto flex max-w-[1200px] flex-col items-start gap-12 border-t border-current/20 pt-8 sm:flex-row sm:items-end sm:justify-between">
+                <div className="font-mono text-xs leading-relaxed opacity-70">
                     © Euntaek 'Robert' Oh. All rights reserved.
                     <br />
                     This Page is powered by Next.js.
@@ -17,7 +17,7 @@ export default function Footer() {
                 <img
                     src="/logo/etfactory.dev.svg"
                     alt="etfactory.dev Logo"
-                    className="h-10 w-auto opacity-20 sm:h-[60px]"
+                    className="h-10 w-auto invert opacity-30 sm:h-[60px] dark:invert-0"
                 />
             </div>
         </footer>

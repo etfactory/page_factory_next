@@ -18,13 +18,13 @@ export default async function PortfolioSection() {
 
   return (
     <FadeInSection id="portfolio_section" delay={200}>
-      <div className="w-[92vw] md:w-[80vw] max-w-[1200px] mx-auto px-[10px] md:px-[20px] mt-[80px]">
-        <h1 className="font-[paperozi] text-[2rem] md:text-[2.5rem] font-[800] mb-[20px] break-keep">Projects</h1>
-        <h2 className="font-[paperozi] text-[1.3rem] md:text-[1.5rem] font-[700] mb-[15px] leading-[1.4]">Mobile Project</h2>
+      <div className="pf-container pf-content-container pf-section">
+        <p className="pf-eyebrow">02 · Projects</p>
+        <h2 className="pf-subsection-title">Mobile Projects</h2>
         {createProjectPanels(mobileProjects)}
-        <h2 className="font-[paperozi] text-[1.3rem] md:text-[1.5rem] font-[700] mb-[15px] leading-[1.4]">Web Projects</h2>
+        <h2 className="pf-subsection-title">Web Projects</h2>
         {createProjectPanels(webProjects)}
-        <h2 className="font-[paperozi] text-[1.3rem] md:text-[1.5rem] font-[700] mb-[15px] leading-[1.4]">Other Projects</h2>
+        <h2 className="pf-subsection-title">Other Projects</h2>
         {createProjectPanels(otherProjects)}
       </div>
     </FadeInSection>

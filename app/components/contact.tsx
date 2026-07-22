@@ -44,16 +44,22 @@ export const ContactSection = () => {
 
     return (
         <FadeInSection id="contact_section" delay={200}>
-            <div className="w-[92vw] md:w-[80vw] max-w-[1200px] mx-auto px-[10px] md:px-[20px] mt-[80px]">
-                <h1 className="font-[paperozi] text-[2rem] md:text-[2.5rem] font-[800] mb-[20px] break-keep">Contact Me</h1>
-                <form ref={form} onSubmit={sendEmail}>
-                    <label className="font-[paperozi] block ml-[8px] mb-[8px] font-bold text-[var(--accent)]">Name</label>
-                    <input type="text" placeholder="Robert Oh" name="name" required className="w-full p-[8px] pl-[16px] mb-[16px] border border-[var(--border)] bg-[var(--input)] rounded-[50px] text-[1rem] outline-none focus:border-[var(--accent)]" />
-                    <label className="font-[paperozi] block ml-[8px] mb-[8px] font-bold text-[var(--accent)]">Email</label>
-                    <input type="email" placeholder="factory@etfactory.dev" name="email" required className="w-full p-[8px] pl-[16px] mb-[16px] border border-[var(--border)] bg-[var(--input)] rounded-[50px] text-[1rem] outline-none focus:border-[var(--accent)]" />
-                    <label className="font-[paperozi] block ml-[8px] mb-[8px] font-bold text-[var(--accent)]">Message</label>
-                    <textarea name="message" required className="w-full p-[8px] pl-[16px] mb-[16px] border border-[var(--border)] bg-[var(--input)] rounded-[20px] text-[1rem] min-h-[100px] outline-none focus:border-[var(--accent)]" />
-                    <input type="submit" value="Send" className="action-button bg-[var(--accent)] py-[10px] px-[20px] border-none rounded-[50px] cursor-pointer text-[1rem]" />
+            <div className="pf-contact-copy pf-container pf-content-container pf-section">
+                <p className="pf-eyebrow">03 · Contact</p>
+                <form ref={form} onSubmit={sendEmail} className="w-full border-t border-[var(--pf-border-subtle)] pt-8">
+                    <div className="grid gap-x-6 md:grid-cols-2">
+                        <div>
+                            <label className="mb-2 block text-sm font-bold" htmlFor="contact-name">Name</label>
+                            <input id="contact-name" type="text" placeholder="Robert Oh" name="name" required className="mb-6 h-12 w-full rounded-lg border border-[var(--pf-border-subtle)] bg-[var(--pf-bg-surface)] px-4 font-sans text-base outline-none transition-colors focus:border-[var(--pf-border-strong)]" />
+                        </div>
+                        <div>
+                            <label className="mb-2 block text-sm font-bold" htmlFor="contact-email">Email</label>
+                            <input id="contact-email" type="email" placeholder="factory@etfactory.dev" name="email" required className="mb-6 h-12 w-full rounded-lg border border-[var(--pf-border-subtle)] bg-[var(--pf-bg-surface)] px-4 font-sans text-base outline-none transition-colors focus:border-[var(--pf-border-strong)]" />
+                        </div>
+                    </div>
+                    <label className="mb-2 block text-sm font-bold" htmlFor="contact-message">Message</label>
+                    <textarea id="contact-message" name="message" required className="mb-6 min-h-36 w-full resize-y rounded-lg border border-[var(--pf-border-subtle)] bg-[var(--pf-bg-surface)] px-4 py-3 font-sans text-base outline-none transition-colors focus:border-[var(--pf-border-strong)]" />
+                    <input type="submit" value="Send" className="action-button" />
                 </form>
             </div>
         </FadeInSection>

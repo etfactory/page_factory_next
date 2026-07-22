@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Noto_Sans_KR } from "next/font/google";
+import localFont from "next/font/local";
 // Used in FadeInSection
 import "./globals.css";
 import Navigator from "./components/header";
@@ -7,11 +7,21 @@ import Footer from "./components/footer";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
-// Noto Sans KR 폰트 설정
-const notoSansKR = Noto_Sans_KR({
-  variable: "--font-noto-sans-kr",
-  subsets: ["latin"],
-  weight: ["400", "700"], // 필요한 굵기 추가
+const pretendard = localFont({
+  src: [
+    { path: "./fonts/woff2/Pretendard-Thin.woff2", weight: "100", style: "normal" },
+    { path: "./fonts/woff2/Pretendard-ExtraLight.woff2", weight: "200", style: "normal" },
+    { path: "./fonts/woff2/Pretendard-Light.woff2", weight: "300", style: "normal" },
+    { path: "./fonts/woff2/Pretendard-Regular.woff2", weight: "400", style: "normal" },
+    { path: "./fonts/woff2/Pretendard-Medium.woff2", weight: "500", style: "normal" },
+    { path: "./fonts/woff2/Pretendard-SemiBold.woff2", weight: "600", style: "normal" },
+    { path: "./fonts/woff2/Pretendard-Bold.woff2", weight: "700", style: "normal" },
+    { path: "./fonts/woff2/Pretendard-ExtraBold.woff2", weight: "800", style: "normal" },
+    { path: "./fonts/woff2/Pretendard-Black.woff2", weight: "900", style: "normal" },
+  ],
+  variable: "--font-pretendard",
+  display: "swap",
+  fallback: ["system-ui", "-apple-system", "Segoe UI", "sans-serif"],
 });
 
 
@@ -30,7 +40,7 @@ export default function DashboardLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="ko" className={notoSansKR.className} suppressHydrationWarning>
+    <html lang="ko" className={pretendard.variable} suppressHydrationWarning>
       <head>
         <script
           dangerouslySetInnerHTML={{

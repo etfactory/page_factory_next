@@ -19,8 +19,6 @@ const FadeInSection: React.FC<FadeInSectionProps> = ({ children, minHeight = '10
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             setTimeout(() => setIsVisible(true), delay); // 지연 시간 적용
-          } else {
-            setIsVisible(false); // 뷰포트에서 벗어나면 다시 숨김
           }
         });
       },
@@ -41,7 +39,7 @@ const FadeInSection: React.FC<FadeInSectionProps> = ({ children, minHeight = '10
   return (
     <div
       id={id} // id를 DOM 요소에 전달
-      className={`opacity-0 translate-y-[20px] transition-all duration-[600ms] ease-out will-change-[opacity,transform] ${isVisible ? '!opacity-100 !translate-y-0' : ''}`}
+      className={`w-full opacity-0 translate-y-4 transition-[opacity,transform] duration-[420ms] ease-out ${isVisible ? '!opacity-100 !translate-y-0' : ''}`}
       ref={domRef}
       style={{
         minHeight, // props로 전달된 높이 사용

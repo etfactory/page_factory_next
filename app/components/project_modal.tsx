@@ -52,30 +52,31 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
                 isOpen={modalIsOpen}
                 onRequestClose={closeModal}
                 contentLabel="Project Details"
-                className="bg-[var(--surface-elevated)] text-[var(--foreground)] border border-[var(--border)] w-full max-w-[600px] max-h-[90vh] overflow-y-auto rounded-[12px] p-[12px] outline-none shadow-[0_4px_16px_var(--shadow)] relative"
-                overlayClassName="fixed inset-0 bg-black/75 flex items-center justify-center z-[1000] p-[20px]"
+                className="pf-modal-content relative max-h-[min(88vh,820px)] w-[min(680px,calc(100vw-40px))] overflow-y-auto rounded-2xl border border-[var(--pf-border-subtle)] bg-[var(--pf-bg-raised)] p-5 text-[var(--pf-text-primary)] shadow-[0_16px_40px_rgb(0_0_0/16%)] outline-none md:p-8"
+                overlayClassName="pf-modal-overlay fixed inset-0 z-[1100] flex items-center justify-center p-5"
                 closeTimeoutMS={200}
             >
                 {/* 닫기 버튼 (우상단 고정) */}
                 <button 
                     onClick={closeModal} 
-                    className="absolute top-[16px] right-[16px] bg-transparent border-none text-[1.5rem] cursor-pointer text-[var(--foreground)]"
+                    aria-label="프로젝트 상세 닫기"
+                    className="absolute right-3 top-3 flex h-11 w-11 cursor-pointer items-center justify-center border border-[var(--pf-border-subtle)] bg-transparent text-xl text-[var(--pf-text-primary)] transition-colors hover:border-[var(--pf-border-strong)] md:right-5 md:top-5"
                 >
                     ✕
                 </button>
 
-                <h2 className="font-[paperozi] text-[1.5rem] font-[800] mb-[10px] mt-0">{title}</h2>
+                <h2 className="mb-3 mt-0 pr-14 text-[1.75rem] font-bold leading-[1.3]">{title}</h2>
                 
-                <div className="font-[paperozi] text-[0.9rem] font-[600] text-[var(--muted-foreground)] flex flex-wrap gap-[8px] mb-[16px]">
+                <div className="mb-6 flex flex-wrap gap-2 font-mono text-xs font-medium text-[var(--pf-text-tertiary)]">
                     {techStack.map((tech, index) => (
-                        <span key={index} className="px-[8px] py-[4px] bg-[var(--surface)] rounded-[4px] text-[0.875rem]">
+                        <span key={index} className="rounded-sm bg-[var(--pf-bg-subtle)] px-2 py-1 text-xs">
                             {tech}
                         </span>
                     ))}
                 </div>
 
                 <div 
-                    className="mt-[15px] text-[1rem] leading-[1.5] text-[var(--muted-foreground)]"
+                    className="mt-6 text-[1rem] leading-[1.65] text-[var(--pf-text-secondary)]"
                     dangerouslySetInnerHTML={{ __html: sanitizedDescription }}
                 />
 
