@@ -14,7 +14,7 @@ export default function ProfileSection() {
             안녕하세요! 모바일 어플리케이션 개발자 오은택입니다.
           </p>
           <p className="mb-5 text-[1.125rem] leading-[1.7]">
-            Android와 iOS 네이티브 앱 개발 경험이 있으며,<br className="hidden md:block" />
+            Android와 iOS 네이티브 앱 개발 경험이 있으며, <br className="hidden md:block" />
             React Native와 Flutter를 활용한 크로스 플랫폼 앱 개발에도 능숙합니다.
           </p>
         </div>
