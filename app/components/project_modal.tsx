@@ -1,3 +1,4 @@
+import DOMPurify from "dompurify";
 import React, { useState, useEffect } from "react";
 import Modal from 'react-modal';
 import LinkButton from './linkbutton';
@@ -19,12 +20,17 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
     techStack 
 }) => {
     const [modalIsOpen, setModalIsOpen] = useState(false);
+    const [sanitizedDescription, setSanitizedDescription] = useState("");
 
     // Next.js SSR 오류 방지: 클라이언트 마운트 후 setAppElement 실행
     useEffect(() => {
         // Next.js의 id="__next" 혹은 body를 지정
-        Modal.setAppElement('body'); 
+        Modal.setAppElement('body');
     }, []);
+
+    useEffect(() => {
+        setSanitizedDescription(sanitizeHtml(description));
+    }, [description]);
 
     const openModal = () => {
         setModalIsOpen(true);
@@ -34,8 +40,6 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
     const closeModal = () => {
         setModalIsOpen(false);
     };
-
-    const sanitizedDescription = sanitizeHtml(description);
 
     return (
         <div className="inline-block">
@@ -76,7 +80,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
                 </div>
 
                 <div 
-                    className="mt-6 text-[1rem] leading-[1.65] text-[var(--pf-text-secondary)]"
+                    className="pf-modal-rich-content mt-6"
                     dangerouslySetInnerHTML={{ __html: sanitizedDescription }}
                 />
 
@@ -95,48 +99,45 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
 }
 
 function sanitizeHtml(input: string) {
-    if (typeof window === 'undefined') {
-        return input
-            .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '')
-            .replace(/on\w+="[^"]*"/gi, '');
-    }
+    const sanitized = DOMPurify.sanitize(input, {
+        USE_PROFILES: { html: true },
+        ADD_TAGS: ['iframe'],
+        ADD_ATTR: [
+            'allow',
+            'allowfullscreen',
+            'data-list',
+            'frameborder',
+            'scrolling',
+            'target',
+        ],
+    });
+    const parsed = new DOMParser().parseFromString(sanitized, 'text/html');
 
-    const parser = new DOMParser();
-    const documentFragment = parser.parseFromString(input, 'text/html');
-    const allowedTags = new Set([
-        'a', 'b', 'blockquote', 'br', 'div', 'em', 'i', 'li', 'ol', 'p', 'span', 'strong', 'u', 'ul'
-    ]);
-    const allowedAttributes = new Set(['href', 'target', 'rel', 'class']);
+    parsed.body.querySelectorAll<HTMLElement>('[style]').forEach((element) => {
+        const color = element.style.color;
+        const backgroundColor = element.style.backgroundColor;
+        element.removeAttribute('style');
+        if (color) element.style.color = color;
+        if (backgroundColor) element.style.backgroundColor = backgroundColor;
+    });
 
-    const walk = (node: ParentNode) => {
-        Array.from(node.children).forEach((element) => {
-            const tagName = element.tagName.toLowerCase();
+    parsed.body.querySelectorAll<HTMLAnchorElement>('a').forEach((link) => {
+        if (link.target === '_blank') {
+            link.rel = 'noopener noreferrer';
+        }
+    });
 
-            if (!allowedTags.has(tagName)) {
-                element.replaceWith(...Array.from(element.childNodes));
-                return;
-            }
+    parsed.body.querySelectorAll<HTMLIFrameElement>('iframe').forEach((frame) => {
+        if (!frame.src.startsWith('https://')) {
+            frame.remove();
+            return;
+        }
+        frame.loading = 'lazy';
+        frame.referrerPolicy = 'strict-origin-when-cross-origin';
+        frame.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-presentation');
+    });
 
-            Array.from(element.attributes).forEach((attribute) => {
-                const name = attribute.name.toLowerCase();
-                const value = attribute.value;
-
-                if (name.startsWith('on') || !allowedAttributes.has(name)) {
-                    element.removeAttribute(attribute.name);
-                    return;
-                }
-
-                if (name === 'href' && !/^https?:\/\//i.test(value) && !value.startsWith('/') && !value.startsWith('#')) {
-                    element.removeAttribute(attribute.name);
-                }
-            });
-
-            walk(element);
-        });
-    };
-
-    walk(documentFragment.body);
-    return documentFragment.body.innerHTML;
+    return parsed.body.innerHTML;
 }
 
 export default ProjectModal;
