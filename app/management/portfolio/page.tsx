@@ -1,7 +1,10 @@
 "use client";
 
 import dynamic from "next/dynamic";
+import DOMPurify from "dompurify";
+import { marked } from "marked";
 import { FormEvent, useEffect, useMemo, useState } from "react";
+import TurndownService from "turndown";
 import "../components/styles/management.css";
 import "react-quill-new/dist/quill.snow.css";
 
@@ -79,6 +82,28 @@ function descriptionStats(value: string) {
   };
 }
 
+function markdownToSafeHtml(markdown: string) {
+  const rendered = marked.parse(markdown, {
+    async: false,
+    breaks: true,
+    gfm: true,
+  });
+  return DOMPurify.sanitize(String(rendered), {
+    USE_PROFILES: { html: true },
+  });
+}
+
+function htmlToMarkdown(html: string) {
+  if (!html.trim()) return "";
+  const turndown = new TurndownService({
+    bulletListMarker: "-",
+    codeBlockStyle: "fenced",
+    emDelimiter: "*",
+    headingStyle: "atx",
+  });
+  return turndown.turndown(html);
+}
+
 export default function PortfolioManagementPage() {
   const [projects, setProjects] = useState<Project[]>([]);
   const [formData, setFormData] = useState<FormData>(EMPTY_FORM);
@@ -90,6 +115,8 @@ export default function PortfolioManagementPage() {
   const [typeFilter, setTypeFilter] = useState<"all" | ProjectType>("all");
   const [editorMode, setEditorMode] = useState<"write" | "preview">("write");
   const [editorExpanded, setEditorExpanded] = useState(false);
+  const [markdownEnabled, setMarkdownEnabled] = useState(false);
+  const [markdownSource, setMarkdownSource] = useState("");
   const [message, setMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);
 
   const isDirty = useMemo(
@@ -160,6 +187,9 @@ export default function PortfolioManagementPage() {
   function resetForm() {
     setEditingProject(null);
     setFormData(EMPTY_FORM);
+    setMarkdownEnabled(false);
+    setMarkdownSource("");
+    setEditorMode("write");
   }
 
   function startEdit(project: Project) {
@@ -174,12 +204,28 @@ export default function PortfolioManagementPage() {
       project_url: project.project_url ?? "",
       modal_description: project.modal_description ?? "",
     });
+    setMarkdownEnabled(false);
+    setMarkdownSource("");
+    setEditorMode("write");
     setMessage(null);
     document.getElementById("portfolio-form")?.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
   function updateField<K extends keyof FormData>(key: K, value: FormData[K]) {
     setFormData((previous) => ({ ...previous, [key]: value }));
+  }
+
+  function toggleMarkdown(enabled: boolean) {
+    setMarkdownEnabled(enabled);
+    setEditorMode("write");
+    if (enabled) {
+      setMarkdownSource(htmlToMarkdown(formData.modal_description));
+    }
+  }
+
+  function updateMarkdown(value: string) {
+    setMarkdownSource(value);
+    updateField("modal_description", markdownToSafeHtml(value));
   }
 
   async function handleSubmit(event: FormEvent) {
@@ -321,6 +367,11 @@ export default function PortfolioManagementPage() {
                   <small>프로젝트 상세 모달에 표시되는 콘텐츠입니다.</small>
                 </div>
                 <div className="mg-editor-actions">
+                  <label className="mg-markdown-toggle">
+                    <input type="checkbox" checked={markdownEnabled} onChange={(event) => toggleMarkdown(event.target.checked)} />
+                    <span aria-hidden="true">✓</span>
+                    마크다운
+                  </label>
                   <div className="mg-editor-tabs" role="tablist" aria-label="상세 설명 보기 방식">
                     <button type="button" role="tab" aria-selected={editorMode === "write"} onClick={() => setEditorMode("write")}>작성</button>
                     <button type="button" role="tab" aria-selected={editorMode === "preview"} onClick={() => setEditorMode("preview")}>미리보기</button>
@@ -333,16 +384,31 @@ export default function PortfolioManagementPage() {
 
               <div className="mg-editor-body">
                 {editorMode === "write" ? (
-                  <div className="mg-editor">
-                    <ReactQuill
-                      theme="snow"
-                      value={formData.modal_description}
-                      onChange={(value) => updateField("modal_description", value)}
-                      modules={quillModules}
-                      formats={quillFormats}
-                      placeholder="프로젝트 배경, 주요 기능, 담당 역할과 성과를 작성해 보세요."
-                    />
-                  </div>
+                  markdownEnabled ? (
+                    <div className="mg-markdown-editor">
+                      <div className="mg-markdown-guide" aria-label="지원하는 마크다운 문법">
+                        <code># 제목</code><code>**굵게**</code><code>*기울임*</code><code>- 목록</code><code>[링크](URL)</code><code>``` 코드 ```</code>
+                      </div>
+                      <textarea
+                        value={markdownSource}
+                        onChange={(event) => updateMarkdown(event.target.value)}
+                        placeholder={"# 프로젝트 소개\n\n프로젝트의 배경과 주요 기능을 **마크다운**으로 작성해 보세요.\n\n- 주요 기능\n- 담당 역할\n- 성과"}
+                        aria-label="마크다운 상세 설명"
+                        spellCheck
+                      />
+                    </div>
+                  ) : (
+                    <div className="mg-editor">
+                      <ReactQuill
+                        theme="snow"
+                        value={formData.modal_description}
+                        onChange={(value) => updateField("modal_description", value)}
+                        modules={quillModules}
+                        formats={quillFormats}
+                        placeholder="프로젝트 배경, 주요 기능, 담당 역할과 성과를 작성해 보세요."
+                      />
+                    </div>
+                  )
                 ) : (
                   <div className="mg-editor-preview" role="tabpanel">
                     {editorStats.characters > 0 ? (
@@ -355,7 +421,7 @@ export default function PortfolioManagementPage() {
               </div>
 
               <div className="mg-editor-footer">
-                <span>색상 · 배경 · 정렬 · 목록 · 인용 · 코드 · 링크 · 미디어 지원</span>
+                <span>{markdownEnabled ? "입력한 마크다운을 안전한 HTML로 자동 변환합니다." : "색상 · 배경 · 정렬 · 목록 · 인용 · 코드 · 링크 · 미디어 지원"}</span>
                 <span>{editorStats.characters.toLocaleString()}자 · {editorStats.words.toLocaleString()}단어</span>
               </div>
             </div>

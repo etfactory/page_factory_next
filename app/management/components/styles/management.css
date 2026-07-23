@@ -159,6 +159,34 @@
 .mg-editor-heading > div:first-child > span { color: var(--pf-text-primary); font-size: 13px; font-weight: 700; }
 .mg-editor-heading small { color: var(--pf-text-tertiary); font-size: 11px; }
 .mg-editor-actions { display: flex; align-items: center; gap: 8px; }
+.mg-markdown-toggle {
+  display: inline-flex;
+  min-height: 34px;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 9px;
+  border: 1px solid var(--pf-border-subtle);
+  border-radius: var(--pf-radius-md);
+  color: var(--pf-text-secondary);
+  font-size: 12px;
+  font-weight: 650;
+  cursor: pointer;
+}
+.mg-markdown-toggle input { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+.mg-markdown-toggle > span {
+  display: grid;
+  width: 16px;
+  height: 16px;
+  place-items: center;
+  border: 1px solid var(--pf-border-strong);
+  border-radius: var(--pf-radius-sm);
+  color: transparent;
+  font-size: 11px;
+  line-height: 1;
+}
+.mg-markdown-toggle:has(input:checked) { border-color: var(--pf-signal); color: var(--pf-text-primary); }
+.mg-markdown-toggle:has(input:checked) > span { border-color: var(--pf-signal); background: var(--pf-signal); color: var(--pf-text-inverse); }
+.mg-markdown-toggle:has(input:focus-visible) { outline: 2px solid var(--pf-focus-ring); outline-offset: 3px; }
 .mg-editor-tabs { display: flex; padding: 3px; border: 1px solid var(--pf-border-subtle); border-radius: var(--pf-radius-md); background: var(--pf-bg-subtle); }
 .mg-editor-tabs button, .mg-expand-button {
   min-height: 32px;
@@ -177,11 +205,30 @@
 .mg-editor-body { min-height: 330px; }
 .mg-editor-shell.is-expanded .mg-editor-body { min-height: 0; flex: 1; overflow: auto; }
 .mg-editor { overflow: hidden; min-height: 330px; background: var(--pf-bg-canvas); }
+.mg-markdown-editor { display: flex; min-height: 330px; flex-direction: column; background: var(--pf-bg-canvas); }
+.mg-markdown-guide { display: flex; gap: 6px; padding: 9px 12px; overflow-x: auto; border-bottom: 1px solid var(--pf-border-subtle); background: var(--pf-bg-subtle); }
+.mg-markdown-guide code { flex: 0 0 auto; padding: 4px 7px; border: 1px solid var(--pf-border-subtle); border-radius: var(--pf-radius-sm); background: var(--pf-bg-surface); color: var(--pf-text-secondary); font: 500 10px/1.3 var(--pf-font-mono); }
+.mg-markdown-editor textarea {
+  width: 100%;
+  min-height: 285px;
+  flex: 1;
+  padding: 20px;
+  border: 0;
+  outline: 0;
+  resize: vertical;
+  background: var(--pf-bg-canvas);
+  color: var(--pf-text-primary);
+  font: 400 14px/1.75 var(--pf-font-mono);
+  tab-size: 2;
+}
+.mg-markdown-editor textarea::placeholder { color: var(--pf-text-tertiary); }
 .mg-editor-loading { display: grid; min-height: 230px; place-items: center; color: var(--pf-text-tertiary); }
 .mg-editor .ql-toolbar.ql-snow { display: flex; flex-wrap: wrap; gap: 2px 0; border: 0; border-bottom: 1px solid var(--pf-border-subtle); background: var(--pf-bg-subtle); }
 .mg-editor .ql-container.ql-snow { min-height: 275px; border: 0; color: var(--pf-text-primary); font-family: var(--pf-font-sans); font-size: 15px; }
 .mg-editor .ql-editor { min-height: 275px; padding: 20px; line-height: 1.7; }
 .mg-editor-shell.is-expanded .mg-editor, .mg-editor-shell.is-expanded .quill, .mg-editor-shell.is-expanded .ql-container { height: 100%; }
+.mg-editor-shell.is-expanded .mg-markdown-editor { height: 100%; }
+.mg-editor-shell.is-expanded .mg-markdown-editor textarea { resize: none; }
 .mg-editor-shell.is-expanded .mg-editor .ql-editor { height: calc(100vh - 210px); }
 .mg-editor-preview { min-height: 330px; padding: 28px; background: var(--pf-bg-surface); }
 .mg-preview-empty { display: grid; min-height: 270px; place-items: center; color: var(--pf-text-tertiary); font-size: 13px; }
@@ -324,6 +371,7 @@
   .mg-form-row { grid-template-columns: 1fr; }
   .mg-editor-heading { align-items: flex-start; flex-direction: column; }
   .mg-editor-actions { width: 100%; justify-content: space-between; }
+  .mg-markdown-toggle { order: 2; }
   .mg-editor-shell.is-expanded { inset: 8px; }
   .mg-editor-footer span:first-child { display: none; }
   .mg-editor-footer { justify-content: flex-end; }
