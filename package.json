@@ -5,6 +5,8 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build --turbopack",
+    "prebuild": "npm run db:ensure-schema",
+    "db:ensure-schema": "node --env-file-if-exists=.env.local ./node_modules/prisma/build/index.js db execute --file prisma/migrations/20260724000000_add_project_progress/migration.sql --schema prisma/schema.prisma",
     "start": "next start",
     "postinstall": "prisma generate"
   },
