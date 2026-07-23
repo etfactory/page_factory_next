@@ -21,97 +21,76 @@ type DashboardStats = {
 export default function Dashboard() {
   const [stats, setStats] = useState<DashboardStats | null>(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
-  useEffect(() => {
-    async function fetchStats() {
-      try {
-        const res = await fetch('/api/dashboard');
-        const data = await res.json();
-        if (data.success) {
-          setStats(data.data);
-        }
-      } catch (error) {
-        console.error("Failed to fetch dashboard stats", error);
-      }
+  async function fetchStats() {
+    setLoading(true);
+    setError("");
+    try {
+      const res = await fetch('/api/dashboard', { cache: "no-store" });
+      const data = await res.json();
+      if (!res.ok || !data.success) throw new Error(data.error || "현황을 불러오지 못했습니다.");
+      setStats(data.data);
+    } catch (error) {
+      setError(error instanceof Error ? error.message : "현황을 불러오지 못했습니다.");
+    } finally {
       setLoading(false);
     }
+  }
+
+  useEffect(() => {
     fetchStats();
   }, []);
 
   if (loading) {
-    return <div style={{ color: 'white' }}>Loading dashboard...</div>;
+    return <div className="mg-card mg-state"><div className="mg-spinner" />현황을 불러오는 중…</div>;
+  }
+
+  if (error) {
+    return <div className="mg-notice mg-notice-error" role="alert"><span>{error}</span><button type="button" onClick={fetchStats}>다시 시도</button></div>;
   }
 
   return (
-    <div className="text-white flex flex-col gap-8">
-      
-      {/* Top Metrics Row */}
-      <div className="grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-6">
-        
-        {/* Total Projects Card */}
-        <div className="bg-[#1a1a1a] p-6 rounded-xl border border-[#333]">
-          <h3 className="m-0 text-[#888] text-base font-semibold">Total Projects</h3>
-          <p className="mt-2.5 text-4xl font-bold">{stats?.total || 0}</p>
-          <div className="flex gap-2.5 mt-2.5 text-sm">
-            <span className="bg-[#2a2a2a] px-2 py-1 rounded">Mobile: {stats?.byType?.mobile || 0}</span>
-            <span className="bg-[#2a2a2a] px-2 py-1 rounded">Web: {stats?.byType?.web || 0}</span>
-            <span className="bg-[#2a2a2a] px-2 py-1 rounded">Other: {stats?.byType?.other || 0}</span>
-          </div>
+    <div className="mg-dashboard">
+      <div className="mg-metric-grid">
+        <div className="mg-card mg-metric-card">
+          <p className="mg-section-label">TOTAL PROJECTS</p>
+          <strong>{stats?.total || 0}</strong>
+          <span>등록된 전체 프로젝트</span>
         </div>
-
-        {/* Vercel Status Card */}
-        <div className="bg-[#1a1a1a] p-6 rounded-xl border border-[#333] flex flex-col justify-between">
-          <div>
-            <div className="flex items-center gap-2.5">
-              <h3 className="m-0 text-[#888] text-base font-semibold">System Status</h3>
-              <div className="flex items-center gap-1.5 bg-green-500/10 text-green-400 px-2 py-0.5 rounded-full text-xs font-bold">
-                <div className="w-2 h-2 bg-green-400 rounded-full" style={{ animation: 'pulse-ring 2s infinite' }} />
-                Online
-              </div>
-            </div>
-            <p className="mt-2.5 text-sm text-[#ccc]">Vercel Edge Network Active.</p>
+        {(["mobile", "web", "other"] as const).map((type) => (
+          <div className="mg-card mg-metric-card" key={type}>
+            <p className="mg-section-label">{type.toUpperCase()}</p>
+            <strong>{stats?.byType?.[type] || 0}</strong>
+            <span>{type === "mobile" ? "모바일" : type === "web" ? "웹" : "기타"} 프로젝트</span>
           </div>
-          <div className="flex gap-2.5 mt-4">
-            <a href="https://vercel.com/dashboard" target="_blank" rel="noopener noreferrer" className="no-underline bg-black border border-[#333] text-white px-3 py-1.5 rounded-md text-sm hover:bg-[#111] transition-colors">
-              Analytics
-            </a>
-            <a href="https://vercel.com/dashboard" target="_blank" rel="noopener noreferrer" className="no-underline bg-black border border-[#333] text-white px-3 py-1.5 rounded-md text-sm hover:bg-[#111] transition-colors">
-              Speed Insights
-            </a>
-          </div>
-        </div>
-        
+        ))}
       </div>
 
-      {/* Recent Activity */}
-      <div className="bg-[#1a1a1a] p-6 rounded-xl border border-[#333]">
-        <h3 className="m-0 text-[#888] text-base font-semibold mb-4">Recent Projects</h3>
+      <div className="mg-card mg-recent-card">
+        <div className="mg-card-header">
+          <div>
+            <p className="mg-section-label">RECENTLY ADDED</p>
+            <h2>최근 프로젝트</h2>
+          </div>
+          <Link href="/management/portfolio" className="mg-text-link">전체 관리 →</Link>
+        </div>
         {stats?.recent && stats.recent.length > 0 ? (
-          <ul className="list-none p-0 m-0 flex flex-col gap-2.5">
+          <ul className="mg-recent-list">
             {stats.recent.map(project => (
-              <li key={project.id} className="list-none m-0 flex justify-between items-center p-2.5 bg-[#2a2a2a] rounded-lg">
+              <li key={project.id}>
                 <div>
-                  <span className="font-bold mr-2.5">{project.title}</span>
-                  <span className="text-xs text-[#888] border border-[#444] px-1.5 py-0.5 rounded uppercase">{project.project_type}</span>
+                  <strong>{project.title}</strong>
+                  <span>{project.project_type}</span>
                 </div>
-                <Link href="/management/portfolio" className="text-blue-500 hover:text-blue-400 no-underline text-sm transition-colors">
-                  Edit
-                </Link>
+                <Link href="/management/portfolio">관리</Link>
               </li>
             ))}
           </ul>
         ) : (
-          <p className="text-[#888] text-sm">No recent projects found.</p>
+          <div className="mg-state"><strong>아직 등록된 프로젝트가 없습니다.</strong><Link href="/management/portfolio">첫 프로젝트 추가하기</Link></div>
         )}
       </div>
-
-      <style dangerouslySetInnerHTML={{__html: `
-        @keyframes pulse-ring {
-          0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.7); }
-          70% { transform: scale(1); box-shadow: 0 0 0 4px rgba(74, 222, 128, 0); }
-          100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(74, 222, 128, 0); }
-        }
-      `}} />
     </div>
   );
 }
