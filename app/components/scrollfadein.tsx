@@ -14,24 +14,33 @@ const FadeInSection: React.FC<FadeInSectionProps> = ({ children, minHeight = '10
   const domRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setTimeout(() => setIsVisible(true), delay); // 지연 시간 적용
-          }
-        });
-      },
-      { threshold: 0.2 }
-    );
+    const element = domRef.current;
+    let visibilityTimer: ReturnType<typeof setTimeout> | undefined;
 
-    if (domRef.current) {
-      observer.observe(domRef.current);
+    if (!element || typeof IntersectionObserver === 'undefined') {
+      setIsVisible(true);
+      return;
     }
 
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) {
+          return;
+        }
+
+        observer.disconnect();
+        visibilityTimer = setTimeout(() => setIsVisible(true), delay);
+      },
+      // 긴 모바일 섹션도 일부가 화면에 들어오는 즉시 표시한다.
+      { threshold: 0.01 }
+    );
+
+    observer.observe(element);
+
     return () => {
-      if (domRef.current) {
-        observer.unobserve(domRef.current);
+      observer.disconnect();
+      if (visibilityTimer) {
+        clearTimeout(visibilityTimer);
       }
     };
   }, [delay]);
