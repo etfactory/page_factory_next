@@ -152,14 +152,51 @@
 .mg-field input:hover, .mg-field textarea:hover, .mg-field select:hover, .mg-search input:hover { border-color: var(--pf-border-strong); }
 .mg-field small { color: var(--pf-text-tertiary); font-size: 11px; }
 .mg-counter { position: absolute; right: 10px; bottom: 8px; padding: 2px 4px; background: var(--pf-bg-canvas); }
-.mg-editor { overflow: hidden; min-height: 230px; border: 1px solid var(--pf-border-subtle); border-radius: var(--pf-radius-md); background: var(--pf-bg-canvas); }
+.mg-editor-shell { overflow: hidden; border: 1px solid var(--pf-border-subtle); border-radius: var(--pf-radius-md); background: var(--pf-bg-canvas); }
+.mg-editor-shell.is-expanded { position: fixed; z-index: 1100; inset: 20px; display: flex; flex-direction: column; border-radius: var(--pf-radius-lg); box-shadow: 0 24px 100px var(--pf-overlay); }
+.mg-editor-heading { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 12px 14px; border-bottom: 1px solid var(--pf-border-subtle); background: var(--pf-bg-surface); }
+.mg-editor-heading > div:first-child { display: flex; min-width: 0; flex-direction: column; gap: 2px; }
+.mg-editor-heading > div:first-child > span { color: var(--pf-text-primary); font-size: 13px; font-weight: 700; }
+.mg-editor-heading small { color: var(--pf-text-tertiary); font-size: 11px; }
+.mg-editor-actions { display: flex; align-items: center; gap: 8px; }
+.mg-editor-tabs { display: flex; padding: 3px; border: 1px solid var(--pf-border-subtle); border-radius: var(--pf-radius-md); background: var(--pf-bg-subtle); }
+.mg-editor-tabs button, .mg-expand-button {
+  min-height: 32px;
+  padding: 6px 10px;
+  border: 0;
+  border-radius: var(--pf-radius-sm);
+  background: transparent;
+  color: var(--pf-text-secondary);
+  font-size: 12px;
+  font-weight: 650;
+  cursor: pointer;
+}
+.mg-editor-tabs button[aria-selected="true"] { background: var(--pf-bg-surface); color: var(--pf-text-primary); box-shadow: 0 1px 4px var(--shadow); }
+.mg-expand-button { border: 1px solid var(--pf-border-subtle); }
+.mg-expand-button:hover { color: var(--pf-text-primary); border-color: var(--pf-border-strong); }
+.mg-editor-body { min-height: 330px; }
+.mg-editor-shell.is-expanded .mg-editor-body { min-height: 0; flex: 1; overflow: auto; }
+.mg-editor { overflow: hidden; min-height: 330px; background: var(--pf-bg-canvas); }
 .mg-editor-loading { display: grid; min-height: 230px; place-items: center; color: var(--pf-text-tertiary); }
-.mg-editor .ql-toolbar.ql-snow { border: 0; border-bottom: 1px solid var(--pf-border-subtle); }
-.mg-editor .ql-container.ql-snow { min-height: 180px; border: 0; color: var(--pf-text-primary); font-family: var(--pf-font-sans); }
-.mg-editor .ql-editor { min-height: 180px; }
+.mg-editor .ql-toolbar.ql-snow { display: flex; flex-wrap: wrap; gap: 2px 0; border: 0; border-bottom: 1px solid var(--pf-border-subtle); background: var(--pf-bg-subtle); }
+.mg-editor .ql-container.ql-snow { min-height: 275px; border: 0; color: var(--pf-text-primary); font-family: var(--pf-font-sans); font-size: 15px; }
+.mg-editor .ql-editor { min-height: 275px; padding: 20px; line-height: 1.7; }
+.mg-editor-shell.is-expanded .mg-editor, .mg-editor-shell.is-expanded .quill, .mg-editor-shell.is-expanded .ql-container { height: 100%; }
+.mg-editor-shell.is-expanded .mg-editor .ql-editor { height: calc(100vh - 210px); }
+.mg-editor-preview { min-height: 330px; padding: 28px; background: var(--pf-bg-surface); }
+.mg-preview-empty { display: grid; min-height: 270px; place-items: center; color: var(--pf-text-tertiary); font-size: 13px; }
+.mg-rich-content { color: var(--pf-text-primary); font-size: 15px; line-height: 1.75; }
+.mg-rich-content > :first-child { margin-top: 0; }
+.mg-rich-content > :last-child { margin-bottom: 0; }
+.mg-rich-content a { color: var(--pf-signal-strong); }
+.mg-rich-content img, .mg-rich-content iframe { max-width: 100%; }
+.mg-rich-content blockquote { margin: 1.2em 0; padding-left: 16px; border-left: 3px solid var(--pf-signal); color: var(--pf-text-secondary); }
+.mg-rich-content pre { overflow-x: auto; padding: 14px; border-radius: var(--pf-radius-md); background: var(--pf-bg-inverse); color: var(--pf-text-inverse); font-family: var(--pf-font-mono); }
+.mg-editor-footer { display: flex; justify-content: space-between; gap: 16px; padding: 9px 14px; border-top: 1px solid var(--pf-border-subtle); background: var(--pf-bg-surface); color: var(--pf-text-tertiary); font-size: 10px; }
 .dark .mg-editor .ql-stroke { stroke: var(--pf-text-secondary); }
 .dark .mg-editor .ql-fill { fill: var(--pf-text-secondary); }
 .dark .mg-editor .ql-picker { color: var(--pf-text-secondary); }
+.dark .mg-editor .ql-picker-options { background: var(--pf-bg-raised); }
 
 .mg-form-actions { gap: 10px; padding-top: 4px; }
 .mg-button {
@@ -285,6 +322,11 @@
   .mg-form-card, .mg-list-card > .mg-card-header { padding: 20px; }
   .mg-list-tools { padding: 0 20px 16px; }
   .mg-form-row { grid-template-columns: 1fr; }
+  .mg-editor-heading { align-items: flex-start; flex-direction: column; }
+  .mg-editor-actions { width: 100%; justify-content: space-between; }
+  .mg-editor-shell.is-expanded { inset: 8px; }
+  .mg-editor-footer span:first-child { display: none; }
+  .mg-editor-footer { justify-content: flex-end; }
   .mg-project-actions { align-self: flex-start; }
 }
 

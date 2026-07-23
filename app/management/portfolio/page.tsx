@@ -66,6 +66,19 @@ function techStackToArray(value: string) {
   return [...new Set(value.split(",").map((item) => item.trim()).filter(Boolean))];
 }
 
+function descriptionStats(value: string) {
+  const plainText = value
+    .replace(/<[^>]*>/g, " ")
+    .replace(/&nbsp;/g, " ")
+    .replace(/&amp;/g, "&")
+    .replace(/\s+/g, " ")
+    .trim();
+  return {
+    characters: plainText.length,
+    words: plainText ? plainText.split(" ").length : 0,
+  };
+}
+
 export default function PortfolioManagementPage() {
   const [projects, setProjects] = useState<Project[]>([]);
   const [formData, setFormData] = useState<FormData>(EMPTY_FORM);
@@ -75,6 +88,8 @@ export default function PortfolioManagementPage() {
   const [submitting, setSubmitting] = useState(false);
   const [query, setQuery] = useState("");
   const [typeFilter, setTypeFilter] = useState<"all" | ProjectType>("all");
+  const [editorMode, setEditorMode] = useState<"write" | "preview">("write");
+  const [editorExpanded, setEditorExpanded] = useState(false);
   const [message, setMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);
 
   const isDirty = useMemo(
@@ -128,6 +143,19 @@ export default function PortfolioManagementPage() {
     window.addEventListener("beforeunload", warnBeforeLeave);
     return () => window.removeEventListener("beforeunload", warnBeforeLeave);
   }, [isDirty]);
+
+  useEffect(() => {
+    if (!editorExpanded) return;
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setEditorExpanded(false);
+    };
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", closeOnEscape);
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", closeOnEscape);
+    };
+  }, [editorExpanded]);
 
   function resetForm() {
     setEditingProject(null);
@@ -199,13 +227,22 @@ export default function PortfolioManagementPage() {
 
   const quillModules = {
     toolbar: [
-      [{ header: [1, 2, 3, false] }],
+      [{ header: [1, 2, 3, 4, false] }, { size: ["small", false, "large", "huge"] }],
       ["bold", "italic", "underline", "strike"],
-      [{ list: "ordered" }, { list: "bullet" }],
-      ["link", "image"],
+      [{ color: [] }, { background: [] }],
+      [{ script: "sub" }, { script: "super" }],
+      [{ list: "ordered" }, { list: "bullet" }, { indent: "-1" }, { indent: "+1" }],
+      [{ align: [] }, "blockquote", "code-block"],
+      ["link", "image", "video"],
       ["clean"],
     ],
   };
+  const quillFormats = [
+    "header", "size", "bold", "italic", "underline", "strike",
+    "color", "background", "script", "list", "indent", "align",
+    "blockquote", "code-block", "link", "image", "video",
+  ];
+  const editorStats = descriptionStats(formData.modal_description);
 
   return (
     <div className="mg-page">
@@ -277,10 +314,49 @@ export default function PortfolioManagementPage() {
                 <input type="url" value={formData.project_url} onChange={(event) => updateField("project_url", event.target.value)} placeholder="https://example.com" />
               </label>
             </div>
-            <div className="mg-field">
-              <span>상세 설명</span>
-              <div className="mg-editor">
-                <ReactQuill theme="snow" value={formData.modal_description} onChange={(value) => updateField("modal_description", value)} modules={quillModules} />
+            <div className={`mg-editor-shell${editorExpanded ? " is-expanded" : ""}`}>
+              <div className="mg-editor-heading">
+                <div>
+                  <span>상세 설명</span>
+                  <small>프로젝트 상세 모달에 표시되는 콘텐츠입니다.</small>
+                </div>
+                <div className="mg-editor-actions">
+                  <div className="mg-editor-tabs" role="tablist" aria-label="상세 설명 보기 방식">
+                    <button type="button" role="tab" aria-selected={editorMode === "write"} onClick={() => setEditorMode("write")}>작성</button>
+                    <button type="button" role="tab" aria-selected={editorMode === "preview"} onClick={() => setEditorMode("preview")}>미리보기</button>
+                  </div>
+                  <button className="mg-expand-button" type="button" onClick={() => setEditorExpanded((value) => !value)} aria-pressed={editorExpanded}>
+                    {editorExpanded ? "축소" : "넓게 쓰기"}
+                  </button>
+                </div>
+              </div>
+
+              <div className="mg-editor-body">
+                {editorMode === "write" ? (
+                  <div className="mg-editor">
+                    <ReactQuill
+                      theme="snow"
+                      value={formData.modal_description}
+                      onChange={(value) => updateField("modal_description", value)}
+                      modules={quillModules}
+                      formats={quillFormats}
+                      placeholder="프로젝트 배경, 주요 기능, 담당 역할과 성과를 작성해 보세요."
+                    />
+                  </div>
+                ) : (
+                  <div className="mg-editor-preview" role="tabpanel">
+                    {editorStats.characters > 0 ? (
+                      <div className="mg-rich-content" dangerouslySetInnerHTML={{ __html: formData.modal_description }} />
+                    ) : (
+                      <div className="mg-preview-empty">미리볼 상세 설명이 없습니다.</div>
+                    )}
+                  </div>
+                )}
+              </div>
+
+              <div className="mg-editor-footer">
+                <span>색상 · 배경 · 정렬 · 목록 · 인용 · 코드 · 링크 · 미디어 지원</span>
+                <span>{editorStats.characters.toLocaleString()}자 · {editorStats.words.toLocaleString()}단어</span>
               </div>
             </div>
 
