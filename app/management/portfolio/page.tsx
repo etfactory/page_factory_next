@@ -25,6 +25,7 @@ type Project = {
   link_name: string | null;
   project_url: string | null;
   modal_description: string | null;
+  is_in_progress: boolean;
 };
 
 type FormData = {
@@ -36,6 +37,7 @@ type FormData = {
   link_name: string;
   project_url: string;
   modal_description: string;
+  is_in_progress: boolean;
 };
 
 const EMPTY_FORM: FormData = {
@@ -47,6 +49,7 @@ const EMPTY_FORM: FormData = {
   link_name: "",
   project_url: "",
   modal_description: "",
+  is_in_progress: false,
 };
 
 const TYPE_LABELS: Record<ProjectType, string> = {
@@ -203,6 +206,7 @@ export default function PortfolioManagementPage() {
       link_name: project.link_name ?? "",
       project_url: project.project_url ?? "",
       modal_description: project.modal_description ?? "",
+      is_in_progress: project.is_in_progress,
     });
     setMarkdownEnabled(false);
     setMarkdownSource("");
@@ -340,6 +344,18 @@ export default function PortfolioManagementPage() {
               <span>프로젝트명 <b>*</b></span>
               <input value={formData.title} onChange={(event) => updateField("title", event.target.value)} placeholder="프로젝트 이름" required maxLength={255} />
             </label>
+            <label className="mg-status-toggle">
+              <input
+                type="checkbox"
+                checked={formData.is_in_progress}
+                onChange={(event) => updateField("is_in_progress", event.target.checked)}
+              />
+              <span className="mg-status-control" aria-hidden="true" />
+              <span>
+                <strong>진행중 프로젝트</strong>
+                <small>URL이 없어도 포트폴리오에 진행중 패널로 표시합니다.</small>
+              </span>
+            </label>
             <label className="mg-field">
               <span>한 줄 소개</span>
               <textarea value={formData.description} onChange={(event) => updateField("description", event.target.value)} placeholder="목록 카드에 표시할 간단한 설명" rows={3} maxLength={500} />
@@ -474,6 +490,7 @@ export default function PortfolioManagementPage() {
                   <div className="mg-project-content">
                     <div className="mg-project-meta">
                       <span className={`mg-type mg-type-${project.project_type}`}>{TYPE_LABELS[project.project_type]}</span>
+                      {project.is_in_progress && <span className="mg-progress-badge">진행중</span>}
                       <code>{project.project_key}</code>
                     </div>
                     <strong>{project.title}</strong>

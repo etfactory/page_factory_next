@@ -44,6 +44,7 @@ export async function PUT(request: Request, context: { params: Promise<{ id: str
       link_name,
       project_url,
       modal_description,
+      is_in_progress,
     } = body;
 
     const projectId = parseInt(id, 10);
@@ -68,7 +69,8 @@ export async function PUT(request: Request, context: { params: Promise<{ id: str
         tech_stack: typeof tech_stack === 'string' ? tech_stack : JSON.stringify(tech_stack),
         link_name: typeof link_name === 'string' ? link_name.trim() : '',
         project_url: typeof project_url === 'string' ? project_url.trim() : '',
-        modal_description: typeof modal_description === 'string' ? modal_description : ''
+        modal_description: typeof modal_description === 'string' ? modal_description : '',
+        is_in_progress: is_in_progress === true
       }
     });
 

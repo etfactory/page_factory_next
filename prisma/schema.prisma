@@ -17,4 +17,5 @@ model Project {
   link_name         String?  @db.VarChar(100)
   project_url       String?  @db.Text
   modal_description String?  @db.Text
+  is_in_progress    Boolean  @default(false)
 }
