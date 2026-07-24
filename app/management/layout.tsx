@@ -10,7 +10,7 @@ export default function ManagementLayout({
     return (
         <div className="mg-shell">
             <Sidebar />
-            <div className="mg-main">{children}</div>
+            <div className="mg-main mt-24">{children}</div>
         </div>
     )
 }
