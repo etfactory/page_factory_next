@@ -8,9 +8,9 @@ export default function ManagementLayout({
     children: React.ReactNode
 }) {
     return (
-        <div className="mg-shell">
+        <div className="mg-shell mt-16">
             <Sidebar />
-            <div className="mg-main mt-24">{children}</div>
+            <div className="mg-main">{children}</div>
         </div>
     )
 }
