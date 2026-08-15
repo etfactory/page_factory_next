@@ -251,7 +251,7 @@
 
 .flow { padding: 120px max(48px, calc((100vw - 1200px) / 2)); background: var(--scene-ink); color: #fff; }
 .flow .sectionIntro .eyebrow { color: #7edbc9; }
-.flow ol { display: grid; margin: 0; padding: 0; grid-template-columns: repeat(4, 1fr); list-style: none; border-top: 1px solid rgb(255 255 255 / 18%); }
+.flow ol { display: grid; margin: 0; padding: 0; grid-template-columns: repeat(5, 1fr); list-style: none; border-top: 1px solid rgb(255 255 255 / 18%); }
 .flow li { position: relative; min-height: 260px; padding: 28px 28px 20px 0; border-right: 1px solid rgb(255 255 255 / 18%); }
 .flow li:not(:first-child) { padding-left: 28px; }
 .flow li > span { color: var(--scene-accent); font: 700 11px/1 var(--pf-font-mono); }
