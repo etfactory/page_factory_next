@@ -21,12 +21,14 @@ export default function ProfileSection() {
 
         {/* --- Education --- */}
         <h2 className="pf-subsection-title">Education</h2>
-        <ul className="mb-16 list-none p-0 text-[var(--pf-text-primary)]">
-          <li>
-            <span className="block text-[1.2rem] font-bold">Kongju National University</span>
-            <span className="mt-1.5 block text-[1rem] text-[var(--pf-text-secondary)]">Division of Computer Engineering, Major in Software</span>
-          </li>
-        </ul>
+        <div className="mb-16 max-w-[720px] border-l-2 border-[var(--pf-signal)] pl-5 text-left md:pl-8">
+          <ul className="mb-16 list-none p-0 text-[var(--pf-text-primary)]">
+            <li>
+              <span className="block text-[1.2rem] font-bold">Kongju National University</span>
+              <span className="mt-1.5 block text-[1rem] text-[var(--pf-text-secondary)]">Division of Computer Engineering, Major in Software</span>
+            </li>
+          </ul>
+        </div>
 
         {/* --- Links --- */}
         <h2 className="pf-subsection-title">Links</h2>
