@@ -315,6 +315,18 @@
   background: var(--scene-accent);
 }
 .finalCta .primaryButton { margin-top: 28px; }
+.privacyLink {
+  display: flex;
+  width: fit-content;
+  min-height: 44px;
+  margin: 18px auto 0;
+  align-items: center;
+  color: rgb(255 255 255 / 72%);
+  font-size: 12px;
+  font-weight: 700;
+  text-underline-offset: 5px;
+}
+.privacyLink:hover { color: #fff; }
 
 @media (max-width: 900px) {
   .header { padding: 0 24px; grid-template-columns: 1fr auto; }
