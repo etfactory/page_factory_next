@@ -4,8 +4,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import Navigator from "./components/header";
 import Footer from "./components/footer";
-import { Analytics } from "@vercel/analytics/react";
-import { SpeedInsights } from "@vercel/speed-insights/next";
+import SiteInsights from "./components/site-insights";
 
 const pretendard = localFont({
   src: [
@@ -56,8 +55,7 @@ export default function DashboardLayout({
         </header>
         <main>{children}</main>
         <Footer />
-        <Analytics />
-        <SpeedInsights />
+        <SiteInsights />
       </body>
     </html>
   )

@@ -64,13 +64,13 @@ const processingRows = [
     "서버 방문 기록",
     "직접 입력한 장소·방문일·선택 메모",
     "여행 이력 제공",
-    "회원 또는 기록 삭제 시까지",
+    "기록 삭제·탈퇴 요청 후 최대 30일",
   ],
   [
     "촬영지 제보",
     "작품·장소·지역·장면 설명·공개 근거 URL",
     "제보 검수·발행",
-    "제보 철회 또는 회원 탈퇴 시까지",
+    "철회·탈퇴 요청 후 최대 30일",
   ],
   [
     "기기 전용 위치 처리",
@@ -113,7 +113,7 @@ export default function SceneTrackerPrivacyPolicyPage() {
       <section className={styles.hero} aria-labelledby="policy-title">
         <div className={styles.heroInner}>
           <p className={styles.eyebrow}>
-            PRIVACY POLICY · VERSION 2026-08-24.2
+            PRIVACY POLICY · VERSION 2026-08-24.4
           </p>
           <h1 id="policy-title">개인정보 처리방침</h1>
           <p className={styles.heroCopy}>
@@ -153,9 +153,9 @@ export default function SceneTrackerPrivacyPolicyPage() {
           <div className={styles.reviewNotice} role="note">
             <span>출시 전 확인</span>
             <p>
-              이 문서는 현재 서비스 구현을 기준으로 작성한 법률 검토용
-              초안입니다. 운영 서버·DB 수탁자와 이메일 실발송 구성을 확정하고
-              전문가 검토를 마친 뒤 게시본으로 전환합니다.
+              AWS Lightsail 서울 애플리케이션 서버와 계정 삭제 정책을 반영한
+              운영 후보본입니다. 운영 DB 수탁자·처리 국가·백업 정책을 확정하고
+              전문가 검토를 마친 뒤 최종 게시본으로 전환합니다.
             </p>
           </div>
 
@@ -337,6 +337,12 @@ export default function SceneTrackerPrivacyPolicyPage() {
                 </thead>
                 <tbody>
                   <tr>
+                    <th scope="row">Amazon Web Services Korea LLC</th>
+                    <td>AWS Lightsail 애플리케이션 서버 호스팅</td>
+                    <td>계정·인증·수동 방문·제보·API 운영 데이터</td>
+                    <td>서비스별 보유기간 및 삭제 요청 후 최대 30일</td>
+                  </tr>
+                  <tr>
                     <th scope="row">Plus Five Five, Inc. (Resend)</th>
                     <td>계정용 트랜잭션 이메일 발송·전달</td>
                     <td>이메일 주소, 이메일 메타데이터·본문·전달 로그</td>
@@ -353,6 +359,14 @@ export default function SceneTrackerPrivacyPolicyPage() {
                 </tbody>
               </table>
             </div>
+            <p>
+              AWS Lightsail 애플리케이션 서버는 대한민국 서울 (ap-northeast-2)
+              리전에 배치합니다. 운영 DB 수탁자와 백업 지역은 아직 선택하지
+              않았으며, 선택 후 이 절의 위탁 항목·국가·보유기간을 갱신하고 사전
+              안내합니다. 확정 전에는 운영 서버를 시작하지 않습니다. 운영 DB는
+              서울 리전, 전송·저장 암호화, 백업 최대 30일 보유·자동 만료, 복구
+              시 삭제 대기 목록 재적용을 지원하는 구성만 선택합니다.
+            </p>
             <p>
               Resend는 공개된 하위처리자를 이용할 수 있습니다. 최신 목록은{" "}
               <a href="https://resend.com/legal/subprocessors">
@@ -392,7 +406,7 @@ export default function SceneTrackerPrivacyPolicyPage() {
                   <dt>시기·방법</dt>
                   <dd>
                     사용자가 이메일 확인·재설정을 요청하거나 보안 알림이 생성될
-                    때마다 암호화된 SMTP STARTTLS 통신으로 전송
+                    때마다 암호화된 HTTPS API 통신으로 전송
                   </dd>
                 </div>
                 <div>
@@ -443,22 +457,24 @@ export default function SceneTrackerPrivacyPolicyPage() {
             <h2>7. 개인정보 파기</h2>
             <p>
               보유기간이 끝나거나 처리 목적을 달성하면 복구하기 어려운 방법으로
-              전자적 정보를 삭제합니다. 회원 탈퇴 시 이메일과 비밀번호 해시는
-              복구할 수 없는 무작위 값으로 치환하고 인증 세션과 동의 이력은
-              삭제하며 방문 기록은 논리 삭제 상태로 전환합니다.
+              전자적 정보를 삭제합니다. 회원 탈퇴 요청 시 이메일·비밀번호
+              해시·MFA 정보는 즉시 삭제하거나 복구할 수 없는 무작위 값으로
+              치환하고 인증 세션·인증 작업·동의 이력은 즉시 삭제합니다.
             </p>
             <p>
-              데이터 관계 무결성과 동일 이메일의 재가입 허용을 위해 비식별 내부
-              식별자, 탈퇴 상태와 탈퇴 시각만 유지합니다. 이 정보만으로 탈퇴
-              회원을 다시 식별하거나 계정을 복구할 수 없습니다. 관계 법령에 따라
-              보존 의무가 발생한 정보는 다른 개인정보와 분리하여 법정기간 보관한
-              뒤 파기합니다.
+              계정·서버 방문 기록·촬영지 제보 원본·근거·검수 이력은 즉시 일반
+              조회에서 제외하고 삭제 대기 상태로 전환한 뒤 요청일로부터 최대
+              30일 이내 영구 삭제합니다. 삭제 대기 기간에도 계정은 복구하거나
+              로그인할 수 없습니다. 관계 법령에 따라 보존 의무가 발생한 정보는
+              다른 개인정보와 분리하여 법정기간 보관한 뒤 파기합니다.
             </p>
             <p>
-              개별 방문 기록은 삭제 즉시 화면과 일반 조회에서 제외하고 30일 복구
-              유예 후 영구 파기합니다. 서비스 개선 일별 집계는 생성 후 180일이
-              지나면 자동 삭제하며 선택형 공유를 철회하면 해당 기기의 HMAC
-              집계를 보유기간 전이라도 삭제합니다.
+              개별 방문 기록과 촬영지 제보도 삭제 즉시 화면과 일반 조회에서
+              제외하고 최대 30일 이내 영구 삭제합니다. 제보자·원본·계정 연결을
+              제거한 독립 검수 완료 공개 촬영지 사실은 서비스 자체 작성 정보로만
+              유지될 수 있습니다. 서비스 개선 일별 집계는 생성 후 180일이 지나면
+              자동 삭제하며 선택형 공유를 철회하면 해당 기기의 HMAC 집계를
+              보유기간 전이라도 삭제합니다.
             </p>
           </section>
 
@@ -489,6 +505,14 @@ export default function SceneTrackerPrivacyPolicyPage() {
               보호 담당 연락처로 요청할 수 있으며 가입 절차보다 어렵지 않게
               처리합니다. 서비스 개선 데이터 공유는 앱 설정에서 언제든 켜거나 끌
               수 있고, 공유를 끄면 해당 기기의 가명 집계 삭제를 요청합니다.
+            </p>
+            <p>
+              앱에 접근할 수 없는 경우에도{" "}
+              <Link href="/about/scene-tracker/account-deletion">
+                공개 계정 삭제 요청 페이지
+              </Link>
+              에서 가입 이메일과 현재 비밀번호를 재확인하여 계정 삭제를 요청할
+              수 있습니다.
             </p>
           </section>
 
@@ -532,9 +556,9 @@ export default function SceneTrackerPrivacyPolicyPage() {
           <section id="changes" className={styles.policySection}>
             <h2>11. 처리방침 변경</h2>
             <p>
-              이 처리방침은 2026년 8월 24일부터 적용될 예정입니다. 중요한 변경은
-              적용 전에 앱 공지 등을 통해 안내하고 이전 버전과 변경 이력을
-              확인할 수 있도록 관리합니다.
+              이 처리방침은 2026년 8월 24일부터 적용됩니다. 중요한 변경은 적용
+              전에 앱 공지 등을 통해 안내하고 이전 버전과 변경 이력을 확인할 수
+              있도록 관리합니다.
             </p>
             <h3>변경 이력</h3>
             <ul className={styles.historyList}>
@@ -544,7 +568,16 @@ export default function SceneTrackerPrivacyPolicyPage() {
                   Resend 이메일 처리위탁과 미국·일본 국외 이전의 항목, 목적,
                   시기, 방법, 보유기간과 거부 효과를 명시했습니다. 사업자 미등록
                   개인의 무료·비상업 운영 상태와 수익화 전 사업자 정보 반영
-                  원칙도 함께 공개했습니다.
+                  원칙, 게시 템플릿 API 적용에 따른 암호화된 HTTPS API 전송
+                  방식도 함께 공개했습니다.
+                </span>
+              </li>
+              <li>
+                <time dateTime="2026-08-24">2026.08.24</time>
+                <span>
+                  AWS Lightsail 서울 애플리케이션 서버, 공개 웹 계정 삭제 요청,
+                  계정·방문·제보 원본의 최대 30일 이내 영구 삭제 기준을
+                  반영했습니다.
                 </span>
               </li>
               <li>
@@ -595,6 +628,21 @@ export default function SceneTrackerPrivacyPolicyPage() {
               <li>
                 <a href="https://resend.com/docs/dashboard/domains/regions">
                   Resend 데이터 리전 안내
+                </a>
+              </li>
+              <li>
+                <a href="https://docs.aws.amazon.com/lightsail/latest/userguide/understanding-regions-and-availability-zones-in-amazon-lightsail.html">
+                  AWS Lightsail 리전·가용 영역
+                </a>
+              </li>
+              <li>
+                <a href="https://developer.apple.com/support/offering-account-deletion-in-your-app/">
+                  Apple 앱 내 계정 삭제 요구사항
+                </a>
+              </li>
+              <li>
+                <a href="https://support.google.com/googleplay/android-developer/answer/13327111?hl=ko">
+                  Google Play 계정 삭제 경로 요구사항
                 </a>
               </li>
             </ul>

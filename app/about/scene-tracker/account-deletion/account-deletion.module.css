@@ -1,0 +1,307 @@
+.page {
+  min-height: 100vh;
+  overflow: visible;
+  background: var(--scene-canvas);
+  color: var(--scene-ink);
+}
+
+.header {
+  display: flex;
+  min-height: 76px;
+  padding: 0 max(48px, calc((100vw - 1200px) / 2));
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--scene-line);
+}
+
+.brand,
+.policyLink {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  color: var(--scene-ink);
+  text-decoration: none;
+}
+
+.brand {
+  gap: 14px;
+}
+
+.brand img {
+  width: auto;
+  height: 18px;
+}
+
+.brand > span {
+  width: 1px;
+  height: 18px;
+  background: var(--scene-line);
+}
+
+.brand b,
+.policyLink,
+.hero > p,
+.guide > p:first-child,
+.formCard > p:first-child,
+.footer {
+  font-family: var(--pf-font-mono);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+
+.policyLink {
+  gap: 8px;
+}
+
+.hero {
+  padding: 104px max(48px, calc((100vw - 1200px) / 2)) 96px;
+  background: var(--scene-primary);
+  color: #fff;
+}
+
+.hero > p {
+  margin: 0 0 22px;
+  color: rgb(255 255 255 / 64%);
+}
+
+.hero h1 {
+  margin: 0;
+  font-size: clamp(48px, 7vw, 78px);
+  font-weight: 900;
+  line-height: 1.08;
+  letter-spacing: -0.05em;
+}
+
+.hero > span {
+  display: block;
+  max-width: 680px;
+  margin-top: 26px;
+  color: rgb(255 255 255 / 76%);
+  font-size: 17px;
+  line-height: 1.8;
+  word-break: keep-all;
+}
+
+.shell {
+  display: grid;
+  width: min(calc(100% - 96px), 1200px);
+  margin: 0 auto;
+  padding: 104px 0 128px;
+  grid-template-columns: minmax(0, 0.8fr) minmax(420px, 1fr);
+  gap: 88px;
+}
+
+.guide > p:first-child,
+.formCard > p:first-child {
+  margin: 0 0 34px;
+  color: var(--scene-primary-dark);
+}
+
+.guide h2,
+.formCard h2 {
+  margin: 0 0 18px;
+  font-size: 27px;
+  letter-spacing: -0.035em;
+}
+
+.guide h2:not(:first-of-type) {
+  margin-top: 52px;
+  padding-top: 38px;
+  border-top: 1px solid var(--scene-line);
+}
+
+.guide p,
+.guide li,
+.formCard > span {
+  color: var(--scene-muted);
+  font-size: 15px;
+  line-height: 1.8;
+  word-break: keep-all;
+}
+
+.guide ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.formCard {
+  padding: 42px;
+  border: 1px solid var(--scene-line);
+  background: #fff;
+}
+
+.formCard > span {
+  display: block;
+  margin-bottom: 30px;
+}
+
+.form {
+  display: grid;
+  gap: 18px;
+}
+
+.field {
+  display: grid;
+  gap: 8px;
+}
+
+.field label {
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.field input {
+  width: 100%;
+  height: 52px;
+  padding: 0 15px;
+  border: 1px solid var(--scene-line);
+  border-radius: 0;
+  outline: none;
+  background: var(--scene-canvas);
+  color: var(--scene-ink);
+  font: inherit;
+}
+
+.field input:focus {
+  border-color: var(--scene-primary);
+  box-shadow: 0 0 0 3px rgb(24 158 143 / 12%);
+}
+
+.confirmation {
+  display: grid;
+  margin-top: 4px;
+  grid-template-columns: 20px 1fr;
+  align-items: start;
+  gap: 10px;
+  color: var(--scene-muted);
+  font-size: 13px;
+  line-height: 1.65;
+  cursor: pointer;
+}
+
+.confirmation input {
+  width: 18px;
+  height: 18px;
+  margin: 2px 0 0;
+  accent-color: var(--scene-primary);
+}
+
+.deleteButton {
+  min-height: 54px;
+  border: 0;
+  background: #a52a2a;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.deleteButton:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.error {
+  margin: 0;
+  color: #a52a2a;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.6;
+}
+
+.securityNote {
+  margin: 0;
+  color: var(--scene-muted);
+  font-size: 11px;
+  line-height: 1.65;
+}
+
+.success {
+  padding: 32px 0 10px;
+  text-align: center;
+}
+
+.success > span {
+  display: grid;
+  width: 52px;
+  height: 52px;
+  margin: 0 auto 22px;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--scene-primary);
+  color: #fff;
+  font-size: 24px;
+}
+
+.success h2 {
+  margin: 0 0 14px;
+}
+
+.success p {
+  margin: 0;
+  color: var(--scene-muted);
+  font-size: 14px;
+  line-height: 1.75;
+}
+
+.support {
+  display: grid;
+  margin-top: 30px;
+  padding-top: 24px;
+  gap: 8px;
+  border-top: 1px solid var(--scene-line);
+  font-size: 12px;
+}
+
+.support a {
+  color: var(--scene-primary-dark);
+  font-weight: 800;
+}
+
+.footer {
+  display: flex;
+  min-height: 92px;
+  padding: 0 max(48px, calc((100vw - 1200px) / 2));
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid var(--scene-line);
+}
+
+.footer a {
+  color: var(--scene-ink);
+}
+
+@media (max-width: 820px) {
+  .header,
+  .hero,
+  .footer {
+    padding-right: 24px;
+    padding-left: 24px;
+  }
+
+  .brand img,
+  .brand > span {
+    display: none;
+  }
+
+  .shell {
+    width: calc(100% - 48px);
+    padding: 72px 0 88px;
+    grid-template-columns: 1fr;
+    gap: 56px;
+  }
+
+  .formCard {
+    padding: 28px 22px;
+  }
+
+  .footer {
+    padding-top: 24px;
+    padding-bottom: 24px;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 12px;
+  }
+}
