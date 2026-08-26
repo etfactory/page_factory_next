@@ -113,7 +113,7 @@ export default function SceneTrackerPrivacyPolicyPage() {
       <section className={styles.hero} aria-labelledby="policy-title">
         <div className={styles.heroInner}>
           <p className={styles.eyebrow}>
-            PRIVACY POLICY · VERSION 2026-08-24.4
+            PRIVACY POLICY · VERSION 2026-08-26.1
           </p>
           <h1 id="policy-title">개인정보 처리방침</h1>
           <p className={styles.heroCopy}>
@@ -127,11 +127,11 @@ export default function SceneTrackerPrivacyPolicyPage() {
             </div>
             <div>
               <dt>공고일</dt>
-              <dd>2026년 8월 24일</dd>
+              <dd>2026년 8월 26일</dd>
             </div>
             <div>
               <dt>시행일</dt>
-              <dd>2026년 8월 24일</dd>
+              <dd>2026년 8월 26일</dd>
             </div>
           </dl>
         </div>
@@ -153,9 +153,9 @@ export default function SceneTrackerPrivacyPolicyPage() {
           <div className={styles.reviewNotice} role="note">
             <span>출시 전 확인</span>
             <p>
-              AWS Lightsail 서울 애플리케이션 서버와 계정 삭제 정책을 반영한
-              운영 후보본입니다. 운영 DB 수탁자·처리 국가·백업 정책을 확정하고
-              전문가 검토를 마친 뒤 최종 게시본으로 전환합니다.
+              AWS Lightsail 서울 애플리케이션 서버와 자체 운영 PostgreSQL,
+              계정 삭제·백업 정책과 Vercel Hobby 공개 웹 처리를 반영한 운영
+              후보본입니다.
             </p>
           </div>
 
@@ -338,9 +338,26 @@ export default function SceneTrackerPrivacyPolicyPage() {
                 <tbody>
                   <tr>
                     <th scope="row">Amazon Web Services Korea LLC</th>
-                    <td>AWS Lightsail 애플리케이션 서버 호스팅</td>
+                    <td>
+                      AWS Lightsail 애플리케이션 서버·자체 운영 PostgreSQL
+                      호스팅
+                    </td>
                     <td>계정·인증·수동 방문·제보·API 운영 데이터</td>
-                    <td>서비스별 보유기간 및 삭제 요청 후 최대 30일</td>
+                    <td>
+                      서비스별 보유기간, 논리 백업 최대 30일, 자동 스냅샷 최근
+                      7일
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Vercel Inc.</th>
+                    <td>공개 개인정보 처리방침·계정 삭제 페이지 호스팅</td>
+                    <td>
+                      IP 주소, 요청 URL, 브라우저·기기 정보, 요청 시각·응답 상태
+                    </td>
+                    <td>
+                      Hobby 운영자 조회 가능 런타임 로그 1시간. 그 밖의 정보는
+                      서비스 제공·보안 목적 달성 또는 관계 법령상 기간
+                    </td>
                   </tr>
                   <tr>
                     <th scope="row">Plus Five Five, Inc. (Resend)</th>
@@ -361,11 +378,12 @@ export default function SceneTrackerPrivacyPolicyPage() {
             </div>
             <p>
               AWS Lightsail 애플리케이션 서버는 대한민국 서울 (ap-northeast-2)
-              리전에 배치합니다. 운영 DB 수탁자와 백업 지역은 아직 선택하지
-              않았으며, 선택 후 이 절의 위탁 항목·국가·보유기간을 갱신하고 사전
-              안내합니다. 확정 전에는 운영 서버를 시작하지 않습니다. 운영 DB는
-              서울 리전, 전송·저장 암호화, 백업 최대 30일 보유·자동 만료, 복구
-              시 삭제 대기 목록 재적용을 지원하는 구성만 선택합니다.
+              리전에 배치합니다. 운영 DB는 별도 관리형 DB 사업자에게 맡기지
+              않고 같은 Lightsail 인스턴스의 외부 포트가 열리지 않은 Docker
+              내부 네트워크에서 PostgreSQL로 직접 운영합니다. 논리 백업은
+              제한된 권한 경로에서 최대 30일 보유하고 자동 스냅샷은 최근
+              7일분을 유지합니다. 복구 시 삭제 대기 상태와 보유기간을 다시
+              적용하며 백업은 장애 복구 목적으로만 사용합니다.
             </p>
             <p>
               Resend는 공개된 하위처리자를 이용할 수 있습니다. 최신 목록은{" "}
@@ -374,6 +392,14 @@ export default function SceneTrackerPrivacyPolicyPage() {
               </a>
               에서 확인할 수 있습니다. 운영자는 변경 통지를 확인하고 개인정보
               보호에 중대한 영향이 있으면 이 처리방침을 변경합니다.
+            </p>
+            <p>
+              공개 개인정보 처리방침과 계정 삭제 페이지는 Vercel Inc.의 Hobby
+              서비스로 제공합니다. 페이지 접속 메타데이터는 미국 중심 글로벌
+              인프라에서 처리될 수 있고 운영자가 조회할 수 있는 런타임 로그는
+              1시간 동안 제공됩니다. 별도 Log Drain이나 방문자 분석은 사용하지
+              않습니다. 계정 삭제 폼의 이메일과 비밀번호는 브라우저에서
+              Lightsail 서울 API로 직접 전송됩니다.
             </p>
 
             <div className={styles.transferCard}>
@@ -437,6 +463,44 @@ export default function SceneTrackerPrivacyPolicyPage() {
                     보호 담당자에게 처리정지·회원탈퇴를 요청할 수 있습니다.
                     거부하면 이메일 계정 기능은 이용할 수 없지만 로그인 없이
                     제공되는 공개 탐색 기능은 이용할 수 있습니다.
+                  </dd>
+                </div>
+              </dl>
+            </div>
+            <div className={styles.transferCard}>
+              <h3>공개 웹 페이지 국외 처리</h3>
+              <dl>
+                <div>
+                  <dt>이전받는 자</dt>
+                  <dd>Vercel Inc. · privacy@vercel.com</dd>
+                </div>
+                <div>
+                  <dt>국가·항목</dt>
+                  <dd>
+                    미국 중심 글로벌 인프라 · IP 주소, 요청 URL, 브라우저·기기
+                    정보, 요청 시각·응답 상태와 요청 식별자
+                  </dd>
+                </div>
+                <div>
+                  <dt>목적·시기·방법</dt>
+                  <dd>
+                    공개 페이지 제공·전송 보안·장애 대응 · 페이지 접속 시
+                    암호화된 HTTPS 처리
+                  </dd>
+                </div>
+                <div>
+                  <dt>보유기간</dt>
+                  <dd>
+                    Hobby 운영자 조회 가능 런타임 로그 1시간. 그 밖의 정보는
+                    서비스 제공·보안 목적 달성 또는 관계 법령상 기간
+                  </dd>
+                </div>
+                <div>
+                  <dt>거부 방법과 효과</dt>
+                  <dd>
+                    웹 페이지를 이용하지 않을 수 있습니다. 이 경우 앱 내 계정
+                    삭제 기능 또는 factory@etfactory.dev 문의를 이용할 수
+                    있습니다.
                   </dd>
                 </div>
               </dl>
@@ -556,12 +620,20 @@ export default function SceneTrackerPrivacyPolicyPage() {
           <section id="changes" className={styles.policySection}>
             <h2>11. 처리방침 변경</h2>
             <p>
-              이 처리방침은 2026년 8월 24일부터 적용됩니다. 중요한 변경은 적용
+              이 처리방침은 2026년 8월 26일부터 적용됩니다. 중요한 변경은 적용
               전에 앱 공지 등을 통해 안내하고 이전 버전과 변경 이력을 확인할 수
               있도록 관리합니다.
             </p>
             <h3>변경 이력</h3>
             <ul className={styles.historyList}>
+              <li>
+                <time dateTime="2026-08-26">2026.08.26</time>
+                <span>
+                  AWS Lightsail 서울 인스턴스 내부 PostgreSQL 직접 운영·백업
+                  정책과 Vercel Hobby 공개 웹 처리·런타임 로그 1시간을
+                  반영했습니다.
+                </span>
+              </li>
               <li>
                 <time dateTime="2026-08-24">2026.08.24</time>
                 <span>
@@ -633,6 +705,16 @@ export default function SceneTrackerPrivacyPolicyPage() {
               <li>
                 <a href="https://docs.aws.amazon.com/lightsail/latest/userguide/understanding-regions-and-availability-zones-in-amazon-lightsail.html">
                   AWS Lightsail 리전·가용 영역
+                </a>
+              </li>
+              <li>
+                <a href="https://vercel.com/legal/privacy-notice">
+                  Vercel Privacy Notice
+                </a>
+              </li>
+              <li>
+                <a href="https://vercel.com/docs/logs/runtime">
+                  Vercel Runtime Logs
                 </a>
               </li>
               <li>
