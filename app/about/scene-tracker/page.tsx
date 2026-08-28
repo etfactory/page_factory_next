@@ -374,7 +374,7 @@ export default function SceneTrackerPage() {
         </h2>
         <div className={styles.releaseNotice}>
           <i aria-hidden="true" />
-          <span>TESTFLIGHT VALIDATION</span>
+          <span>COMING SOON</span>
         </div>
         <Link href="/" className={styles.primaryButton}>
           pageFactory로 돌아가기 <span aria-hidden="true">↗</span>
