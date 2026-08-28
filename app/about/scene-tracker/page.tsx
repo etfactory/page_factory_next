@@ -27,14 +27,14 @@ const features = [
     number: "04",
     title: "직접 만드는 여행 코스",
     description:
-      "저장한 장소를 골라 방문 순서를 편집하고, 네이티브 지도와 구간별 길찾기로 여행을 이어갑니다.",
+      "저장한 장소를 골라 코스를 만들고 저장 탭에서 다시 진입해, 방문 순서 편집과 네이티브 지도·구간별 길찾기로 여행을 이어갑니다.",
     icon: "route",
   },
   {
     number: "05",
     title: "여행이 쌓이는 방문 기록",
     description:
-      "방문일과 메모를 남기고 월별 기록과 코스 진행률을 확인합니다. 동의하면 앱 사용 중 100m 접근도 기기 안에서 기록합니다.",
+      "방문일과 메모, 월별 기록과 코스 진행률을 확인합니다. 동의하면 앱 사용 중 100m 접근을 기기 안에서 기록하고 로컬 알림으로 안내합니다.",
     icon: "visit",
   },
   {
@@ -64,7 +64,8 @@ const stack = [
   ],
   ["Research", "Gemini Grounding · 근거 저장 · 관리자 검수"],
   ["Trust", "이메일 확인 · 관리자 TOTP MFA · 요청 제한"],
-  ["Operations", "최소수집 일별 지표 · AI 비용 · 180일 자동 파기"],
+  ["Operations", "AWS Lightsail 서울 · PostgreSQL · 최소수집 지표"],
+  ["Delivery", "EAS Build · TestFlight 실기기 검증 · 스토어 서명"],
 ];
 
 function FeatureIcon({ name }: { name: string }) {
@@ -332,9 +333,10 @@ export default function SceneTrackerPage() {
             <h2>여행의 전 과정을 구현한<br />출시 준비 단계의 MVP+.</h2>
           </div>
           <p>
-            2026.08.13 기준 검색부터 코스 편집, 현장 방문, 제보 검수와 운영
-            지표까지 구현했습니다. 개인화 추천, 다국어, 자동 코스 최적화는 다음
-            단계로 이어집니다.
+            2026.08.28 기준 검색부터 저장 코스 재진입, 현장 자동 방문 알림,
+            제보 검수와 운영 지표까지 구현하고 TestFlight 실기기 검증을 진행
+            중입니다. 개인화 추천, 다국어, 자동 코스 최적화는 다음 단계로
+            이어집니다.
           </p>
         </div>
         <div className={styles.statusGrid}>
@@ -372,7 +374,7 @@ export default function SceneTrackerPage() {
         </h2>
         <div className={styles.releaseNotice}>
           <i aria-hidden="true" />
-          <span>COMING SOON</span>
+          <span>TESTFLIGHT VALIDATION</span>
         </div>
         <Link href="/" className={styles.primaryButton}>
           pageFactory로 돌아가기 <span aria-hidden="true">↗</span>
