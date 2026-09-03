@@ -7,6 +7,13 @@ export const metadata: Metadata = {
   title: "개인정보 처리방침 | Scene Tracker",
   description:
     "Scene Tracker가 처리하는 개인정보의 항목, 목적, 보유기간과 이용자 권리를 안내합니다.",
+  alternates: {
+    canonical: "https://etfactory.dev/about/scene-tracker/privacy-policy",
+    languages: {
+      "ko-KR": "https://etfactory.dev/about/scene-tracker/privacy-policy",
+      "en-US": "https://etfactory.dev/about/scene-tracker/privacy-policy/en",
+    },
+  },
 };
 
 const sections = [
@@ -79,15 +86,9 @@ const processingRows = [
     "현재 기기에서만 처리",
   ],
   [
-    "비식별 서비스 집계",
-    "집계일, 사건 유형, 횟수, 정규 작품 식별자",
-    "기능 이용 현황 확인",
-    "생성일로부터 180일",
-  ],
-  [
     "선택형 개선 공유",
-    "임의 기기 ID의 HMAC 가명값과 일별 사건 횟수",
-    "활성 기기·재방문 분석",
+    "임의 기기 ID의 HMAC 가명값, 집계일, 사건 유형·횟수, 작품 검색 성공 시 정규 작품 식별자",
+    "기능 현황·활성 기기·재방문 분석",
     "철회 또는 생성일로부터 180일",
   ],
 ] as const;
@@ -105,15 +106,29 @@ export default function SceneTrackerPrivacyPolicyPage() {
           <span aria-hidden="true" />
           <b>SCENE TRACKER</b>
         </Link>
-        <Link href="/about/scene-tracker" className={styles.backLink}>
-          프로젝트로 돌아가기 <span aria-hidden="true">↗</span>
-        </Link>
+        <div className={styles.headerActions}>
+          <nav className={styles.languageSwitch} aria-label="문서 언어 선택">
+            <span className={styles.languageButtonActive} aria-current="page">
+              한국어
+            </span>
+            <Link
+              href="/about/scene-tracker/privacy-policy/en"
+              className={styles.languageButton}
+              hrefLang="en"
+            >
+              English
+            </Link>
+          </nav>
+          <Link href="/about/scene-tracker" className={styles.backLink}>
+            프로젝트로 돌아가기 <span aria-hidden="true">↗</span>
+          </Link>
+        </div>
       </header>
 
       <section className={styles.hero} aria-labelledby="policy-title">
         <div className={styles.heroInner}>
           <p className={styles.eyebrow}>
-            PRIVACY POLICY · VERSION 2026-08-26.1
+            PRIVACY POLICY · VERSION 2026-09-03.1
           </p>
           <h1 id="policy-title">개인정보 처리방침</h1>
           <p className={styles.heroCopy}>
@@ -127,11 +142,11 @@ export default function SceneTrackerPrivacyPolicyPage() {
             </div>
             <div>
               <dt>공고일</dt>
-              <dd>2026년 8월 26일</dd>
+              <dd>2026년 9월 3일</dd>
             </div>
             <div>
               <dt>시행일</dt>
-              <dd>2026년 8월 26일</dd>
+              <dd>2026년 9월 3일</dd>
             </div>
           </dl>
         </div>
@@ -150,15 +165,6 @@ export default function SceneTrackerPrivacyPolicyPage() {
         </aside>
 
         <article className={styles.document}>
-          <div className={styles.reviewNotice} role="note">
-            <span>출시 전 확인</span>
-            <p>
-              AWS Lightsail 서울 애플리케이션 서버와 자체 운영 PostgreSQL,
-              계정 삭제·백업 정책과 Vercel Hobby 공개 웹 처리를 반영한 운영
-              후보본입니다.
-            </p>
-          </div>
-
           <div
             className={styles.principles}
             aria-label="개인정보 처리 핵심 원칙"
@@ -276,17 +282,15 @@ export default function SceneTrackerPrivacyPolicyPage() {
               전달하지 않습니다.
             </p>
             <p>
-              앱 실행, 작품 검색 성공, 장소 저장과 코스 생성은 개인과 연결되지
-              않는 일별 합계로 집계할 수 있습니다. 작품 검색 성공 시 검색 원문
-              대신 서버에 저장된 정규 작품 식별자만 사용하며 여행지 검색어, 저장
-              장소명과 코스명은 분석 테이블에 저장하지 않습니다.
-            </p>
-            <p>
               서비스 개선 데이터 공유는 기본적으로 꺼져 있습니다. 사용자가
-              공유를 켜면 기기에서 계정과 무관한 임의 ID를 생성하고 서버가 목적
-              분리 HMAC으로 변환하여 활성 기기와 재방문을 계산합니다. 현재 위치,
-              이메일과 회원 ID는 이 값에 연결하지 않습니다. 공유를 끄면 해당
-              기기의 가명 집계 삭제를 요청합니다.
+              공유를 켠 경우에만 앱 실행, 작품 검색 성공, 장소 저장과 코스 생성
+              사건을 전송합니다. 기기에서 계정과 무관한 임의 ID를 생성하고
+              서버가 목적 분리 HMAC으로 변환하여 일별 기능 현황, 활성 기기와
+              재방문을 계산합니다. 작품 검색 성공 시 검색 원문 대신 서버에
+              저장된 정규 작품 식별자만 사용하며 여행지 검색어, 저장 장소명과
+              코스명은 분석 테이블에 저장하지 않습니다. 현재 위치, 이메일과 회원
+              ID는 이 값에 연결하지 않습니다. 공유를 끄면 해당 기기의 가명 집계
+              삭제를 요청합니다.
             </p>
             <h3>촬영지 제보</h3>
             <p>
@@ -313,6 +317,11 @@ export default function SceneTrackerPrivacyPolicyPage() {
               운영자는 원칙적으로 개인정보를 제3자에게 제공하지 않습니다. 제공이
               필요한 경우 법적 근거를 확인하고 제공받는 자, 제공 목적, 제공
               항목, 보유기간과 거부권을 별도로 안내합니다.
+            </p>
+            <p>
+              개인정보 처리 수탁자와 서비스 제공자에게 이 처리방침 및 관계
+              법령에서 요구하는 수준과 동일하거나 그 이상의 개인정보 보호조치를
+              적용하도록 계약·이용조건과 보호조치를 확인합니다.
             </p>
           </section>
 
@@ -378,12 +387,12 @@ export default function SceneTrackerPrivacyPolicyPage() {
             </div>
             <p>
               AWS Lightsail 애플리케이션 서버는 대한민국 서울 (ap-northeast-2)
-              리전에 배치합니다. 운영 DB는 별도 관리형 DB 사업자에게 맡기지
-              않고 같은 Lightsail 인스턴스의 외부 포트가 열리지 않은 Docker
-              내부 네트워크에서 PostgreSQL로 직접 운영합니다. 논리 백업은
-              제한된 권한 경로에서 최대 30일 보유하고 자동 스냅샷은 최근
-              7일분을 유지합니다. 복구 시 삭제 대기 상태와 보유기간을 다시
-              적용하며 백업은 장애 복구 목적으로만 사용합니다.
+              리전에 배치합니다. 운영 DB는 별도 관리형 DB 사업자에게 맡기지 않고
+              같은 Lightsail 인스턴스의 외부 포트가 열리지 않은 Docker 내부
+              네트워크에서 PostgreSQL로 직접 운영합니다. 논리 백업은 제한된 권한
+              경로에서 최대 30일 보유하고 자동 스냅샷은 최근 7일분을 유지합니다.
+              복구 시 삭제 대기 상태와 보유기간을 다시 적용하며 백업은 장애 복구
+              목적으로만 사용합니다.
             </p>
             <p>
               Resend는 공개된 하위처리자를 이용할 수 있습니다. 최신 목록은{" "}
@@ -397,8 +406,9 @@ export default function SceneTrackerPrivacyPolicyPage() {
               공개 개인정보 처리방침과 계정 삭제 페이지는 Vercel Inc.의 Hobby
               서비스로 제공합니다. 페이지 접속 메타데이터는 미국 중심 글로벌
               인프라에서 처리될 수 있고 운영자가 조회할 수 있는 런타임 로그는
-              1시간 동안 제공됩니다. 별도 Log Drain이나 방문자 분석은 사용하지
-              않습니다. 계정 삭제 폼의 이메일과 비밀번호는 브라우저에서
+              1시간 동안 제공됩니다. 모든 /about/scene-tracker 경로에서 Vercel
+              Analytics와 Speed Insights를 비활성화하고 별도 Log Drain을
+              사용하지 않습니다. 계정 삭제 폼의 이메일과 비밀번호는 브라우저에서
               Lightsail 서울 API로 직접 전송됩니다.
             </p>
 
@@ -592,8 +602,8 @@ export default function SceneTrackerPrivacyPolicyPage() {
                 <dd>etfactory.dev</dd>
               </div>
               <div>
-                <dt>개인정보 보호책임자</dt>
-                <dd>개인 운영자 본인</dd>
+                <dt>개인정보 보호업무 담당</dt>
+                <dd>Scene Tracker 개인정보 보호 담당</dd>
               </div>
               <div>
                 <dt>개인정보 문의</dt>
@@ -620,12 +630,19 @@ export default function SceneTrackerPrivacyPolicyPage() {
           <section id="changes" className={styles.policySection}>
             <h2>11. 처리방침 변경</h2>
             <p>
-              이 처리방침은 2026년 8월 26일부터 적용됩니다. 중요한 변경은 적용
+              이 처리방침은 2026년 9월 3일부터 적용됩니다. 중요한 변경은 적용
               전에 앱 공지 등을 통해 안내하고 이전 버전과 변경 이력을 확인할 수
               있도록 관리합니다.
             </p>
             <h3>변경 이력</h3>
             <ul className={styles.historyList}>
+              <li>
+                <time dateTime="2026-09-03">2026.09.03</time>
+                <span>
+                  App Store 출시본을 확정하고 동일한 내용의 영문 처리방침을
+                  제공했습니다.
+                </span>
+              </li>
               <li>
                 <time dateTime="2026-08-26">2026.08.26</time>
                 <span>
@@ -655,8 +672,8 @@ export default function SceneTrackerPrivacyPolicyPage() {
               <li>
                 <time dateTime="2026-08-13">2026.08.13</time>
                 <span>
-                  촬영지 제보, 인증 보안, 비식별 기능 집계와 선택형 개선 공유의
-                  처리·파기 기준을 명시했습니다.
+                  촬영지 제보, 인증 보안, 선택형 가명 기기 기능 이용·재방문
+                  분석의 처리·파기 기준을 명시했습니다.
                 </span>
               </li>
               <li>
@@ -729,9 +746,10 @@ export default function SceneTrackerPrivacyPolicyPage() {
               </li>
             </ul>
             <p className={styles.legalFootnote}>
-              실제 배포 구조와 개인정보 흐름을 기준으로 개인정보·IT 서비스
-              전문가의 최종 검토가 필요합니다. 위치정보 관련 신고·약관 대상
-              여부는 실제 운영 구조를 기준으로 관계기관에 최종 확인합니다.
+              본 처리방침은 현재 확인된 운영 구조와 개인정보 흐름을 기준으로
+              적용됩니다. 법령이나 서비스 구조가 변경되면 필요한 검토와 개정을
+              진행합니다. 위치정보 관련 신고·약관 대상 여부는 실제 운영 구조를
+              기준으로 관계기관에 최종 확인합니다.
             </p>
           </section>
         </article>
