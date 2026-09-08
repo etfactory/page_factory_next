@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import ThemeToggle from "./theme-toggle";
@@ -49,7 +50,14 @@ export default function Navigator() {
     <nav aria-label="주요 탐색" className="fixed top-0 left-0 z-[1000] flex h-16 w-full items-center justify-between border-b border-[var(--pf-border-subtle)] bg-[var(--header)] px-5 backdrop-blur-md md:h-[72px] md:px-12">
 
       <Link href="/" className="font-bold flex items-center" onClick={closeMenu}>
-        <img src="/logo/page factory black.svg" alt="pageFactory" className="theme-logo h-[18px] md:h-5" />
+        <Image
+          src="/logo/page factory black.svg"
+          alt="pageFactory"
+          width={1064}
+          height={159}
+          sizes="(min-width: 768px) 134px, 120px"
+          className="theme-logo h-[18px] w-auto md:h-5"
+        />
       </Link>
 
       <div className="flex items-center gap-3">

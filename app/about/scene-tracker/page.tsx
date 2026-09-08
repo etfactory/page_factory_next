@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import styles from "./scene-tracker.module.css";
 
@@ -123,12 +124,19 @@ export default function SceneTrackerPage() {
     <main className={styles.page}>
       <header className={styles.header}>
         <Link href="/" className={styles.brand} aria-label="pageFactory 홈으로">
-          <img src="/logo/page factory black.svg" alt="pageFactory" />
+          <Image
+            src="/logo/page factory black.svg"
+            alt="pageFactory"
+            width={1064}
+            height={159}
+            sizes="120px"
+          />
         </Link>
         <nav aria-label="Scene Tracker 페이지 탐색">
           <a href="#experience">Experience</a>
           <a href="#system">System</a>
           <a href="#status">Status</a>
+          <a href="#download">Download</a>
           <Link href="/about/scene-tracker/privacy-policy">Privacy</Link>
         </nav>
         <span className={styles.headerLabel}>PROJECT PAGE</span>
@@ -365,17 +373,26 @@ export default function SceneTrackerPage() {
         </div>
       </section>
 
-      <section className={styles.finalCta}>
+      <section id="download" className={styles.finalCta}>
         <p>FROM SCREEN TO STREET</p>
         <h2>
           좋아했던 장면을,
           <br />
           <span>당신의 여행으로.</span>
         </h2>
-        <div className={styles.releaseNotice}>
-          <i aria-hidden="true" />
-          <span>COMING SOON</span>
-        </div>
+        <Link
+          href="https://apps.apple.com/kr/app/scene-tracker-filming-location/id6805334478"
+          className={styles.appStoreButton}
+          target="_blank"
+        >
+          <Image
+            src="/app-store-badge.svg"
+            alt="App Store에서 Scene Tracker 다운로드"
+            width={130}
+            height={40}
+            sizes="180px"
+          />
+        </Link>
         <Link href="/" className={styles.primaryButton}>
           pageFactory로 돌아가기 <span aria-hidden="true">↗</span>
         </Link>

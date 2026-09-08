@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 import FadeInSection from "./scrollfadein";
 
 export default function StartSection() {
@@ -18,7 +20,14 @@ export default function StartSection() {
         </div>
         <div className="order-1 flex justify-start md:order-2 md:justify-end">
           <div className="flex aspect-square w-36 items-center justify-center border border-[var(--pf-border-subtle)] bg-[var(--pf-bg-subtle)] md:w-full">
-            <img src="/logo/2FD.svg" alt="etfactory logo" className="theme-logo h-24 w-24 md:h-44 md:w-44" />
+            <Image
+              src="/logo/2FD.svg"
+              alt="etfactory logo"
+              width={281}
+              height={281}
+              sizes="(min-width: 768px) 176px, 96px"
+              className="theme-logo h-24 w-24 md:h-44 md:w-44"
+            />
           </div>
         </div>
       </div>

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import sceneStyles from "../scene-tracker.module.css";
 import styles from "./privacy-policy.module.css";
@@ -102,7 +103,13 @@ export default function SceneTrackerPrivacyPolicyPage() {
           className={styles.brand}
           aria-label="Scene Tracker 프로젝트 페이지로"
         >
-          <img src="/logo/page factory black.svg" alt="pageFactory" />
+          <Image
+            src="/logo/page factory black.svg"
+            alt="pageFactory"
+            width={1064}
+            height={159}
+            sizes="120px"
+          />
           <span aria-hidden="true" />
           <b>SCENE TRACKER</b>
         </Link>
