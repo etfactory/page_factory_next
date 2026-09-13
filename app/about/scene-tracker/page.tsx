@@ -137,6 +137,7 @@ export default function SceneTrackerPage() {
           <a href="#system">System</a>
           <a href="#status">Status</a>
           <a href="#download">Download</a>
+          <Link href="/about/scene-tracker/updates">Updates</Link>
           <Link href="/about/scene-tracker/privacy-policy">Privacy</Link>
         </nav>
         <span className={styles.headerLabel}>PROJECT PAGE</span>
@@ -396,12 +397,18 @@ export default function SceneTrackerPage() {
         <Link href="/" className={styles.primaryButton}>
           pageFactory로 돌아가기 <span aria-hidden="true">↗</span>
         </Link>
-        <Link
-          href="/about/scene-tracker/privacy-policy"
-          className={styles.privacyLink}
-        >
-          개인정보 처리방침
-        </Link>
+        <div className={styles.footerLinks}>
+          <Link
+            href="/about/scene-tracker/privacy-policy"
+            className={styles.privacyLink}
+          >
+            개인정보 처리방침
+          </Link>
+          <span aria-hidden="true">·</span>
+          <Link href="/about/scene-tracker/updates" className={styles.privacyLink}>
+            업데이트 내역
+          </Link>
+        </div>
       </section>
     </main>
   );
