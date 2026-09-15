@@ -28,7 +28,7 @@ const features = [
     number: "04",
     title: "직접 만드는 여행 코스",
     description:
-      "저장한 장소를 골라 방문 순서를 직접 정합니다. 지도에서 장소 위치를 확인하고 외부 지도 앱으로 구간별 길찾기를 연결합니다. 연결선은 실제 이동 경로가 아닙니다.",
+      "저장한 장소를 골라 순서를 직접 정하거나 Gemini AI가 제안한 순서를 확인 후 적용합니다. 첫 방문지를 유지한 직선거리 기반 참고용이며, 실제 이동 경로나 최단 경로를 보장하지 않습니다. 길찾기는 외부 지도 앱으로 연결합니다.",
     icon: "route",
   },
   {
@@ -344,15 +344,15 @@ export default function SceneTrackerPage() {
           <p>
             2026.09.15 기준 한국어·영어 주요 화면과 관광정보 전환, 작품 검색
             자동완성, 방문 기록 기반 스탬프를 제공합니다. 1.0.4 업데이트에서는
-            관광정보 출처와 서비스 안내를 정리하고 있습니다. 개인화 순위 추천과
-            자동 코스 최적화는 향후 검토 범위이며, 설치 가능한 버전은 App Store에서
+            관광정보 출처와 서비스 안내를 정리하고 AI 방문 순서 추천을 추가합니다.
+            개인화 순위 추천과 실제 이동 경로 최적화는 향후 검토 범위이며, 설치 가능한 버전은 App Store에서
             확인할 수 있습니다.
           </p>
         </div>
         <div className={styles.statusGrid}>
           <div className={styles.progressCard}>
             <span>IMPLEMENTED</span>
-            <strong>KO / EN</strong>
+            <strong>KO·EN</strong>
             <p>한국어·영어 주요 화면 지원</p>
             <div><i /></div>
             <small>검색 자동완성 · 코스 · 지도 연결 · 방문 기록 · 스탬프</small>
@@ -362,7 +362,7 @@ export default function SceneTrackerPage() {
             <strong>NEXT</strong>
             <p>향후 검토할 기능</p>
             <div><i /></div>
-            <small>개인화 순위 추천 · 자동 코스 최적화 · 추가 언어</small>
+            <small>개인화 순위 추천 · 실제 이동 경로 최적화 · 추가 언어</small>
           </div>
           <div className={styles.stackCard}>
             {stack.map(([label, value]) => (

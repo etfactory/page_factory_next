@@ -529,9 +529,14 @@ export default function SceneTrackerPrivacyPolicyPage() {
               장소와 코스 정보를 이메일 본문에 포함하지 않습니다.
             </p>
             <p>
-              Gemini에는 작품명과 촬영지 조사 요청만 전달하며 이메일, 토큰, 회원
-              ID를 전달하지 않습니다. 현재 구조에서는 Gemini 조사가 회원
-              개인정보의 국외 이전에 해당하지 않도록 분리합니다.
+              Gemini에는 작품명·촬영지 조사 요청 또는 AI 코스 순서 추천용
+              순번·장소 간 직선거리표를 전달합니다. AI 순서 추천은 사용자가
+              요청한 경우에만 선택 장소의 ID·공개 장소 좌표를 서비스 서버에서
+              일시 처리하며 요청 종료 후 별도 저장하지 않습니다. Gemini에는
+              장소 ID·장소명·좌표·코스명·현재 위치·회원 ID·이메일·토큰을
+              전달하지 않습니다. 계정별 남용 방지를 위한 HMAC 식별자·요청 횟수는
+              요청 제한 시간창 동안 처리합니다. 추천을 이용하지 않아도 직접
+              코스를 만들 수 있습니다.
             </p>
           </section>
 
@@ -644,7 +649,7 @@ export default function SceneTrackerPrivacyPolicyPage() {
             </p>
             <h3>변경 이력</h3>
             <ul className={styles.historyList}>
-              <li><time dateTime="2026-09-15">2026.09.15</time><span>선택형 해외 장소정보 베타의 참여 설정·누적 검색 한도·공개 API 전달 범위를 명시했습니다.</span></li>
+              <li><time dateTime="2026-09-15">2026.09.15</time><span>선택형 해외 장소정보 베타의 참여 설정·누적 한도·공개 API 전달 범위와 AI 코스 순서 추천의 일시 처리·거리표 전달 범위를 명시했습니다.</span></li>
               <li>
                 <time dateTime="2026-09-03">2026.09.03</time>
                 <span>

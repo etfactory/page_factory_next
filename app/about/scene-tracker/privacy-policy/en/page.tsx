@@ -592,10 +592,15 @@ export default function SceneTrackerPrivacyPolicyEnglishPage() {
               .
             </p>
             <p>
-              Gemini receives only a title and filming-location research
-              request. Member email addresses, tokens, member IDs, current
-              location, saved places, courses, and travel preferences are not
-              transmitted to Gemini.
+              Gemini receives a title/filming-location research request or numbered
+              indexes and a straight-line distance matrix for AI course-order
+              suggestions. Only when requested, our server temporarily processes
+              selected place IDs and public-place coordinates; these inputs are not
+              separately stored after the request. Gemini does not receive place
+              IDs, names, coordinates, course names, current location, member IDs,
+              email addresses, or tokens. HMAC identifiers and request counts are
+              processed during the rate-limit window to prevent account abuse.
+              Manual course creation remains available without AI suggestions.
             </p>
           </section>
 
@@ -728,7 +733,7 @@ export default function SceneTrackerPrivacyPolicyEnglishPage() {
             </p>
             <h3>Revision history</h3>
             <ul className={styles.historyList}>
-              <li><time dateTime="2026-09-15">2026.09.15</time><span>Added optional international place beta preferences, cumulative search limits, and public API data scope.</span></li>
+              <li><time dateTime="2026-09-15">2026.09.15</time><span>Added optional international place beta preferences, cumulative limits, public API data scope, and temporary processing/distance-matrix sharing for AI course-order suggestions.</span></li>
               <li>
                 <time dateTime="2026-09-03">2026.09.03</time>
                 <span>
