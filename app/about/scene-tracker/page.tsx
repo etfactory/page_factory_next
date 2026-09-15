@@ -7,7 +7,7 @@ const features = [
     number: "01",
     title: "작품에서 시작하는 탐색",
     description:
-      "드라마·영화·예능 작품명으로 촬영지를 찾고, 작품과 장소의 연결 근거를 함께 확인합니다.",
+      "드라마·영화·예능 작품명을 검색하고 자동완성으로 저장된 작품을 찾습니다. 공개 근거가 연결된 촬영지 후보를 확인할 수 있습니다.",
     icon: "film",
   },
   {
@@ -28,14 +28,14 @@ const features = [
     number: "04",
     title: "직접 만드는 여행 코스",
     description:
-      "저장한 장소를 골라 코스를 만들고 저장 탭에서 다시 진입해, 방문 순서 편집과 네이티브 지도·구간별 길찾기로 여행을 이어갑니다.",
+      "저장한 장소를 골라 방문 순서를 직접 정합니다. 지도에서 장소 위치를 확인하고 외부 지도 앱으로 구간별 길찾기를 연결합니다. 연결선은 실제 이동 경로가 아닙니다.",
     icon: "route",
   },
   {
     number: "05",
     title: "여행이 쌓이는 방문 기록",
     description:
-      "방문일과 메모, 월별 기록과 코스 진행률을 확인합니다. 동의하면 앱 사용 중 100m 접근을 기기 안에서 기록하고 로컬 알림으로 안내합니다.",
+      "방문 기록과 코스 진행률, 방문 장소 수에 따른 스탬프를 확인합니다. 수동 기록은 로그인 시 서버에 동기화하고, 동의한 자동 방문 기록은 앱 사용 중에만 판정해 기기에 보관합니다.",
     icon: "visit",
   },
   {
@@ -155,7 +155,7 @@ export default function SceneTrackerPage() {
             <em>여행이 시작됩니다.</em>
           </h1>
           <p className={styles.heroDescription}>
-            Scene Tracker는 영상 콘텐츠 속 촬영지를 검증 가능한 정보와
+            Scene Tracker는 영상 콘텐츠 속 촬영지 후보를 공개 검색 근거와
             연결하고, 주변 관광정보와 날씨, 코스와 방문 기록까지 더해 실제
             여행으로 이어주는 모바일 서비스입니다. 사용자의 촬영지 제보도
             운영자 검수를 거쳐 새로운 여행 정보가 됩니다.
@@ -339,29 +339,30 @@ export default function SceneTrackerPage() {
             <p className={styles.eyebrow}>
               <span /> BUILD STATUS
             </p>
-            <h2>여행의 전 과정을 구현한<br />출시 준비 단계의 MVP+.</h2>
+            <h2>검색부터 방문 기록까지,<br />출시 후에도 개선하는 여행 앱.</h2>
           </div>
           <p>
-            2026.08.28 기준 검색부터 저장 코스 재진입, 현장 자동 방문 알림,
-            제보 검수와 운영 지표까지 구현하고 TestFlight 실기기 검증을 진행
-            중입니다. 개인화 추천, 다국어, 자동 코스 최적화는 다음 단계로
-            이어집니다.
+            2026.09.15 기준 한국어·영어 주요 화면과 관광정보 전환, 작품 검색
+            자동완성, 방문 기록 기반 스탬프를 제공합니다. 1.0.4 업데이트에서는
+            관광정보 출처와 서비스 안내를 정리하고 있습니다. 개인화 순위 추천과
+            자동 코스 최적화는 향후 검토 범위이며, 설치 가능한 버전은 App Store에서
+            확인할 수 있습니다.
           </p>
         </div>
         <div className={styles.statusGrid}>
           <div className={styles.progressCard}>
             <span>IMPLEMENTED</span>
-            <strong>18</strong>
-            <p>구현 완료 기능 영역</p>
+            <strong>KO / EN</strong>
+            <p>한국어·영어 주요 화면 지원</p>
             <div><i /></div>
-            <small>탐색 · 코스 · 지도 · 방문 · 인증 · 운영 지표</small>
+            <small>검색 자동완성 · 코스 · 지도 연결 · 방문 기록 · 스탬프</small>
           </div>
           <div className={styles.progressCard}>
-            <span>PARTIAL</span>
-            <strong>02</strong>
-            <p>부분 구현 기능 영역</p>
+            <span>PLANNED</span>
+            <strong>NEXT</strong>
+            <p>향후 검토할 기능</p>
             <div><i /></div>
-            <small>여행 조건 기반 추천 · 기존 관광정보 연결 검수</small>
+            <small>개인화 순위 추천 · 자동 코스 최적화 · 추가 언어</small>
           </div>
           <div className={styles.stackCard}>
             {stack.map(([label, value]) => (
