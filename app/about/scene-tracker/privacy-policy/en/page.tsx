@@ -135,7 +135,7 @@ export default function SceneTrackerPrivacyPolicyEnglishPage() {
       <section className={styles.hero} aria-labelledby="policy-title">
         <div className={styles.heroInner}>
           <p className={styles.eyebrow}>
-            PRIVACY POLICY · VERSION 2026-09-03.1
+            PRIVACY POLICY · VERSION 2026-09-15.1
           </p>
           <h1 id="policy-title">Privacy Policy</h1>
           <p className={styles.heroCopy}>
@@ -150,11 +150,11 @@ export default function SceneTrackerPrivacyPolicyEnglishPage() {
             </div>
             <div>
               <dt>Published</dt>
-              <dd>September 3, 2026</dd>
+              <dd>September 15, 2026</dd>
             </div>
             <div>
               <dt>Effective</dt>
-              <dd>September 3, 2026</dd>
+              <dd>September 15, 2026</dd>
             </div>
           </dl>
         </div>
@@ -231,6 +231,7 @@ export default function SceneTrackerPrivacyPolicyEnglishPage() {
 
           <section id="collection" className={styles.policySection}>
             <h2>2. Purposes, data categories, and retention</h2>
+            <p>The optional international place beta stores account ID, opt-in status, cumulative search count, and preference/count update time for participation and quota management, deleting them within 30 days of account deletion. Turning beta off does not reset the count. Search terms are not stored in account history. Only public place names, Wikidata identifiers, and the selected language are sent to Wikimedia public APIs, not email addresses, account IDs, current location, or authentication tokens. Results use a short-lived server memory cache; no paid AI generation is used.</p>
             <div className={styles.tableWrap} tabIndex={0}>
               <table>
                 <caption className={styles.srOnly}>
@@ -720,13 +721,14 @@ export default function SceneTrackerPrivacyPolicyEnglishPage() {
           <section id="changes" className={styles.policySection}>
             <h2>11. Changes to this Policy</h2>
             <p>
-              This Policy takes effect on September 3, 2026. Material changes
+              This Policy takes effect on September 15, 2026. Material changes
               will be announced in the app or through another appropriate notice
               before they take effect, and prior versions and revision history
               will be maintained.
             </p>
             <h3>Revision history</h3>
             <ul className={styles.historyList}>
+              <li><time dateTime="2026-09-15">2026.09.15</time><span>Added optional international place beta preferences, cumulative search limits, and public API data scope.</span></li>
               <li>
                 <time dateTime="2026-09-03">2026.09.03</time>
                 <span>

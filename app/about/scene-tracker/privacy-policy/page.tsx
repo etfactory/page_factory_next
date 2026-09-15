@@ -135,7 +135,7 @@ export default function SceneTrackerPrivacyPolicyPage() {
       <section className={styles.hero} aria-labelledby="policy-title">
         <div className={styles.heroInner}>
           <p className={styles.eyebrow}>
-            PRIVACY POLICY · VERSION 2026-09-03.1
+            PRIVACY POLICY · VERSION 2026-09-15.1
           </p>
           <h1 id="policy-title">개인정보 처리방침</h1>
           <p className={styles.heroCopy}>
@@ -149,11 +149,11 @@ export default function SceneTrackerPrivacyPolicyPage() {
             </div>
             <div>
               <dt>공고일</dt>
-              <dd>2026년 9월 3일</dd>
+              <dd>2026년 9월 15일</dd>
             </div>
             <div>
               <dt>시행일</dt>
-              <dd>2026년 9월 3일</dd>
+              <dd>2026년 9월 15일</dd>
             </div>
           </dl>
         </div>
@@ -215,6 +215,7 @@ export default function SceneTrackerPrivacyPolicyPage() {
 
           <section id="collection" className={styles.policySection}>
             <h2>2. 개인정보 처리 목적·항목·기간</h2>
+            <p>선택형 해외 장소정보 베타는 계정 ID·참여 여부·누적 검색 횟수·설정/횟수 변경 시각을 참여 설정과 계정별 한도 관리 목적으로 저장하고 탈퇴 요청 후 최대 30일 이내 삭제합니다. 참여를 꺼도 누적 한도 관리를 위해 횟수는 유지하며 검색어를 계정 이력으로 저장하지 않습니다. Wikimedia 공개 API에는 공개 장소명·Wikidata 식별자·선택 언어만 전달하고 이메일·계정 ID·현재 위치·인증 토큰은 전달하지 않습니다. 결과는 짧은 서버 메모리 캐시로 제공하며 유료 AI 생성은 사용하지 않습니다.</p>
             <div className={styles.tableWrap} tabIndex={0}>
               <table>
                 <caption className={styles.srOnly}>
@@ -637,12 +638,13 @@ export default function SceneTrackerPrivacyPolicyPage() {
           <section id="changes" className={styles.policySection}>
             <h2>11. 처리방침 변경</h2>
             <p>
-              이 처리방침은 2026년 9월 3일부터 적용됩니다. 중요한 변경은 적용
+              이 처리방침은 2026년 9월 15일부터 적용됩니다. 중요한 변경은 적용
               전에 앱 공지 등을 통해 안내하고 이전 버전과 변경 이력을 확인할 수
               있도록 관리합니다.
             </p>
             <h3>변경 이력</h3>
             <ul className={styles.historyList}>
+              <li><time dateTime="2026-09-15">2026.09.15</time><span>선택형 해외 장소정보 베타의 참여 설정·누적 검색 한도·공개 API 전달 범위를 명시했습니다.</span></li>
               <li>
                 <time dateTime="2026-09-03">2026.09.03</time>
                 <span>
