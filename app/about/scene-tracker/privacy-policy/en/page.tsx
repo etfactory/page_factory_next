@@ -231,7 +231,7 @@ export default function SceneTrackerPrivacyPolicyEnglishPage() {
 
           <section id="collection" className={styles.policySection}>
             <h2>2. Purposes, data categories, and retention</h2>
-            <p>The optional international place beta stores account ID, opt-in status, cumulative search count, and preference/count update time for participation and quota management, deleting them within 30 days of account deletion. Turning beta off does not reset the count. Search terms are not stored in account history. Only public place names, Wikidata identifiers, and the selected language are sent to Wikimedia public APIs, not email addresses, account IDs, current location, or authentication tokens. Results use a short-lived server memory cache; no paid AI generation is used.</p>
+            <p>The optional international place beta stores account ID, opt-in status, cumulative search count, and preference/count update time for participation and quota management, deleting them within 30 days of account deletion. Turning beta off does not reset the count. Search terms are not stored in account history. International filming research sends the work title, work type, and release date to Google Gemini and Google Search to investigate public sources, including overseas articles and visitor information. Wikimedia API lookups send public place names, Wikidata identifiers, and the selected language. Neither process sends email addresses, account IDs, current location, or authentication tokens. Public work/place descriptions, filming evidence, visitor information, and check timestamps are stored in the server database as shared place information, not per-account search history. Work research results may be reused for 30 days. Shared information is retained while needed to provide the service and corrected or removed when errors or rights violations are identified.</p>
             <div className={styles.tableWrap} tabIndex={0}>
               <table>
                 <caption className={styles.srOnly}>
@@ -733,7 +733,7 @@ export default function SceneTrackerPrivacyPolicyEnglishPage() {
             </p>
             <h3>Revision history</h3>
             <ul className={styles.historyList}>
-              <li><time dateTime="2026-09-15">2026.09.15</time><span>Added optional international place beta preferences, cumulative limits, public API data scope, and temporary processing/distance-matrix sharing for AI course-order suggestions.</span></li>
+              <li><time dateTime="2026-09-15">2026.09.15</time><span>Added optional international place beta preferences, cumulative limits, Gemini overseas research, shared place storage, public API data scope, and temporary processing/distance-matrix sharing for AI course-order suggestions.</span></li>
               <li>
                 <time dateTime="2026-09-03">2026.09.03</time>
                 <span>
