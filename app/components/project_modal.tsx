@@ -56,7 +56,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
                 isOpen={modalIsOpen}
                 onRequestClose={closeModal}
                 contentLabel="Project Details"
-                className="pf-modal-content relative max-h-[min(88vh,820px)] w-[min(680px,calc(100vw-40px))] overflow-y-auto rounded-2xl border border-[var(--pf-border-subtle)] bg-[var(--pf-bg-raised)] p-5 text-[var(--pf-text-primary)] shadow-[0_16px_40px_rgb(0_0_0/16%)] outline-none md:p-8"
+                className="pf-modal-content relative max-h-[min(88vh,820px)] w-[min(680px,calc(100vw-40px))] overflow-y-auto border border-[var(--pf-border-subtle)] bg-[var(--pf-bg-raised)] p-5 text-[var(--pf-text-primary)] shadow-[0_16px_40px_rgb(0_0_0/16%)] outline-none md:p-8"
                 overlayClassName="pf-modal-overlay fixed inset-0 z-[1100] flex items-center justify-center p-5"
                 closeTimeoutMS={200}
             >
@@ -73,7 +73,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
                 
                 <div className="mb-6 flex flex-wrap gap-2 font-mono text-xs font-medium text-[var(--pf-text-tertiary)]">
                     {techStack.map((tech, index) => (
-                        <span key={index} className="rounded-sm bg-[var(--pf-bg-subtle)] px-2 py-1 text-xs">
+                        <span key={index} className="bg-[var(--pf-bg-subtle)] px-2 py-1 text-xs">
                             {tech}
                         </span>
                     ))}

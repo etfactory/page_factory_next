@@ -308,7 +308,7 @@ export default function SceneTrackerPrivacyPolicyEnglishPage() {
               server or content providers. Title search terms and travel
               conditions are processed only as needed to produce results. Email
               addresses, member IDs, and authentication tokens are not sent to
-              Gemini, the Korea Tourism Organization, the Korea Meteorological
+              Gemini, travel information providers, the Korea Meteorological
               Administration, or other content providers.
             </p>
             <p>

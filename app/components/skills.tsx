@@ -3,7 +3,7 @@ import { FaSwift } from "react-icons/fa6";
 import { SiKotlin, SiDart, SiJavascript, SiTypescript, SiFlutter, SiNextdotjs, SiSpringboot, SiMysql, SiSqlite, SiNestjs, SiPostgresql, SiFastapi } from "react-icons/si";
 
 export default function Skills() {
-  const cardClass = "flex min-h-36 flex-col items-start justify-between rounded-2xl border border-[var(--pf-border-subtle)] bg-[var(--pf-bg-surface)] p-5 transition-[transform,border-color] duration-150 hover:-translate-y-0.5 hover:border-[var(--pf-border-strong)]";
+  const cardClass = "flex min-h-36 flex-col items-start justify-between border border-[var(--pf-border-subtle)] bg-[var(--pf-bg-surface)] p-5 transition-[transform,border-color] duration-150 hover:-translate-y-0.5 hover:border-[var(--pf-border-strong)]";
   const iconClass = "mb-6 text-[2.5rem]";
   const titleClass = "text-[0.95rem] font-bold text-left";
 

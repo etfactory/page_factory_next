@@ -1,5 +1,27 @@
 export const releaseNotes = [
   {
+    version: "1.0.4",
+    date: "2026-09-16",
+    ko: {
+      title: "철저하고, 계획적인 여행",
+      summary: "여행 계획을 더 편리하게 세울 수 있도록 개선했습니다.",
+      changes: [
+        "AI가 여행 코스의 방문 순서를 추천하는 기능을 추가했습니다.",
+        "각종 버그를 수정하고 사용성을 개선했습니다.",
+        "개발자는 여전히 카페인이 부족합니다.",
+      ],
+    },
+    en: {
+      title: "Thorough and planned Travel",
+      summary: "Made it easier to create Travel plans.",
+      changes: [
+        "Added AI-powered stop order suggestions for travel itineraries.",
+        "Fixed various bugs and improved usability.",
+        "The developer is still running low on caffeine.",
+      ],
+    },
+  },
+  {
     version: "1.0.3",
     date: "2026-09-12",
     ko: {

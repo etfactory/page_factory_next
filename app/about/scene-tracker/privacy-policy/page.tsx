@@ -286,7 +286,7 @@ export default function SceneTrackerPrivacyPolicyPage() {
               좌표만 사용합니다. 단말기의 현재 좌표를 운영자 서버나 콘텐츠 제공
               API 요청에 포함하지 않습니다. 작품명 검색어와 여행 조건은
               검색·추천 응답 생성에 필요한 동안만 처리하며, 이메일, 회원 ID와
-              인증 토큰은 Gemini, 한국관광공사, 기상청 등 콘텐츠 제공 API에
+              인증 토큰은 Gemini, 기상청 및 외부 여행정보 제공 API에
               전달하지 않습니다.
             </p>
             <p>

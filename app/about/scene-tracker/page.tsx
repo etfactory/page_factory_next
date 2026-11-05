@@ -60,8 +60,8 @@ const stack = [
   ["API", "NestJS · Zod · TanStack Query"],
   ["Data", "PostgreSQL · PostGIS · TypeORM"],
   [
-    "Public data",
-    "한국관광공사에서 제공하는 관광정보 · 경기데이터드림 · 기상청",
+    "Travel data",
+    "여행정보 · 촬영지 정보 · 기상청 날씨",
   ],
   ["Research", "Gemini Grounding · 근거 저장 · 관리자 검수"],
   ["Trust", "이메일 확인 · 관리자 TOTP MFA · 요청 제한"],
@@ -223,7 +223,7 @@ export default function SceneTrackerPage() {
                   <b>장면 속 그곳에서 시작하는 하루</b>
                   <div>
                     <span>촬영지 5곳</span>
-                    <span>한국관광공사 제공 3곳</span>
+                    <span>주변 여행지 3곳</span>
                   </div>
                   <strong>여행 살펴보기　›</strong>
                 </div>
@@ -295,7 +295,7 @@ export default function SceneTrackerPage() {
           <h2>AI는 찾고,<br />근거와 경계가 확인합니다.</h2>
           <p>
             미등록 작품은 공개 근거를 바탕으로 촬영지 후보를 조사합니다. 결과는
-            확정 사실과 분리해 저장하고, 좌표를 추측하거나 한국관광공사에서
+            확정 사실과 분리해 저장하고, 좌표를 추측하거나 외부에서
             제공하는 장소 정보에 억지로 연결하지 않습니다. 현장 확인에 쓰는 현재
             위치는 단말기 안에서만 처리합니다.
           </p>
@@ -321,7 +321,7 @@ export default function SceneTrackerPage() {
           <i>→</i>
           <div className={styles.dataNode}>
             <small>03 / CONNECT</small>
-            <b>한국관광공사 제공 관광정보</b>
+            <b>주변 여행정보</b>
             <span>반경 3km 실시간 조회</span>
           </div>
           <i>→</i>
