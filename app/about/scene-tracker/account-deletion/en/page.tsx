@@ -3,9 +3,9 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 
-import sceneStyles from "../scene-tracker.module.css";
+import sceneStyles from "../../scene-tracker.module.css";
 import AccountDeletionForm from "../account-deletion-form";
-import styles from "./account-deletion.module.css";
+import styles from "../account-deletion.module.css";
 
 export const metadata: Metadata = {
   title: "계정 삭제 요청 | Scene Tracker",
