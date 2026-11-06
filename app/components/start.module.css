@@ -1,0 +1,174 @@
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: clip;
+}
+
+.stage {
+  position: relative;
+  display: grid;
+  min-height: 100vh;
+  align-items: center;
+  gap: 3rem;
+  padding-block: 7rem 5rem;
+}
+
+/* A quiet drawing-board grid keeps the theme present after the intro finishes. */
+.blueprint {
+  position: absolute;
+  inset: 70px 0 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.blueprint::before {
+  position: absolute;
+  inset: 0;
+  content: "";
+  background-image: linear-gradient(to right, var(--pf-border-subtle) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--pf-border-subtle) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: linear-gradient(to bottom, transparent, rgb(0 0 0 / 18%) 16%, rgb(0 0 0 / 18%) 82%, transparent);
+}
+.guideHorizontal, .guideVertical { position: absolute; background: var(--pf-signal); opacity: 0; }
+.guideHorizontal { top: 33%; width: 100%; height: 1px; transform-origin: left; animation: drawHorizontal 2.2s .25s both; }
+.guideVertical { top: 0; left: 72%; width: 1px; height: 100%; transform-origin: top; animation: drawVertical 2.4s .5s both; }
+.measurement {
+  position: absolute;
+  top: 34%; right: 1rem;
+  color: var(--pf-signal-strong);
+  font: 700 10px/1 var(--pf-font-mono);
+  letter-spacing: .1em;
+  animation: draftMark 2.4s .5s both;
+}
+.copy { order: 2; min-width: 0; position: relative; }
+.eyebrow { animation: arrive 600ms 450ms both; }
+.headlineWrap { position: relative; }
+.headline {
+  max-width: 850px;
+  margin: 0;
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.035em;
+  word-break: keep-all;
+}
+.headlineLine {
+  display: block;
+  animation: revealLine 850ms cubic-bezier(.22, 1, .36, 1) both;
+}
+.headlineLine:nth-child(1) { animation-delay: .85s; }
+.headlineLine:nth-child(2) { animation-delay: 1.25s; }
+.headlineLine:nth-child(3) { animation-delay: 1.65s; }
+.disciplines {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 2.5rem;
+  border-top: 1px solid var(--pf-border-subtle);
+  padding-top: 1.25rem;
+  color: var(--pf-text-secondary);
+  font-size: .875rem;
+  font-weight: 700;
+  animation: arrive 650ms 2s both;
+}
+.signal { width: .625rem; height: .625rem; flex: none; background: var(--pf-signal); }
+.logoColumn { order: 1; position: relative; display: flex; justify-content: flex-start; }
+.logoCard {
+  position: relative;
+  display: flex;
+  width: 9rem;
+  aspect-ratio: 1;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--pf-border-subtle);
+  background: var(--pf-bg-subtle);
+  animation: cardBuild 800ms .5s both;
+}
+.logoImage { animation: arrive 650ms 1.2s both; }
+.logoCross { position: absolute; inset: 14%; border: 1px dashed var(--pf-border-strong); animation: draftMark 2.4s .8s both; }
+.logoCross::before, .logoCross::after { position: absolute; content: ""; background: var(--pf-border-strong); }
+.logoCross::before { top: 50%; left: 0; width: 100%; height: 1px; }
+.logoCross::after { top: 0; left: 50%; width: 1px; height: 100%; }
+.textFrame, .logoFrame {
+  position: absolute;
+  z-index: 2;
+  pointer-events: none;
+  border: 1px solid #a46ae2;
+  opacity: 0;
+  animation: frame 2.8s .7s both;
+}
+.textFrame { inset: -.55rem -.7rem; }
+.logoFrame { inset: -5px; border-color: #17a9bb; animation-delay: .4s; }
+.textFrame::before, .textFrame::after, .logoFrame::before, .logoFrame::after {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border: 1px solid currentColor;
+  background: var(--pf-bg-canvas);
+  content: "";
+}
+.textFrame::before, .logoFrame::before { top: -4px; left: -4px; }
+.textFrame::after, .logoFrame::after { right: -4px; bottom: -4px; }
+.textFrame { color: #a46ae2; }
+.logoFrame { color: #17a9bb; }
+.cursors { position: absolute; inset: 0; z-index: 3; pointer-events: none; overflow: hidden; }
+.cursor {
+  position: absolute;
+  display: flex;
+  align-items: flex-start;
+  opacity: 0;
+  filter: drop-shadow(0 2px 3px rgb(0 0 0 / .12));
+}
+.cursor > span {
+  margin: 17px 0 0 -2px;
+  padding: 4px 7px;
+  border-radius: 3px;
+  color: #fff;
+  font: 700 10px/1 var(--pf-font-mono);
+  letter-spacing: .02em;
+}
+.cursorOne { top: 48%; left: 9%; color: #9761d5; animation: cursorOne 4.3s .1s both; }
+.cursorOne > span { background: #8050bd; }
+.cursorTwo { top: 22%; left: 38%; color: #008f9f; animation: cursorTwo 4.1s .25s both; }
+.cursorTwo > span { background: #007b89; }
+.cursorThree { top: 76%; left: 54%; color: #e66f56; animation: cursorThree 4.2s .45s both; }
+.cursorThree > span { background: #b74835; }
+.cursorFour { top: 54%; left: 74%; color: #d29219; animation: cursorFour 4s .6s both; }
+.cursorFour > span { background: #966400; }
+.cursorFive { top: 67%; left: 22%; color: #50a768; animation: cursorFive 3.9s .8s both; }
+.cursorFive > span { background: #347e4c; }
+
+@keyframes arrive { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes revealLine { from { opacity: 0; clip-path: inset(0 100% 0 0); transform: translateY(8px); } to { opacity: 1; clip-path: inset(0); transform: translateY(0); } }
+@keyframes cardBuild { from { opacity: 0; transform: scale(.92); } to { opacity: 1; transform: scale(1); } }
+@keyframes draftMark { 0%, 100% { opacity: 0; } 15%, 65% { opacity: .8; } }
+@keyframes drawHorizontal { 0% { opacity: 0; transform: scaleX(0); } 15%, 65% { opacity: .7; } 80%, 100% { opacity: 0; transform: scaleX(1); } }
+@keyframes drawVertical { 0% { opacity: 0; transform: scaleY(0); } 15%, 65% { opacity: .7; } 80%, 100% { opacity: 0; transform: scaleY(1); } }
+@keyframes frame { 0% { opacity: 0; transform: scale(.97); } 12%, 70% { opacity: .9; transform: scale(1); } 100% { opacity: 0; transform: scale(1); } }
+@keyframes cursorOne { 0% { opacity: 0; transform: translate(-70px, 65px); } 12% { opacity: 1; transform: translate(0, 0); } 42% { opacity: 1; transform: translate(100px, -25px); } 68% { opacity: 1; transform: translate(55px, 50px); } 100% { opacity: 0; transform: translate(110px, 85px); } }
+@keyframes cursorTwo { 0% { opacity: 0; transform: translate(50px, -45px); } 15% { opacity: 1; transform: translate(0, 0); } 45% { opacity: 1; transform: translate(-55px, 60px); } 72% { opacity: 1; transform: translate(-20px, 90px); } 100% { opacity: 0; transform: translate(30px, 115px); } }
+@keyframes cursorThree { 0% { opacity: 0; transform: translate(30px, 60px); } 18% { opacity: 1; transform: translate(0, 0); } 55% { opacity: 1; transform: translate(-80px, -30px); } 78% { opacity: 1; transform: translate(-45px, -55px); } 100% { opacity: 0; transform: translate(-10px, -75px); } }
+@keyframes cursorFour { 0% { opacity: 0; transform: translate(70px, 20px); } 16% { opacity: 1; transform: translate(0, 0); } 52% { opacity: 1; transform: translate(-110px, 30px); } 76% { opacity: 1; transform: translate(-80px, -45px); } 100% { opacity: 0; transform: translate(-25px, -65px); } }
+@keyframes cursorFive { 0% { opacity: 0; transform: translate(-40px, 60px); } 16% { opacity: 1; transform: translate(0, 0); } 48% { opacity: 1; transform: translate(90px, -40px); } 78% { opacity: 1; transform: translate(150px, -40px); } 100% { opacity: 0; transform: translate(190px, -10px); } }
+@media (min-width: 768px) {
+  .stage { grid-template-columns: minmax(0, 1fr) 280px; gap: 5rem; padding-block: 8rem 6rem; }
+  .copy { order: 1; }
+  .logoColumn { order: 2; justify-content: flex-end; }
+  .logoCard { width: 100%; }
+  .cursorOne { top: 44%; left: 4%; }
+  .cursorTwo { top: 34%; left: 75%; }
+  .cursorThree { top: 70%; left: 42%; }
+  .cursorFour { top: 62%; left: 81%; }
+  .cursorFive { top: 29%; left: 39%; }
+}
+@media (min-width: 1024px) { .stage { grid-template-columns: minmax(0, 1fr) 360px; } }
+@media (max-width: 767px) {
+  .cursorThree, .cursorFour { display: none; }
+  .cursorFive { top: 67%; left: 15%; }
+  .headline { font-size: clamp(2rem, 8vw, 3.25rem); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .eyebrow, .headlineLine, .disciplines, .logoCard, .logoImage { animation: none; }
+  .cursors, .textFrame, .logoFrame, .logoCross, .guideHorizontal, .guideVertical, .measurement { display: none; }
+}

@@ -1,6 +1,7 @@
 import FadeInSection from "./scrollfadein";
 import Skills from "./skills";
 import LinkButton from "./linkbutton";
+import SectionAssembly from "./section-assembly";
 
 export default function ProfileSection() {
   return (
@@ -9,6 +10,7 @@ export default function ProfileSection() {
         {/* --- About Me --- */}
         <p className="pf-eyebrow">01 · Profile</p>
         <h2 className="pf-subsection-title">About Me</h2>
+        <SectionAssembly label="type" accent="purple">
         <div className="mb-16 max-w-[720px] border-l-2 border-[var(--pf-signal)] pl-5 text-left md:pl-8">
           <p className="mb-5 text-[1.125rem] leading-[1.7]">
             안녕하세요! 모바일 어플리케이션 개발자 오은택입니다.
@@ -19,8 +21,11 @@ export default function ProfileSection() {
           </p>
         </div>
 
+        </SectionAssembly>
+
         {/* --- Education --- */}
         <h2 className="pf-subsection-title">Education</h2>
+        <SectionAssembly label="education" accent="cyan">
         <div className="mb-16 max-w-[720px] border-l-2 border-[var(--pf-signal)] pl-5 text-left md:pl-8">
           <ul className="mb-16 list-none p-0 text-[var(--pf-text-primary)]">
             <li>
@@ -30,8 +35,11 @@ export default function ProfileSection() {
           </ul>
         </div>
 
+        </SectionAssembly>
+
         {/* --- Links --- */}
         <h2 className="pf-subsection-title">Links</h2>
+        <SectionAssembly label="links" accent="coral">
         <div className="mb-16 flex flex-wrap gap-3">
           <LinkButton
             text="GitHub"
@@ -45,8 +53,12 @@ export default function ProfileSection() {
           />
         </div>
 
+        </SectionAssembly>
+
         {/* --- Skills --- */}
-        <Skills />
+        <SectionAssembly label="components" accent="cyan">
+          <Skills />
+        </SectionAssembly>
       </div>
     </FadeInSection>
   );

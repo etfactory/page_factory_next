@@ -1,0 +1,76 @@
+.stage {
+  position: relative;
+  min-width: 0;
+  --assembly-accent: #9563cf;
+  --assembly-accent-label: #7544ae;
+}
+.stage[data-accent="cyan"] { --assembly-accent: #079aaa; --assembly-accent-label: #007886; }
+.stage[data-accent="coral"] { --assembly-accent: #de705a; --assembly-accent-label: #a94735; }
+.marks {
+  position: absolute;
+  inset: -8px;
+  z-index: 3;
+  pointer-events: none;
+  color: var(--assembly-accent);
+}
+.frame {
+  position: absolute;
+  inset: 0;
+  border: 1px solid currentColor;
+  opacity: 0;
+  transform: scale(.985);
+}
+.frame i { position: absolute; width: 7px; height: 7px; border: 1px solid currentColor; background: var(--pf-bg-canvas); }
+.frame i:nth-child(1) { top: -4px; left: -4px; }
+.frame i:nth-child(2) { top: -4px; right: -4px; }
+.frame i:nth-child(3) { bottom: -4px; left: -4px; }
+.frame i:nth-child(4) { bottom: -4px; right: -4px; }
+.guide {
+  position: absolute;
+  top: 0;
+  left: -16px;
+  right: -16px;
+  height: 1px;
+  background: currentColor;
+  opacity: 0;
+  transform: scaleX(0);
+  transform-origin: left;
+}
+.cursor, .cursorSecond { position: absolute; display: flex; align-items: flex-start; opacity: 0; filter: drop-shadow(0 2px 2px rgb(0 0 0 / .15)); }
+.cursor { top: 0; left: 0; }
+.cursorSecond { right: 2%; bottom: 0; color: #0997a7; }
+.cursor > span, .cursorSecond > span { margin: 16px 0 0 -2px; padding: 4px 7px; border-radius: 3px; color: white; background: var(--assembly-accent-label); font: 700 10px/1 var(--pf-font-mono); }
+.cursorSecond > span { background: #007886; }
+.stage[data-assembled] .frame { animation: select-frame 2.4s .2s both; }
+.stage[data-assembled] .guide { animation: draw-guide 2.2s both; }
+.stage[data-assembled] .cursor { animation: build 2.8s both; }
+.stage[data-assembled] .cursorSecond { animation: align 2.5s .2s both; }
+@keyframes select-frame {
+  0%, 12% { opacity: 0; transform: scale(.985); }
+  25%, 70% { opacity: .85; transform: scale(1); }
+  100% { opacity: 0; transform: scale(1); }
+}
+@keyframes draw-guide {
+  0% { opacity: 0; transform: scaleX(0); }
+  12% { opacity: .7; }
+  55% { opacity: .7; transform: scaleX(1); }
+  100% { opacity: 0; transform: scaleX(1); }
+}
+@keyframes build {
+  0% { opacity: 0; transform: translate(-20px, 35px); }
+  12% { opacity: 1; transform: translate(0, 0); }
+  60% { opacity: 1; transform: translate(min(40vw, 240px), 0); }
+  82% { opacity: 1; transform: translate(min(40vw, 240px), 16px); }
+  100% { opacity: 0; transform: translate(min(40vw, 240px), 35px); }
+}
+@keyframes align {
+  0% { opacity: 0; transform: translate(10px, 30px); }
+  20% { opacity: 1; transform: translate(0, 0); }
+  65% { opacity: 1; transform: translate(-50px, -14px); }
+  100% { opacity: 0; transform: translate(-80px, 20px); }
+}
+@media (max-width: 767px) {
+  .marks { inset: -5px; }
+  .cursorSecond { display: none; }
+}
+@media (prefers-reduced-motion: reduce) { .marks { display: none; } }

@@ -1,0 +1,108 @@
+/* The build overlay is decorative: the actual project information is always
+   present, interactive and readable, including before JavaScript runs. */
+.buildOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.buildFrame,
+.buildLine,
+.buildCursor {
+  position: absolute;
+  opacity: 0;
+}
+
+.buildFrame {
+  inset: -1px;
+  border: 1px solid #a578df;
+}
+
+.buildFrame::before,
+.buildFrame::after {
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  border: 1px solid #a578df;
+  background: var(--pf-bg-surface);
+  content: "";
+}
+
+.buildFrame::before { top: -4px; left: -4px; }
+.buildFrame::after { right: -4px; bottom: -4px; }
+
+.buildLine {
+  left: 0;
+  width: 100%;
+  height: 2px;
+  transform: scaleX(0);
+}
+.buildLineTop {
+  top: -1px;
+  background: #12a7ba;
+  transform-origin: left center;
+}
+.buildLineBottom {
+  bottom: -1px;
+  background: #a578df;
+  transform-origin: right center;
+}
+
+.buildCursor {
+  display: flex;
+  align-items: flex-start;
+  filter: drop-shadow(0 2px 3px rgb(0 0 0 / .15));
+  white-space: nowrap;
+}
+.buildCursor > span {
+  margin: 14px 0 0 -1px;
+  padding: 4px 6px;
+  border-radius: 3px;
+  color: #fff;
+  font: 700 9px/1 var(--pf-font-mono);
+}
+.cursorLayout { top: -8px; left: 0; color: #009aad; }
+.cursorLayout > span { background: #007b89; }
+.cursorDetail { right: 0; bottom: -8px; color: #a578df; }
+.cursorDetail > span { background: #8050bd; }
+
+.panel[data-entered] .buildFrame { animation: select-frame 2.35s ease both; }
+.panel[data-entered] .buildLineTop { animation: draw-line 2s cubic-bezier(.22, 1, .36, 1) both; }
+.panel[data-entered] .buildLineBottom { animation: draw-line 1.7s 350ms cubic-bezier(.22, 1, .36, 1) both; }
+.panel[data-entered] .cursorLayout { animation: draw-top 2.2s cubic-bezier(.22, 1, .36, 1) both; }
+.panel[data-entered] .cursorDetail { animation: draw-bottom 2s 300ms cubic-bezier(.22, 1, .36, 1) both; }
+.panel[data-entered] .projectHeading { animation: settle-in .6s ease-out both; }
+.panel[data-entered] .projectDescription { animation: settle-in .6s .12s ease-out both; }
+.panel[data-entered] .projectActions { animation: settle-in .6s .24s ease-out both; }
+
+@keyframes select-frame {
+  0%, 100% { opacity: 0; }
+  15%, 75% { opacity: .75; }
+}
+@keyframes draw-line {
+  0% { opacity: 0; transform: scaleX(0); }
+  12%, 70% { opacity: .95; }
+  100% { opacity: 0; transform: scaleX(1); }
+}
+@keyframes draw-top {
+  0% { opacity: 0; left: 0; transform: translate(-4px, -6px); }
+  12%, 65% { opacity: 1; }
+  100% { opacity: 0; left: calc(100% - 65px); transform: translate(0, 0); }
+}
+@keyframes draw-bottom {
+  0% { opacity: 0; right: 0; transform: translate(0, 5px); }
+  15%, 65% { opacity: 1; }
+  100% { opacity: 0; right: calc(100% - 65px); transform: translate(0, 0); }
+}
+@keyframes settle-in {
+  from { opacity: .65; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .buildOverlay { display: none; }
+  .panel[data-entered] .projectHeading,
+  .panel[data-entered] .projectDescription,
+  .panel[data-entered] .projectActions { animation: none; }
+}

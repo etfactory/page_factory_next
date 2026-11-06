@@ -1,0 +1,76 @@
+/* Assembly marks are decorative; the underlying content is always present. */
+.card {
+  position: relative;
+  --skill-accent: #168f9f;
+  --skill-label: #007786;
+  --skill-delay: 0ms;
+}
+.card:nth-child(4n + 2) { --skill-accent: #9a68d4; --skill-label: #7544aa; --skill-delay: 100ms; }
+.card:nth-child(4n + 3) { --skill-accent: #d56e56; --skill-label: #a94735; --skill-delay: 200ms; }
+.card:nth-child(4n + 4) { --skill-accent: #c78a21; --skill-label: #855c13; --skill-delay: 300ms; }
+.card::before, .card::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  opacity: 0;
+}
+.card::before {
+  inset: -1px;
+  z-index: 1;
+  border: 1px solid var(--skill-accent);
+}
+.card::after {
+  top: -4px;
+  left: -4px;
+  z-index: 2;
+  width: 7px;
+  height: 7px;
+  border: 1px solid var(--skill-accent);
+  background: var(--pf-bg-surface);
+  box-shadow: 0 0 0 1px var(--pf-bg-surface);
+}
+.cursor {
+  position: absolute;
+  z-index: 3;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: flex-start;
+  color: var(--skill-accent);
+  opacity: 0;
+  pointer-events: none;
+  filter: drop-shadow(0 2px 2px rgb(0 0 0 / .12));
+}
+.cursor > span {
+  margin: 14px 0 0 -1px;
+  padding: 4px 6px;
+  border-radius: 3px;
+  color: #fff;
+  background: var(--skill-label);
+  font: 700 9px/1 var(--pf-font-mono);
+}
+.card[data-build]::before,
+.card[data-build]::after { animation: selection 1.9s var(--skill-delay) both; }
+.card[data-build] .cursor { animation: place 2s var(--skill-delay) cubic-bezier(.22, 1, .36, 1) both; }
+.card[data-build] > h4 { animation: settle .55s calc(var(--skill-delay) + 160ms) ease-out both; }
+.card[data-build] > svg,
+.card[data-build] > div { animation: settle .65s var(--skill-delay) ease-out both; }
+@keyframes selection {
+  0%, 100% { opacity: 0; }
+  16%, 65% { opacity: .9; }
+}
+@keyframes place {
+  0% { opacity: 0; transform: translate(-9px, 16px); }
+  18% { opacity: 1; transform: translate(0, 0); }
+  55% { opacity: 1; transform: translate(35px, 10px); }
+  75% { opacity: 1; transform: translate(42px, 5px); }
+  100% { opacity: 0; transform: translate(55px, 18px); }
+}
+@keyframes settle {
+  from { opacity: .65; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .card::before, .card::after, .cursor { display: none; }
+  .card[data-build] > h4, .card[data-build] > svg, .card[data-build] > div { animation: none; }
+}
