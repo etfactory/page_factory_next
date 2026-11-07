@@ -13,9 +13,13 @@ model Project {
   project_key       String   @db.VarChar(100)
   title             String   @db.VarChar(255)
   description       String?  @db.Text
+  description_ko    String?  @db.Text
+  description_en    String?  @db.Text
   tech_stack        String?  @db.Text
   link_name         String?  @db.VarChar(100)
   project_url       String?  @db.Text
   modal_description String?  @db.Text
+  modal_description_ko String? @db.Text
+  modal_description_en String? @db.Text
   is_in_progress    Boolean  @default(false)
 }

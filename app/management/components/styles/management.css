@@ -239,7 +239,7 @@
   font-weight: 650;
   cursor: pointer;
 }
-.mg-editor-tabs button[aria-selected="true"] { background: var(--pf-bg-surface); color: var(--pf-text-primary); box-shadow: 0 1px 4px var(--shadow); }
+.mg-editor-tabs button[aria-selected="true"], .mg-editor-tabs button[aria-pressed="true"] { background: var(--pf-bg-surface); color: var(--pf-text-primary); box-shadow: 0 1px 4px var(--shadow); }
 .mg-expand-button { border: 1px solid var(--pf-border-subtle); }
 .mg-expand-button:hover { color: var(--pf-text-primary); border-color: var(--pf-border-strong); }
 .mg-editor-body { min-height: 330px; }
@@ -411,7 +411,7 @@
   .mg-list-tools { padding: 0 20px 16px; }
   .mg-form-row { grid-template-columns: 1fr; }
   .mg-editor-heading { align-items: flex-start; flex-direction: column; }
-  .mg-editor-actions { width: 100%; justify-content: space-between; }
+  .mg-editor-actions { width: 100%; flex-wrap: wrap; justify-content: space-between; }
   .mg-markdown-toggle { order: 2; }
   .mg-editor-shell.is-expanded { inset: 8px; }
   .mg-editor-footer span:first-child { display: none; }

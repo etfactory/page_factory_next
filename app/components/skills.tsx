@@ -30,10 +30,10 @@ export default function Skills() {
 
   return (
     <div ref={containerRef}>
-      <h2 className="pf-subsection-title">Skills</h2>
+      <h2 lang="en" className="pf-subsection-title">Skills</h2>
 
       {/* --- Languages --- */}
-      <h3 className="pf-group-title">Languages</h3>
+      <h3 lang="en" className="pf-group-title">Languages</h3>
       <div className="mb-8 grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4 lg:grid-cols-4">
         <div className={cardClass} data-skill-card>
           <SkillCursor />
@@ -70,7 +70,7 @@ export default function Skills() {
       </div>
 
       {/* --- Frameworks & Libraries --- */}
-      <h3 className="pf-group-title">Frameworks & Libraries</h3>
+      <h3 lang="en" className="pf-group-title">Frameworks &amp; Libraries</h3>
       <div className="mb-8 grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4 lg:grid-cols-4">
         <div className={cardClass} data-skill-card>
           <SkillCursor />
@@ -105,7 +105,7 @@ export default function Skills() {
       </div>
 
       {/* --- Databases --- */}
-      <h3 className="pf-group-title">Databases</h3>
+      <h3 lang="en" className="pf-group-title">Databases</h3>
       <div className="mb-8 grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4 lg:grid-cols-4">
         <div className={cardClass} data-skill-card>
           <SkillCursor />
@@ -125,7 +125,7 @@ export default function Skills() {
       </div>
 
       {/* --- Tools & Platforms --- */}
-      <h3 className="pf-group-title">Tools & Platforms</h3>
+      <h3 lang="en" className="pf-group-title">Tools &amp; Platforms</h3>
       <div className="mb-8 grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4 lg:grid-cols-4">
         <div className={cardClass} data-skill-card>
           <SkillCursor />

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import styles from "./start.module.css";
 
-export default function StartSection() {
+export default function StartSection({ locale = "ko" }: { locale?: "ko" | "en" }) {
   return (
     <section id="main_section" className={styles.hero}>
       <div className={`pf-container ${styles.stage}`}>
@@ -15,9 +15,15 @@ export default function StartSection() {
           <div className={styles.headlineWrap}>
             <span className={styles.textFrame} aria-hidden="true" />
             <h1 className={styles.headline}>
-              <span className={styles.headlineLine}>안녕하세요.</span>{" "}
-              <span className={styles.headlineLine}>모바일 앱의 흐름을 설계하고</span>{" "}
-              <span className={styles.headlineLine}>구현하는 개발자 오은택입니다.</span>
+              {locale === "ko" ? <>
+                <span className={styles.headlineLine}>안녕하세요.</span>{" "}
+                <span className={styles.headlineLine}>모바일 앱의 흐름을 설계하고</span>{" "}
+                <span className={styles.headlineLine}>구현하는 개발자 오은택입니다.</span>
+              </> : <>
+                <span className={styles.headlineLine}>Hello, I’m Euntaek Oh.</span>{" "}
+                <span className={styles.headlineLine}>I design and build</span>{" "}
+                <span className={styles.headlineLine}>mobile app experiences.</span>
+              </>}
             </h1>
           </div>
           <div className={styles.disciplines}>

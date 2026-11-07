@@ -47,23 +47,23 @@ export const ContactSection = () => {
             });
 
             if (response.ok) {
-                alert("메일이 성공적으로 전송되었습니다!");
+                alert("Your message has been sent.");
                 form.current.reset();
             } else {
-                alert("전송에 실패했습니다.");
+                alert("Your message could not be sent. Please try again.");
             }
         } catch (error) {
             console.error(error);
-            alert("오류가 발생했습니다.");
+            alert("An error occurred. Please try again.");
         }
     };
 
     return (
         <FadeInSection id="contact_section" delay={200}>
             <div className="pf-contact-copy pf-container pf-content-container pf-section">
-                <p className="pf-eyebrow">03 · Contact</p>
+                <p lang="en" className="pf-eyebrow">03 · Contact</p>
                 <SectionAssembly label="connect" accent="coral">
-                <form ref={form} onSubmit={sendEmail} data-build={formEntered || undefined} className={`w-full border-t border-[var(--pf-border-subtle)] pt-8 ${styles.form}`}>
+                <form lang="en" ref={form} onSubmit={sendEmail} data-build={formEntered || undefined} className={`w-full border-t border-[var(--pf-border-subtle)] pt-8 ${styles.form}`}>
                     <div className="grid gap-x-6 md:grid-cols-2">
                         <div className={styles.field}>
                             <FieldMark label="name" />
@@ -83,7 +83,7 @@ export const ContactSection = () => {
                     </div>
                     <span className={styles.buttonWrap}>
                         <FieldMark label="send" />
-                        <input type="submit" value="Send" className="action-button" />
+                        <input type="submit" value="Send message" lang="en" className="action-button" />
                     </span>
                 </form>
                 </SectionAssembly>

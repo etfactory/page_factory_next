@@ -1,15 +1,15 @@
-import StartSection from "./components/start";
-import ProfileSection from "./components/profile";
-import ContactSection from "./components/contact";
-import PortfolioSection from "./components/portfolio";
+import type { Metadata } from "next";
+import HomePage from "./components/home-page";
+
+export const metadata: Metadata = {
+  title: "pageFactory | 오은택 포트폴리오",
+  description: "모바일 앱을 설계하고 구현하는 개발자 오은택의 포트폴리오입니다.",
+  alternates: {
+    canonical: "https://etfactory.dev/",
+    languages: { ko: "https://etfactory.dev/", en: "https://etfactory.dev/en", "x-default": "https://etfactory.dev/" },
+  },
+};
 
 export default function Home() {
-  return (
-    <main className="min-h-screen w-full">
-      <StartSection />
-      <ProfileSection />
-      <PortfolioSection />
-      <ContactSection />
-    </main>
-  );
+  return <HomePage locale="ko" />;
 }

@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import LinkButton from './linkbutton';
 import ProjectModal from './project_modal';
 import styles from './project_panel.module.css';
+import { projectLinkLabel } from './project-link-label';
 
 interface ProjectPanelProps {
     title: string;
@@ -13,9 +14,10 @@ interface ProjectPanelProps {
     techStack: string[];
     modalDescription: string;
     isInProgress?: boolean;
+    locale?: "ko" | "en";
 }
 
-const ProjectPanel: React.FC<ProjectPanelProps> = ({ title, description, projectUrl, techStack, linkname, modalDescription, isInProgress = false }) => {
+const ProjectPanel: React.FC<ProjectPanelProps> = ({ title, description, projectUrl, techStack, linkname, modalDescription, isInProgress = false, locale = "ko" }) => {
     const panelRef = useRef<HTMLElement>(null);
     const [hasEntered, setHasEntered] = useState(false);
 
@@ -70,9 +72,9 @@ const ProjectPanel: React.FC<ProjectPanelProps> = ({ title, description, project
             </div>
             <p className={`mt-6 max-w-[720px] text-[1rem] leading-[1.65] text-[var(--pf-text-secondary)] ${styles.projectDescription}`}>{description}</p>
             <div className={`mt-6 flex flex-wrap items-center gap-3 ${styles.projectActions}`}>
-                <ProjectModal title={title} description={modalDescription} projectUrl={projectUrl} techStack={techStack} linkname={linkname} />
+                <ProjectModal title={title} description={modalDescription} projectUrl={projectUrl} techStack={techStack} linkname={linkname} locale={locale} />
                 {projectUrl && (
-                    <LinkButton text={linkname ? linkname : "Github Link"} href={projectUrl} style={{ backgroundColor: "#000000" }} />
+                    <LinkButton text={projectLinkLabel(linkname)} href={projectUrl} style={{ backgroundColor: "#000000" }} />
                 )}
             </div>
         </article>

@@ -50,10 +50,14 @@ export async function POST(request: Request) {
       project_key,
       title,
       description,
+      description_ko,
+      description_en,
       tech_stack,
       link_name,
       project_url,
       modal_description,
+      modal_description_ko,
+      modal_description_en,
       is_in_progress,
     } = body;
 
@@ -68,15 +72,20 @@ export async function POST(request: Request) {
         project_key: project_key.trim(),
         title: title.trim(),
         description: typeof description === 'string' ? description.trim() : '',
+        description_ko: typeof description_ko === 'string' ? description_ko.trim() : null,
+        description_en: typeof description_en === 'string' ? description_en.trim() : null,
         tech_stack: typeof tech_stack === 'string' ? tech_stack : JSON.stringify(tech_stack),
         link_name: typeof link_name === 'string' ? link_name.trim() : '',
         project_url: typeof project_url === 'string' ? project_url.trim() : '',
         modal_description: typeof modal_description === 'string' ? modal_description : '',
+        modal_description_ko: typeof modal_description_ko === 'string' ? modal_description_ko : null,
+        modal_description_en: typeof modal_description_en === 'string' ? modal_description_en : null,
         is_in_progress: is_in_progress === true
       }
     });
 
     revalidatePath('/');
+    revalidatePath('/en');
 
     return NextResponse.json({ success: true, id: result.id });
   } catch (error) {

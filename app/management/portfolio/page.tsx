@@ -21,10 +21,14 @@ type Project = {
   project_key: string;
   title: string;
   description: string | null;
+  description_ko: string | null;
+  description_en: string | null;
   tech_stack: string | null;
   link_name: string | null;
   project_url: string | null;
   modal_description: string | null;
+  modal_description_ko: string | null;
+  modal_description_en: string | null;
   is_in_progress: boolean;
 };
 
@@ -32,11 +36,13 @@ type FormData = {
   project_type: ProjectType;
   project_key: string;
   title: string;
-  description: string;
+  description_ko: string;
+  description_en: string;
   tech_stack: string;
   link_name: string;
   project_url: string;
-  modal_description: string;
+  modal_description_ko: string;
+  modal_description_en: string;
   is_in_progress: boolean;
 };
 
@@ -44,11 +50,13 @@ const EMPTY_FORM: FormData = {
   project_type: "mobile",
   project_key: "",
   title: "",
-  description: "",
+  description_ko: "",
+  description_en: "",
   tech_stack: "",
   link_name: "",
   project_url: "",
-  modal_description: "",
+  modal_description_ko: "",
+  modal_description_en: "",
   is_in_progress: false,
 };
 
@@ -117,6 +125,7 @@ export default function PortfolioManagementPage() {
   const [query, setQuery] = useState("");
   const [typeFilter, setTypeFilter] = useState<"all" | ProjectType>("all");
   const [editorMode, setEditorMode] = useState<"write" | "preview">("write");
+  const [editorLanguage, setEditorLanguage] = useState<"ko" | "en">("ko");
   const [editorExpanded, setEditorExpanded] = useState(false);
   const [markdownEnabled, setMarkdownEnabled] = useState(false);
   const [markdownSource, setMarkdownSource] = useState("");
@@ -131,7 +140,7 @@ export default function PortfolioManagementPage() {
     const normalizedQuery = query.trim().toLocaleLowerCase();
     return projects.filter((project) => {
       const matchesType = typeFilter === "all" || project.project_type === typeFilter;
-      const searchable = `${project.title} ${project.project_key} ${project.description ?? ""} ${project.tech_stack ?? ""}`.toLocaleLowerCase();
+      const searchable = `${project.title} ${project.project_key} ${project.description_ko ?? ""} ${project.description_en ?? ""} ${project.description ?? ""} ${project.tech_stack ?? ""}`.toLocaleLowerCase();
       return matchesType && (!normalizedQuery || searchable.includes(normalizedQuery));
     });
   }, [projects, query, typeFilter]);
@@ -193,6 +202,7 @@ export default function PortfolioManagementPage() {
     setMarkdownEnabled(false);
     setMarkdownSource("");
     setEditorMode("write");
+    setEditorLanguage("ko");
   }
 
   function startEdit(project: Project) {
@@ -201,16 +211,19 @@ export default function PortfolioManagementPage() {
       project_type: project.project_type,
       project_key: project.project_key,
       title: project.title,
-      description: project.description ?? "",
+      description_ko: project.description_ko ?? "",
+      description_en: project.description_en ?? "",
       tech_stack: techStackToInput(project.tech_stack),
       link_name: project.link_name ?? "",
       project_url: project.project_url ?? "",
-      modal_description: project.modal_description ?? "",
+      modal_description_ko: project.modal_description_ko ?? "",
+      modal_description_en: project.modal_description_en ?? "",
       is_in_progress: project.is_in_progress,
     });
     setMarkdownEnabled(false);
     setMarkdownSource("");
     setEditorMode("write");
+    setEditorLanguage("ko");
     setMessage(null);
     document.getElementById("portfolio-form")?.scrollIntoView({ behavior: "smooth", block: "start" });
   }
@@ -223,13 +236,20 @@ export default function PortfolioManagementPage() {
     setMarkdownEnabled(enabled);
     setEditorMode("write");
     if (enabled) {
-      setMarkdownSource(htmlToMarkdown(formData.modal_description));
+      setMarkdownSource(htmlToMarkdown(editorLanguage === "ko" ? formData.modal_description_ko : formData.modal_description_en));
     }
   }
 
   function updateMarkdown(value: string) {
     setMarkdownSource(value);
-    updateField("modal_description", markdownToSafeHtml(value));
+    updateField(editorLanguage === "ko" ? "modal_description_ko" : "modal_description_en", markdownToSafeHtml(value));
+  }
+
+  function switchEditorLanguage(language: "ko" | "en") {
+    setEditorLanguage(language);
+    if (markdownEnabled) {
+      setMarkdownSource(htmlToMarkdown(language === "ko" ? formData.modal_description_ko : formData.modal_description_en));
+    }
   }
 
   async function handleSubmit(event: FormEvent) {
@@ -292,7 +312,8 @@ export default function PortfolioManagementPage() {
     "color", "background", "script", "list", "indent", "align",
     "blockquote", "code-block", "link", "image", "video",
   ];
-  const editorStats = descriptionStats(formData.modal_description);
+  const editorValue = editorLanguage === "ko" ? formData.modal_description_ko : formData.modal_description_en;
+  const editorStats = descriptionStats(editorValue);
 
   return (
     <div className="mg-page">
@@ -357,9 +378,14 @@ export default function PortfolioManagementPage() {
               </span>
             </label>
             <label className="mg-field">
-              <span>한 줄 소개</span>
-              <textarea value={formData.description} onChange={(event) => updateField("description", event.target.value)} placeholder="목록 카드에 표시할 간단한 설명" rows={3} maxLength={500} />
-              <small className="mg-counter">{formData.description.length}/500</small>
+              <span>한 줄 소개 · 한국어</span>
+              <textarea value={formData.description_ko} onChange={(event) => updateField("description_ko", event.target.value)} placeholder="한국어 목록 카드에 표시할 간단한 설명" rows={3} maxLength={500} />
+              <small className="mg-counter">{formData.description_ko.length}/500</small>
+            </label>
+            <label className="mg-field">
+              <span>한 줄 소개 · 영어</span>
+              <textarea value={formData.description_en} onChange={(event) => updateField("description_en", event.target.value)} placeholder="영어 목록 카드에 표시할 간단한 설명" rows={3} maxLength={500} />
+              <small className="mg-counter">{formData.description_en.length}/500</small>
             </label>
             <label className="mg-field">
               <span>기술 스택</span>
@@ -379,10 +405,14 @@ export default function PortfolioManagementPage() {
             <div className={`mg-editor-shell${editorExpanded ? " is-expanded" : ""}`}>
               <div className="mg-editor-heading">
                 <div>
-                  <span>상세 설명</span>
+                  <span>상세 설명 · {editorLanguage === "ko" ? "한국어" : "영어"}</span>
                   <small>프로젝트 상세 모달에 표시되는 콘텐츠입니다.</small>
                 </div>
                 <div className="mg-editor-actions">
+                  <div className="mg-editor-tabs" role="group" aria-label="상세 설명 언어">
+                    <button type="button" aria-pressed={editorLanguage === "ko"} onClick={() => switchEditorLanguage("ko")}>한국어</button>
+                    <button type="button" aria-pressed={editorLanguage === "en"} onClick={() => switchEditorLanguage("en")}>영어</button>
+                  </div>
                   <label className="mg-markdown-toggle">
                     <input type="checkbox" checked={markdownEnabled} onChange={(event) => toggleMarkdown(event.target.checked)} />
                     <span aria-hidden="true">✓</span>
@@ -409,16 +439,17 @@ export default function PortfolioManagementPage() {
                         value={markdownSource}
                         onChange={(event) => updateMarkdown(event.target.value)}
                         placeholder={"# 프로젝트 소개\n\n프로젝트의 배경과 주요 기능을 **마크다운**으로 작성해 보세요.\n\n- 주요 기능\n- 담당 역할\n- 성과"}
-                        aria-label="마크다운 상세 설명"
+                        aria-label={`${editorLanguage === "ko" ? "한국어" : "영어"} 마크다운 상세 설명`}
                         spellCheck
                       />
                     </div>
                   ) : (
                     <div className="mg-editor">
                       <ReactQuill
+                        key={editorLanguage}
                         theme="snow"
-                        value={formData.modal_description}
-                        onChange={(value) => updateField("modal_description", value)}
+                        value={editorValue}
+                        onChange={(value) => updateField(editorLanguage === "ko" ? "modal_description_ko" : "modal_description_en", value)}
                         modules={quillModules}
                         formats={quillFormats}
                         placeholder="프로젝트 배경, 주요 기능, 담당 역할과 성과를 작성해 보세요."
@@ -428,7 +459,7 @@ export default function PortfolioManagementPage() {
                 ) : (
                   <div className="mg-editor-preview" role="tabpanel">
                     {editorStats.characters > 0 ? (
-                      <div className="mg-rich-content" dangerouslySetInnerHTML={{ __html: formData.modal_description }} />
+                      <div className="mg-rich-content" dangerouslySetInnerHTML={{ __html: editorValue }} />
                     ) : (
                       <div className="mg-preview-empty">미리볼 상세 설명이 없습니다.</div>
                     )}
@@ -494,7 +525,7 @@ export default function PortfolioManagementPage() {
                       <code>{project.project_key}</code>
                     </div>
                     <strong>{project.title}</strong>
-                    <p>{project.description || "등록된 한 줄 소개가 없습니다."}</p>
+                    <p>{project.description_ko || project.description_en || project.description || "등록된 한 줄 소개가 없습니다."}</p>
                     {techStackToArray(techStackToInput(project.tech_stack)).length > 0 && (
                       <div className="mg-tags">
                         {techStackToArray(techStackToInput(project.tech_stack)).slice(0, 4).map((tech) => <span key={tech}>{tech}</span>)}

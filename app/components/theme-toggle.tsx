@@ -7,7 +7,7 @@ type Theme = "light" | "dark";
 const getCurrentTheme = (): Theme =>
   document.documentElement.classList.contains("dark") ? "dark" : "light";
 
-export default function ThemeToggle() {
+export default function ThemeToggle({ locale = "ko" }: { locale?: "ko" | "en" }) {
   const [theme, setTheme] = useState<Theme | null>(null);
 
   useEffect(() => {
@@ -41,8 +41,8 @@ export default function ThemeToggle() {
       type="button"
       onClick={toggleTheme}
       className="theme-toggle"
-      aria-label={isDark ? "라이트 모드로 전환" : "다크 모드로 전환"}
-      title={isDark ? "라이트 모드" : "다크 모드"}
+      aria-label={locale === "en" ? (isDark ? "Switch to light mode" : "Switch to dark mode") : (isDark ? "라이트 모드로 전환" : "다크 모드로 전환")}
+      title={locale === "en" ? (isDark ? "Light mode" : "Dark mode") : (isDark ? "라이트 모드" : "다크 모드")}
     >
       <svg aria-hidden="true" viewBox="0 0 24 24" className="h-[18px] w-[18px]">
         {isDark ? (

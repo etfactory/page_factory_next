@@ -40,10 +40,14 @@ export async function PUT(request: Request, context: { params: Promise<{ id: str
       project_key,
       title,
       description,
+      description_ko,
+      description_en,
       tech_stack,
       link_name,
       project_url,
       modal_description,
+      modal_description_ko,
+      modal_description_en,
       is_in_progress,
     } = body;
 
@@ -65,16 +69,21 @@ export async function PUT(request: Request, context: { params: Promise<{ id: str
         project_type: project_type.trim(),
         project_key: project_key.trim(),
         title: title.trim(),
-        description: typeof description === 'string' ? description.trim() : '',
+        ...(typeof description === 'string' ? { description: description.trim() } : {}),
+        ...(typeof description_ko === 'string' ? { description_ko: description_ko.trim() } : {}),
+        ...(typeof description_en === 'string' ? { description_en: description_en.trim() } : {}),
         tech_stack: typeof tech_stack === 'string' ? tech_stack : JSON.stringify(tech_stack),
         link_name: typeof link_name === 'string' ? link_name.trim() : '',
         project_url: typeof project_url === 'string' ? project_url.trim() : '',
-        modal_description: typeof modal_description === 'string' ? modal_description : '',
+        ...(typeof modal_description === 'string' ? { modal_description } : {}),
+        ...(typeof modal_description_ko === 'string' ? { modal_description_ko } : {}),
+        ...(typeof modal_description_en === 'string' ? { modal_description_en } : {}),
         is_in_progress: is_in_progress === true
       }
     });
 
     revalidatePath('/');
+    revalidatePath('/en');
 
     return NextResponse.json({ success: true, data: updatedProject });
   } catch (error: unknown) {
@@ -100,6 +109,7 @@ export async function DELETE(request: Request, context: { params: Promise<{ id: 
     });
 
     revalidatePath('/');
+    revalidatePath('/en');
 
     return NextResponse.json({ success: true });
   } catch (error: unknown) {
