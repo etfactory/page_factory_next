@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import HomePage from "./components/home-page";
 
 export const metadata: Metadata = {
-  title: "pageFactory | 오은택 포트폴리오",
+  title: "pageFactory",
   description: "모바일 앱을 설계하고 구현하는 개발자 오은택의 포트폴리오입니다.",
   alternates: {
     canonical: "https://etfactory.dev/",

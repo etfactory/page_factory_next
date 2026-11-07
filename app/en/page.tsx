@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import HomePage from "../components/home-page";
 
 export const metadata: Metadata = {
-  title: "pageFactory | Euntaek Oh's Portfolio",
+  title: "pageFactory",
   description: "The portfolio of Euntaek Oh, a mobile application developer.",
   alternates: {
     canonical: "https://etfactory.dev/en",
