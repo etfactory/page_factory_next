@@ -42,7 +42,7 @@ export default function ProfileSection({ locale = "ko" }: { locale?: "ko" | "en"
             <h2 lang="en" className="pf-subsection-title">Military Service</h2>
             <SectionAssembly label="service" accent="cyan">
               <div className="mb-16 max-w-[720px] border-l-2 border-[var(--pf-signal)] pl-5 text-left md:pl-8">
-                <p className="block text-[1.2rem] font-bold">Republic of Korea Army, SGT (E-5)</p>
+                <p className="block text-[1.2rem] font-bold">Republic of Korea Army, Sergent (E-5)</p>
                 <p className="mt-1.5 block text-[1rem] text-[var(--pf-text-secondary)]">Non-Commissioned Officer Academy Assist Drill Sergent for Personal Weapon</p>
               </div>
             </SectionAssembly>
